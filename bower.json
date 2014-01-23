@@ -1,0 +1,12 @@
+{
+	"name": "macrae",
+	"authors": [
+		"Callum Macrae <callum@macr.ae>"
+	],
+	"dependencies": {
+		"reset-css": "latest"
+	},
+	"devDependencies": {
+		"requirejs": "~2.1.9"
+	}
+}
