@@ -17,7 +17,7 @@ body {
 }
 
 body > header {
-	margin: 50px 25px;
+	margin: 50px 20px;
 	text-align: center;
 
 	a {
@@ -37,7 +37,15 @@ body > header {
 	}
 }
 
-article {
+.article body > header h1:hover:before {
+	content: "«";
+	position: absolute;
+
+	transform: translate(-60px, 0);
+
+}
+
+article, section {
 	width: 90%;
 	width: calc(~"100% - 50px"); // Brackets or LESS will parse it
 	max-width: 800px;
@@ -46,20 +54,65 @@ article {
 	font-family: "Merriweather", serif;
 	line-height: 1.5;
 	font-size: 14pt;
+}
 
-	header {
-		margin-bottom: 30px;
+article header {
+	margin-bottom: 30px;
 
-		font-family: "Open Sans", sans-serif;
+	font-family: "Open Sans", sans-serif;
+	line-height: 1;
+
+	.article-date {
+		margin-left: 20px;
+
+		font-size: 10pt;
+		color: grey;
+		font-weight: 300;
+	}
+}
+
+section {
+	h2 {
 		line-height: 1;
+	}
 
-		.article-date {
-			margin-left: 20px;
+	ul {
+		list-style-type: none;
+		padding-left: 0;
+	}
 
-			font-size: 10pt;
-			color: grey;
-			font-weight: 300;
-		}
+	li {
+		margin-top: 20px;
+	}
+
+	time {
+		margin-left: 20px;
+
+		font-size: 10pt;
+		color: #666;
+	}
+
+	img {
+		float: left;
+		margin-right: 30px;
+	}
+
+	& + section {
+		margin-top: 50px;
+		overflow: auto;
+	}
+}
+
+@media all and (max-width: 450px) {
+	section a {
+		display: block;
+	}
+
+	section img {
+		float: none;
+		display: block;
+		margin: 0 auto;
+		margin-bottom: 20px;
 	}
 }
 
