@@ -4,6 +4,8 @@
  * Copyright (c) 2014 Callum Macrae
  */
 
+@color: #905;
+
 * {
 	// You, too, should use * { box-sizing: border-box; }
 	// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
@@ -21,8 +23,6 @@ body > header {
 	a {
 		color: black;
 		text-decoration: none;
-
-		.fade-on-hover;
 	}
 
 	h1 {
@@ -64,10 +64,8 @@ article {
 }
 
 h2, h3, h4, h5, h6 {
+	font-family: "Open Sans", sans-serif;
 	margin: 10px 0;
-
-	// Why not?
-	.fade-on-hover;
 }
 
 h2 {
@@ -87,6 +85,10 @@ h4 {
 
 h5 {
 	font-size: 18pt;
+}
+
+a {
+	color: @color;
 }
 
 a:hover {
@@ -153,21 +155,13 @@ footer {
 		color: black;
 		text-transform: uppercase;
 		font-size: 22pt;
-		
-		.fade-on-hover;
-
 		text-decoration: none;
+
+		transition: color 0.5s;
+
 		&:hover {
 			text-decoration: underline;
+			color: @color;
 		}
-	}
-}
-
-
-.fade-on-hover() {
-	transition: color 0.5s;
-
-	&:hover {
-		color: #333;
 	}
 }
