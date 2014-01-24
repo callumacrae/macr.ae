@@ -1,12 +1,14 @@
 {
-	"name": "macrae",
-	"authors": [
-		"Callum Macrae <callum@macr.ae>"
-	],
-	"dependencies": {
-		"reset-css": "latest"
-	},
-	"devDependencies": {
-		"requirejs": "~2.1.9"
-	}
+  "name": "macrae",
+  "authors": [
+    "Callum Macrae <callum@macr.ae>"
+  ],
+  "dependencies": {
+    "reset-css": "latest",
+    "prism": "git@github.com:LeaVerou/prism.git#gh-pages",
+    "modernizr": "~2.7.1"
+  },
+  "devDependencies": {
+    "requirejs": "~2.1.10"
+  }
 }

@@ -1,5 +1,173 @@
 /**
- * macrae
+ * macr.ae
  *
  * Copyright (c) 2014 Callum Macrae
  */
+
+* {
+	// You, too, should use * { box-sizing: border-box; }
+	// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Open Sans", sans-serif;
+}
+
+body > header {
+	margin: 50px 25px;
+	text-align: center;
+
+	a {
+		color: black;
+		text-decoration: none;
+
+		.fade-on-hover;
+	}
+
+	h1 {
+		text-transform: uppercase;
+		font-size: 36pt;
+		font-weight: 700;
+	}
+
+	.tagline {
+		font-size: 10pt;
+//		font-style: italic;
+	}
+}
+
+article {
+	width: 90%;
+	width: calc(~"100% - 50px"); // Brackets or LESS will parse it
+	max-width: 800px;
+	margin: 0 auto;
+
+	font-family: "Merriweather", serif;
+	line-height: 1.5;
+	font-size: 14pt;
+
+	header {
+		margin-bottom: 30px;
+
+		font-family: "Open Sans", sans-serif;
+		line-height: 1;
+
+		.article-date {
+			margin-left: 20px;
+
+			font-size: 10pt;
+			color: grey;
+			font-weight: 300;
+		}
+	}
+}
+
+h2, h3, h4, h5, h6 {
+	margin: 10px 0;
+
+	// Why not?
+	.fade-on-hover;
+}
+
+h2 {
+	font-size: 32pt;
+	font-weight: 700;
+}
+
+h3 {
+	font-size: 24pt;
+	font-weight: 700;
+}
+
+h4 {
+	font-size: 18pt;
+	font-weight: 700;
+}
+
+h5 {
+	font-size: 18pt;
+}
+
+a:hover {
+	text-decoration: none;
+}
+
+p {
+	margin-bottom: 20px;
+}
+
+ol, ul {
+	padding-left: 40px;
+	margin-bottom: 20px;
+}
+
+ul {
+	list-style: square;
+}
+
+ol {
+	list-style: decimal-leading-zero;
+}
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: italic;
+}
+
+:not(pre) > code {
+	padding: 3px 5px;
+	margin: -3px 0;
+
+	border: 1px darken(#f5f2f0, 10%) solid;
+	background-color: #f5f2f0;
+	font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+
+pre {
+	border: 1px darken(#f5f2f0, 10%) solid;
+
+	font-size: 12pt;
+}
+
+abbr[title] {
+	border-bottom: 1px dashed #ADADAD;
+	cursor: help;
+}
+
+.touch abbr[title]:after {
+	content: " (" attr(title) ")";
+}
+
+footer {
+	margin: 50px 25px;
+
+	text-align: center;
+
+	a {
+		margin: 20px;
+
+		color: black;
+		text-transform: uppercase;
+		font-size: 22pt;
+		
+		.fade-on-hover;
+
+		text-decoration: none;
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+
+.fade-on-hover() {
+	transition: color 0.5s;
+
+	&:hover {
+		color: #666;
+	}
+}

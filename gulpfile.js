@@ -13,8 +13,8 @@ var browserSync = require('browser-sync'),
 	w3cjs = require('gulp-w3cjs');
 
 var config = {
-	lintOnLess: true,
-	minify: true, // @todo: Get this from a env var or something
+	lintOnLess: false,
+	minify: false, // @todo: Get this from a env var or something
 
 	recessOptions: {
 		strictPropertyOrder: false
