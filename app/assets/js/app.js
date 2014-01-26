@@ -5,6 +5,8 @@
  */
 
 (function () {
+	'use strict';
+
 	// Hide no-js paragraph
 	var p = document.querySelectorAll('p.no-js');
 	p = p[p.length - 1];
@@ -23,6 +25,6 @@
 
 	function addAddr() {
 		var a = 'http://callum\u0040ma\u0063r\u002Eae';
-		this.href = a.replace('http://', 'ma\u0069' + 'lto:');
+		emailElement.href = a.replace('http://', 'ma\u0069' + 'lto:');
 	}
 })();
