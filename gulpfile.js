@@ -8,7 +8,6 @@ var fs = require('fs'),
 	gutil = require('gulp-util'),
 	jshint = require('gulp-jshint'),
 	less = require('gulp-less'),
-	marked = require('marked'),
 	markdown = require('gulp-markdown'),
 	moment = require('moment'),
 	minifyCSS = require('gulp-minify-css'),
@@ -20,7 +19,7 @@ var fs = require('fs'),
 
 var config = {
 	lintOnLess: false,
-	minify: false, // @todo: Get this from a env var or something
+	minify: false,
 
 	recessOptions: {
 		strictPropertyOrder: false
