@@ -56,18 +56,24 @@ article, section {
 	font-size: 14pt;
 }
 
-article header {
-	margin-bottom: 30px;
+article {
+	header {
+		margin-bottom: 30px;
 
-	font-family: "Open Sans", sans-serif;
-	line-height: 1;
+		font-family: "Open Sans", sans-serif;
+		line-height: 1;
 
-	.article-date {
-		margin-left: 20px;
+		.article-date {
+			margin-left: 20px;
 
-		font-size: 10pt;
-		color: grey;
-		font-weight: 300;
+			font-size: 10pt;
+			color: grey;
+			font-weight: 300;
+		}
+	}
+
+	img {
+		max-width: 100%;
 	}
 }
 
@@ -185,8 +191,9 @@ em {
 }
 
 pre {
-	border: 1px darken(#f5f2f0, 10%) solid;
+	margin-bottom: 30px !important;
 
+	border: 1px darken(#f5f2f0, 10%) solid;
 	font-size: 12pt;
 }
 
