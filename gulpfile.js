@@ -27,13 +27,6 @@ var config = {
 	}
 };
 
-//var myRenderer = new marked.Renderer();
-//
-//myRenderer.code = function(code, lang, escaped) {
-//	var className = lang ? ' class="language-' + this.options.langPrefix + lang + '"' : '';
-//	return '<pre><code' + className + '>' + (escaped ? code : escape(code, true)) + '\n</code></pre>\n';
-//};
-
 
 gulp.task('build', function () {
 	gulp.run('less');
