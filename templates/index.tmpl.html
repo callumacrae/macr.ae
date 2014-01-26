@@ -1,0 +1,29 @@
+{% extends "base.tmpl.html" %}
+
+{% block body %}
+	<section>
+		<h2>Posts</h2>
+
+		<ul>
+			{% for article in articles %}
+			<li>
+				<a href="article/{{ article.slug }}.html">{{ article.title }}</a>
+				<time datetime="{{ article.datetime }}">{{ article.date }}</time>
+			</li>
+			{% endfor %}
+		</ul>
+	</section>
+
+	<section>
+		<h2>Books</h2>
+
+		<a href="http://shop.oreilly.com/product/0636920026280.do"><img src="http://akamaicovers.oreilly.com/images/0636920026280/cat.gif" alt="Learning from jQuery"></a>
+		<h3>Learning from jQuery</h3>
+		<p>
+			If you’re comfortable with jQuery but a bit shaky with JavaScript, this concise guide will help you expand your knowledge of the language—especially the code that jQuery covers up for you. Many jQuery devotees write as little code as possible, but with some JavaScript under your belt, you can prevent errors, reduce overhead, and make your application code more efficient.
+			<a href="http://shop.oreilly.com/product/0636920026280.do">O'Reilly Shop</a>,
+			<a href="http://www.amazon.co.uk/Learning-jQuery-Callum-Macrae/dp/1449335195">amazon.co.uk</a>,
+			<a href="http://www.amazon.com/Learning-jQuery-Callum-Macrae/dp/1449335195">amazon.com</a>
+		</p>
+	</section>
+{% endblock %}

@@ -1,12 +1,18 @@
 'use strict';
 
-var browserSync = require('browser-sync'),
+var fs = require('fs'),
+
+	browserSync = require('browser-sync'),
 	es = require('event-stream'),
 	gulp = require('gulp'),
 	gutil = require('gulp-util'),
 	jshint = require('gulp-jshint'),
 	less = require('gulp-less'),
+	marked = require('marked'),
+	markdown = require('gulp-markdown'),
+	moment = require('moment'),
 	minifyCSS = require('gulp-minify-css'),
+	nunjucks = require('nunjucks'),
 	prefix = require('gulp-autoprefixer'),
 	recess = require('gulp-recess'),
 	stylish = require('jshint-stylish'),
@@ -21,8 +27,77 @@ var config = {
 	}
 };
 
+//var myRenderer = new marked.Renderer();
+//
+//myRenderer.code = function(code, lang, escaped) {
+//	var className = lang ? ' class="language-' + this.options.langPrefix + lang + '"' : '';
+//	return '<pre><code' + className + '>' + (escaped ? code : escape(code, true)) + '\n</code></pre>\n';
+//};
+
+
 gulp.task('build', function () {
 	gulp.run('less');
+
+	// Build HTML from MarkDown and template files
+	nunjucks.configure('templates');
+
+	var files = [];
+
+	gulp.src('articles/*.md')
+		.pipe(es.map(function (file, callback) {
+			// Extract article data
+			file.articleData = {};
+			files.push(file.articleData);
+
+			var lines = file.contents.toString('utf8').split('\n');
+			file.articleData.title = lines.splice(0, 1)[0].slice(2);
+			file.articleData.date = lines.splice(0, 1)[0].slice(2);
+
+			var date = moment(file.articleData.date, 'D MMMM, YYYY', 'en');
+			file.articleData.datetime = date.format('YYYY-MM-DD 00:00');
+
+			file.articleData.slug = file.path.slice(file.base.length, -3);
+
+			file.contents = new Buffer(lines.join('\n'));
+
+			callback(null, file);
+		}))
+		.pipe(markdown({
+			langPrefix: 'language-'
+		}))
+		.pipe(es.map(function (file, callback) {
+			file.articleData.body = file.contents.toString('utf8');
+
+			file.contents = new Buffer(nunjucks.render('article.tmpl.html', {
+				article: file.articleData,
+				root: '..',
+				prism: true
+			}));
+
+			callback(null, file);
+		}))
+		.pipe(gulp.dest('app/article'))
+		.on('end', function () {
+			files.sort(function (a, b) {
+				if (a.datetime > b.datetime) {
+					return -1;
+				}
+
+				if (a.datetime < b.datetime) {
+					return 1;
+				}
+
+				return 0;
+			});
+
+			var out = nunjucks.render('index.tmpl.html', {
+				articles: files,
+				root: '.',
+				prism: false
+			});
+
+			fs.writeFile('app/index.html', out);
+		});
 });
 
 gulp.task('less', function () {
@@ -53,17 +128,15 @@ gulp.task('less', function () {
 gulp.task('lesslint', function () {
 	gulp.src(['app/assets/css/*.css', 'app/assets/less/*.less'])
 		.pipe(recess(config.recessOptions));
-
-	// @todo: Add failure
 });
 
 gulp.task('browser-sync', function () {
 	browserSync.init([
 		'app/assets/build/style.css',
 		'app/assets/css/**/*.css',
-		// requirejs out,
 		'app/assets/imgs/**/*.jpg',
 		'app/assets/imgs/**/*.png',
+		'app/assets/js/**/*.js',
 		'app/**/*.php',
 		'app/**/*.html'
 	], {
@@ -126,5 +199,9 @@ gulp.task('default', ['lint'], function () {
 
 	gulp.watch('app/assets/less/**/*.less', function () {
 		gulp.run('less');
+	});
+
+	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], function () {
+		gulp.run('build');
 	});
 });

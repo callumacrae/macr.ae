@@ -12,6 +12,10 @@
     "gulp-autoprefixer": "~0.0.4",
     "gulp-minify-css": "~0.2.0",
     "event-stream": "~3.1.0",
-    "gulp-w3cjs": "~0.0.3"
+    "gulp-w3cjs": "~0.0.3",
+    "nunjucks": "~1.0.1",
+    "gulp-markdown": "~0.1.2",
+    "moment": "~2.5.1",
+    "marked": "~0.3.0"
   }
 }

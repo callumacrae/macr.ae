@@ -4,6 +4,8 @@ app/assets/js/bower
 
 # Project files
 app/assets/build
+app/article
+app/index.html
 
 # Generated files
 npm-debug.log

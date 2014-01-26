@@ -1,0 +1,16 @@
+{% extends "base.tmpl.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{% block page %}article{% endblock %}
+
+{% block body %}
+	<article>
+		<header>
+			<h2>{{ article.title }}</h2>
+			<time class="article-date" datetime="{{ article.datetime }}">{{ article.date }}</time>
+		</header>
+
+		{{ article.body }}
+	</article>
+{% endblock %}

@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="no-js {% block page %}index{% endblock %}">
+<head>
+	<title>{% block title %}Callum Macrae{% endblock %}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	{% if prism %}<link rel="stylesheet" href="{{ root }}/assets/js/bower/prism/themes/prism.css">{% endif %}
+	<link rel="stylesheet" href="{{ root }}/assets/js/bower/reset-css/reset.css">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,400italic,700">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Merriweather:400,400italic,700,700italic">
+	<link rel="stylesheet" href="{{ root }}/assets/build/style.css">
+
+	<script src="{{ root }}/assets/js/bower/modernizr/modernizr.js"></script>
+</head>
+<body>
+	<header>
+		<!-- So this font has pretty bad kerning... -->
+		<a href="{{ root }}/"><h1>C<span style="margin-left: 1px">a</span>ll<span style="margin-left: -2px; margin-right: -2px">u</span>m Ma<span style="margin-left: -2px">c</span>r<span style="margin-left: 4px">a</span>e</h1></a>
+		<span class="tagline">Front-End Developer</span>
+	</header>
+
+	{% block body %}{% endblock %}
+
+	<footer>
+		<a href="https://twitter.com/callumacrae">Twitter</a>
+		<a href="https://github.com/callumacrae">GitHub</a>
+		<a href="#" class="add-email">Email</a>
+		<p class="no-js">Please enable JavaScript to see my email address. Sorry!</p>
+	</footer>
+
+	{% if prism %}<script src="{{ root }}/assets/js/bower/prism/prism.js"></script>{% endif %}
+	<script src="{{ root }}/assets/js/app.js"></script>
+</body>
+</html>
