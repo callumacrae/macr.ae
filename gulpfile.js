@@ -19,9 +19,7 @@ var config = {
 };
 
 
-gulp.task('build', function () {
-	gulp.run('less');
-
+gulp.task('build', ['less'], function () {
 	// Build HTML from MarkDown and template files
 	nunjucks.configure('templates');
 
