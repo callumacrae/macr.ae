@@ -68,37 +68,48 @@ for (let element of elements) {
 
 ### Iterators
 
-Iterators are pretty self descriptive—an Iterator is an object that can iterate through something one item at a time. They can be iterated through either by calling the `.next()` method or using a for…in loop.
+**This section updated 14th February 2014: before, it was wrong and was using SpiderMonkey's old syntax for Iterators. Apologies!**
+
+Iterators are pretty self descriptive—an Iterator is an object that can iterate through something one item at a time. They can be iterated through either by calling the `.next()` method or using a for…of loop.
 
 A really simple iterator would just iterate through an object:
 
+An object is an iterators when it has a method called `@@iterator`. For example, we could define a `NumberIterator` constructor to create an iterator to loop through an array, converting the elements to numbers. It isn't really a real-life example, but it's good for demonstration:
+
 ```javascript
-var keyMap = {
-	keyLeft: 37,
-	keyUp: 38,
-	keyRight: 39,
-	keyDown: 40
-};
+function NumberIterator(arr) {
+    this['@@iterator'] = function () {
+        var index = 0;
 
-var keyMapIterator = Iterator(keyMap);
-
-keyMapIterator.next(); // ["keyLeft", 37]
-keyMapIterator.next(); // ["keyUp", 38]
-keyMapIterator.next(); // ["keyRight", 39]
-keyMapIterator.next(); // ["keyUp", 40]
-
-keyMapIterator = Iterator(keyMap);
-
-for (let [key, code] in keyMapIterator) {
-	console.log(key + ' has keyCode ' + code);
+        return {
+            next: function () {
+                if (index >= arr.length) {
+                    return {done: true};
+                } else {
+                    return {
+                        value: parseInt(arr[index++]),
+                        done: false
+                    }
+                }
+            }
+        }
+    };
 }
 ```
 
-That code sample demonstrates two ways of iterating through an Iterator. You may have noticed that we declared `keyMapIterator` twice, once before each loops—this is because once an Iterator has been looped through all the way, you can't loop through it again (it'll just throw an error).
+We can then use the iterator using the following:
 
-#### More ECMAScript 6 features
+```javascript
+for (let i of new NumberIterator([1, 2, "3"])) {
+    console.log(i);
+}
+```
 
-`let [key, code]` demonstrates another two ECMAScript 6 features. `let` is similar to the `var` keyword in that it declares a variable, but it uses block scoping instead of function scoping, meaning that the variable declared will not be available after the block:
+This works as expected, logging the numbers one to three to the console, all as numbers.
+
+#### The let keyword
+
+The usage of `let i` demonstrates another ECMAScript 6 feature. `let` is similar to the `var` keyword in that it declares a variable, but it uses block scoping instead of function scoping, meaning that the variable declared will not be available after the block:
 
 ```javascript
 {
@@ -112,35 +123,13 @@ console.log(foo); // "bar"
 console.log(hello); // ReferenceError
 ```
 
-The square brackets allow you to declare multiple variables at the same time on one line:
-
-```javascript
-var [a, b] = ["hello", "world"];
-console.log(a, b); // "hello" "world"
-```
-
-This is especially useful for switching two variables round (which previously involved three lines of code and a temporary variable):
-
-```javascript
-var a = 1,
-	b = 2;
-
-[a, b] = [b, a];
-
-console.log(a, b); // a = 2, b = 1
-```
-
-This is called a destructuring assignment.
-
 #### Back to iterators
 
-So we've seen how we can create an Iterator to iterate over a simple object. You can also use them to loop over arrays in the same way, and it will include properties added to the array (but not properties added to the prototype; it's like using a for…in loop with an `arr.hasOwnProperty(key)` call).
-
-You can create **custom iterators** to iterate through your own objects.
+Time for a more complicated example, this time using prototypes instead of returning an object.
 
 Let's say we have an array containing a couple million strings containing JSON representations of users. We want to create a page to scroll through them all, but we only want to display the first hundred. When the browser reaches the bottom of the page, we'll display another hundred.
 
-To do this, we'll use an iterator. The following block of code defines our iterator. 
+To do this, we'll use an iterator. The following block of code defines our iterator.
 
 ```javascript
 function JSONStrings(jsonStrings) {
@@ -154,13 +143,16 @@ function JSONStringsIterator(stringsArray) {
 
 JSONStringsIterator.prototype.next = function () {
     if (this.index >= this.stringsArray.length) {
-        throw StopIteration;
+        return {done: true};
     } else {
-        return JSON.parse(this.stringsArray[this.index++]);
+        return {
+            value: JSON.parse(this.stringsArray[this.index++]),
+            done: false
+        };
     }
 };
 
-JSONStrings.prototype.__iterator__ = function () {
+JSONStrings.prototype['@@iterator'] = function () {
     return new JSONStringsIterator(this.jsonStrings);
 };
 ```
@@ -176,7 +168,7 @@ var users = new JSONStrings([
     '{"id":3,"name":"Callum Macrae","email":"callum@example.com"}'
 ]);
 
-for (let user in users) {
+for (let user of users) {
     console.log(user.name + ' has email address ' + user.email);
 }
 ```
@@ -205,36 +197,42 @@ Our iterator function stores an array of JSON strings, and defines the initial i
 ```javascript
 JSONStringsIterator.prototype.next = function () {
     if (this.index >= this.stringsArray.length) {
-        throw StopIteration;
+        return {done: true};
     } else {
-        return JSON.parse(this.stringsArray[this.index++]);
+        return {
+            value: JSON.parse(this.stringsArray[this.index++]),
+            done: false
+        };
     }
 };
 ```
 
-This is the function called to iterate through the items, the usage of which was demonstrated earlier. If the index is greater than the length of the array of strings then there is nothing left to iterate over and the function throws `StopIteration` to indicate that—otherwise, it parses the JSON string of the current iteration, and increases the index by one.
+This is the function called by the JavaScript engine in order to iterate through the items. It has to return an object containing two properties, `value` and `done`. When `done` is false, the `value` is given to the for…of loop, and the loop continues. When `done` is true, the loop is stopped.
 
 ```javascript
-JSONStrings.prototype.__iterator__ = function () {
+JSONStrings.prototype['@@iterator'] = function () {
     return new JSONStringsIterator(this.jsonStrings);
 };
 ```
 
-This is the code that makes `JSONStrings` iterable. When you attempt to loop through an object in a for…in loop, the JavaScript engine looks for an `__iterator__` method, and calls it to attempt to get an iterator.
+This is the code that makes `JSONStrings` iterable. When you attempt to loop through an object in a for…of loop, the JavaScript engine looks for an `@@iterator` method, and calls it to attempt to get an iterator.
 
-There are a lot of functions which don't really do much in the above example, but they're not strictly needed. The below code would do the same and is a lot easier to understand, but I wouldn't recommend using it: it copies the `__iterator__` function into every instance of JSONStrings, which isn't great.
+There are a lot of functions which don't really do much in the above example, but they're not strictly needed. The below code would do the same and is a lot easier to understand, but I wouldn't recommend using it: it copies the `@@iterator` function into every instance of JSONStrings, which isn't great.
 
 ```javascript
 function JSONStrings(jsonStrings) {
-    this.__iterator__ = function () {
+    this['@@iterator'] = function () {
         var index = 0,
             iterator = {};
 
         iterator.next = function () {
             if (index >= jsonStrings.length) {
-                throw StopIteration;
+                return {done: true};
             } else {
-                return JSON.parse(jsonStrings[index++]);
+                return {
+                    value: JSON.parse(jsonStrings[index++]),
+                    done: false
+                };
             }
         };
 
@@ -358,24 +356,34 @@ for (let i of ['one', 'two', 'three']) {
 }
 ```
 
-Iterators create a nice way to loop through objects on at a time using something like for for…in loop (or just by calling the `.next()` method).
+Iterators create a nice way to loop through objects one at a time using a for…of loop.
 
 ```javascript
-var obj = {
-	one: 1,
-	two: 2,
-	three: 3
-};
+function NumberIterator(arr) {
+    this['@@iterator'] = function () {
+        var index = 0;
 
-for (let [word, num] in Iterator(obj)) {
-	console.log(word + ' is ' + num);
-		// one is 1
-		// two is 2
-		// three is 3
+        return {
+            next: function () {
+                if (index >= arr.length) {
+                    return {done: true};
+                } else {
+                    return {
+                        value: parseInt(arr[index++]),
+                        done: false
+                    }
+                }
+            }
+        }
+    };
+}
+
+for (let i of new NumberIterator([1, 2, "3"])) {
+    console.log(i);
 }
 ```
 
-You can create custom iterators on your own objects by adding an `__iterator__` method to the object (either directly or onto a prototype) which returns an object with a `.next()` method.
+You can create iterators on your objects by adding an `@@iterator` method to the object (either directly or onto a prototype) which returns an object with a `.next()` method, which in turn returns an object with `done` and `value` properties.
 
 
 Generators provide an easy way to create iterators and functions with multiple exit and entry points, allowing us to decouple non-function logic from functions and make code easier to reuse and better for testing. The following code will output the first twenty fibonacci numbers, and then all the fibonacci numbers below 150.
