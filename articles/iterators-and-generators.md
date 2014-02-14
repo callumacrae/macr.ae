@@ -70,11 +70,7 @@ for (let element of elements) {
 
 **This section updated 14th February 2014: before, it was wrong and was using SpiderMonkey's old syntax for Iterators. Apologies!**
 
-Iterators are pretty self descriptive—an Iterator is an object that can iterate through something one item at a time. They can be iterated through either by calling the `.next()` method or using a for…of loop.
-
-A really simple iterator would just iterate through an object:
-
-An object is an iterators when it has a method called `@@iterator`. For example, we could define a `NumberIterator` constructor to create an iterator to loop through an array, converting the elements to numbers. It isn't really a real-life example, but it's good for demonstration:
+Iterators are pretty self descriptive—an Iterator is an object that can iterate through something one item at a time. An object is an iterator when it has a method called `@@iterator`. For example, we could define a `NumberIterator` constructor to create an iterator to loop through an array, converting the elements to numbers. It isn't really a real-life example, but it's good for demonstration:
 
 ```javascript
 function NumberIterator(arr) {
