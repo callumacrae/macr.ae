@@ -1,5 +1,5 @@
 # My take on function memoization in JavaScript
-- 19th February 2013
+- 19th February 2014
 
 Memoization is a simple optimisation technique where the result of a function is cached, and then if the same arguments are seen again the result is retrieved from the cache instead of being calculated again. On functions which take longer to run, this can be extremely effective at speeding up your JavaScript.
 
