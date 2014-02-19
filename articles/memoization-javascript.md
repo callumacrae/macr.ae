@@ -112,7 +112,7 @@ function findClosestToTen() {
 }
 ```
 
-This is fine with a small list of numbers, but as the list gets bigger, this takes a horrifically large amount of time as it has a cubic complexity `O(n^3)`. Let's generate an array containing 300 random numbers:
+This is fine with a small list of numbers, but as the list gets bigger, this takes a horrifically large amount of time as it has a cubic complexity `O(n^3)`. Let's generate an array containing 500 random numbers:
 
 ```javascript
 var nums = [];
