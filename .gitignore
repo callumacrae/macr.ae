@@ -11,5 +11,5 @@ app/index.html
 npm-debug.log
 
 # Random folders
-stuff
-tryregex
+app/stuff
+app/tryregex
