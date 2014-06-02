@@ -54,7 +54,7 @@ Running `casperjs test myTests.js` will give us the following output:
 
 ![Successful tests](http://i.imgur.com/JLWknKQ.png)
 
-Even though your test files are written in Node, you can't actually run them directly through Node. If you're using Grunt, you can use the [grunt-casperjs](https://github.com/ronaldlokers/grunt-casperjs) plugin. There's also [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS) to run CasperJS from Node, but it has a different API and doesn't seem to support Casper's testing functionality yet.
+Even though your test files are written in JavaScript using Node.js, you can't actually run them directly through the `node` package. If you're using Grunt, you can use the [grunt-casperjs](https://github.com/ronaldlokers/grunt-casperjs) plugin. There's also [SpookyJS](https://github.com/WaterfallEngineering/SpookyJS) to run CasperJS from Node, but it has a different API and doesn't seem to support Casper's testing functionality yet.
 
 Unlike with Grunt, there is no gulp plugin to run CasperJS tests. I dug into grunt-casperjs and trawled StackOverflow for a bit, and it seems that the best way—although slightly hacky—is to use Node's [child_process](http://nodejs.org/api/child_process.html#child_process_child_process_spawn_command_args_options) functionality to call `casperjs`.
 
