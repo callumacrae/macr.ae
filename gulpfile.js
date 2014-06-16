@@ -25,7 +25,7 @@ gulp.task('build', ['less'], function () {
 
 	var files = [];
 
-	gulp.src('articles/*.md')
+	return gulp.src('articles/*.md')
 		.pipe(es.map(function (file, callback) {
 			// Extract article data
 			file.articleData = {};
@@ -104,11 +104,11 @@ gulp.task('less', function () {
 		stream = stream.pipe(plugins.minifyCss());
 	}
 
-	stream.pipe(gulp.dest('app/assets/build'));
+	return stream.pipe(gulp.dest('app/assets/build'));
 });
 
 gulp.task('lesslint', function () {
-	gulp.src(['app/assets/css/*.css', 'app/assets/less/*.less'])
+	return gulp.src(['app/assets/css/*.css', 'app/assets/less/*.less'])
 		.pipe(plugins.recess(config.recessOptions));
 });
 
