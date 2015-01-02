@@ -1,7 +1,7 @@
 # Building with Gulp (external)
 - 11th June, 2014
 
-<img src="https://i.imgur.com/f9afCn7.png" style="display:block; margin: 0 auto">
+<img alt="Gulp" src="https://i.imgur.com/f9afCn7.png" style="display:block; margin: 0 auto">
 
 I wrote an article for Smashing Magazine about Gulp:
 
