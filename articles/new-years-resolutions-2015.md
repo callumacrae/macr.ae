@@ -7,7 +7,7 @@ I don't usually have this many resolutions.
 
 ## Eat fewer cows
 
-This is vague and completely unmeasurable, but for environmental reasons, I'm going to eat less beef. I'm also going to eat less lamb, but that's less important because I didn't eat much of that to begin with.
+This is vague and completely unmeasurable, but for [environmental reasons](http://www.ecorazzi.com/wp-content/uploads/2011/07/green_house_proteins.jpg), I'm going to eat less beef. I'm also going to eat less lamb, but that's less important because I didn't eat much of that to begin with.
 
 ![low res bacon what i done cooked](http://i.imgur.com/oawRhsw.png)
 
