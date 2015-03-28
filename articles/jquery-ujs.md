@@ -48,7 +48,7 @@ The jquery-ujs way is no shorter, isn't semantic HTML—POST requests should be 
 
 And finally, in the example for `data-params`, we get to see some HTML-encoded JSON!
 
-```
+```markup
 data-params="{&quot;param1&quot;:&quot;Hello server&quot;}"
 ```
 
@@ -108,13 +108,13 @@ Uh, thanks guys. For anyone who doesn't know, [this is a confirm box]. You might
 
 Confirm boxes are really, really bad. They create a horrible experience for the user—especially if you do it wrong—as they're super invasive, and you can't theme them. [This comment][shitty confirm box] on StackExchange puts it better than I can.
 
-You can take it a step further and say you shouldn't even prompt the user to confirm they want to do something, whether doing it in a prompt, modal or inline. It's way nicer to prompt the user to undo their action after they've already done it! Here's a great article on A List Apart about the subject: [Never Use a Warning When you Mean Undo].
+You can take it a step further and say you shouldn't even prompt the user to confirm they want to do something, whether doing it in a prompt, modal, or inline. It's way nicer to prompt the user to undo their action after they've already done it! Here's a great article on A List Apart about the subject: [Never Use a Warning When you Mean Undo].
 
 Please just don't use `data-confirm`.
 
 ## The remaining functionality
 
-There's two things left in jquery-ujs that do have uses. The first is `data-disable-with`, which disables submit submit buttons in forms when the form is submitted.
+There are two things left in jquery-ujs that do have uses. The first is `data-disable-with`, which disables submit submit buttons in forms when the form is submitted.
 
 Basically, this:
 
@@ -141,7 +141,7 @@ The last thing jquery-ujs does—and its best feature, in my opinion, is `data-r
 
 ---
 
-In summary, there's a few reasons I don't like jquery-ujs, and no real reason to use it. It would be better as a number of small libraries instead of one big library, some of its functionality is bad for progressive enhancement, and it isn't on npm and doesn't properly support Bower.
+In summary, there are a few reasons I don't like jquery-ujs, and no real reasons to use it. It would be better as a number of small libraries instead of one big library, some of its functionality is bad for progressive enhancement, it isn't on npm, and doesn't properly support Bower.
 
 Most of its functionality, such as `data-confirm` and the crazy link to form conversion stuff, just shouldn't be used. The rest can be easily replaced by a few lines of code—which I provided above—and [eldarion-ajax], which provides the same behaviour as `data-remote`.
 
