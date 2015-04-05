@@ -109,8 +109,8 @@ gulp.task('htmllint', function () {
 gulp.task('lint', gulp.parallel('jshint', 'lesslint', 'htmllint'));
 
 gulp.task('watchers', function () {
-	gulp.watch('app/assets/less/**/*.less', 'less');
-	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], 'build');
+	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
+	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('build'));
 
 	browserSync.init([
 		'app/assets/build/style.css',
