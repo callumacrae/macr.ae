@@ -170,7 +170,7 @@ I find that this way of including tasks is also a lot better when you have tasks
 
 The following is part of the gulpfile in the project I link to at the end of this article. It's really easy to see which tasks run each other!
 
-```
+```javascript
 gulp.task('auto-reload', getTask('auto-reload'));
 gulp.task('html', getTask('html'));
 gulp.task('js', ['js-quality'], getTask('js'));
