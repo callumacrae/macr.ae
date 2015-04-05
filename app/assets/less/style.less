@@ -6,10 +6,13 @@
 
 @color: #905;
 
-* {
-	// You, too, should use * { box-sizing: border-box; }
-	// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+// http://www.paulirish.com/2012/box-sizing-border-box-ftw/
+html {
 	box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: inherit;
 }
 
 body {
@@ -26,14 +29,15 @@ body > header {
 	}
 
 	h1 {
+		margin-bottom: 5px;
+
 		text-transform: uppercase;
 		font-size: 48pt;
 		font-weight: 700;
 	}
 
 	.tagline {
-		font-size: 10pt;
-//		font-style: italic;
+		font-size: 12pt;
 	}
 }
 
@@ -47,7 +51,7 @@ body > header {
 
 .disqus, article, section {
 	width: 90%;
-	width: calc(~"100% - 50px"); // Brackets or LESS will parse it
+	width: calc(~"100% - 50px"); // Quotes or LESS will parse it
 	max-width: 800px;
 	margin: 0 auto;
 
@@ -134,8 +138,11 @@ h2, h3, h4, h5, h6 {
 }
 
 h2 {
+	margin-bottom: 20px;
+
 	font-size: 32pt;
 	font-weight: 700;
+	line-height: 1.2;
 }
 
 h3 {
@@ -150,6 +157,11 @@ h4 {
 
 h5 {
 	font-size: 18pt;
+}
+
+hr {
+	border-bottom: 0;
+	margin: 30px 0;
 }
 
 a {
