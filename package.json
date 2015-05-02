@@ -1,5 +1,6 @@
 {
   "name": "macrae",
+  "private": true,
   "author": "Callum Macrae <callum@macr.ae>",
   "devDependencies": {
     "browser-sync": "^2.4.0",
