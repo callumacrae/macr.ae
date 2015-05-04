@@ -22,4 +22,4 @@ if (isTouch()) {
 }
 
 document.documentElement.classList.add('js');
-document.documentElement.classList.remove('js');
+document.documentElement.classList.remove('no-js');
