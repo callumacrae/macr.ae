@@ -1,14 +1,11 @@
-# Repositories
+# npm
 node_modules
-app/assets/js/bower
+*.log
 
 # Project files
 app/assets/build
 app/article
 app/index.html
-
-# Generated files
-npm-debug.log
 
 # Random folders
 app/stuff

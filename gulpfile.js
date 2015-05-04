@@ -1,26 +1,39 @@
 'use strict';
 
 var fs = require('fs');
+var browserify = require('browserify');
 var browserSync = require('browser-sync');
+var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var moment = require('moment');
 var nunjucks = require('nunjucks');
-var stylish = require('jshint-stylish');
+var source = require('vinyl-source-stream');
 var through = require('through2');
 var plugins = require('gulp-load-plugins')();
 
-gulp.task('less', function () {
-	var minify = false;
+var minify = process.env.MINIFY || false;
 
+gulp.task('less', function () {
 	return gulp.src('app/assets/less/style.less')
 		.pipe(plugins.plumber())
-		.pipe(plugins.less({ compress: true }))
+		.pipe(plugins.less({ compress: minify }))
 		.pipe(plugins.autoprefixer())
 		.pipe(minify ? plugins.minifyCss() : plugins.util.noop())
 		.pipe(gulp.dest('app/assets/build'));
 });
 
-gulp.task('build', function () {
+gulp.task('js', function () {
+	var bundler = browserify();
+	bundler.add('./app/assets/js/app.js');
+
+	return bundler.bundle()
+		.pipe(source('app.js'))
+		.pipe(buffer())
+		.pipe(minify ? plugins.uglify() : plugins.util.noop())
+		.pipe(gulp.dest('app/assets/build'));
+});
+
+gulp.task('html', function () {
 	// Build HTML from MarkDown and template files
 	nunjucks.configure('templates');
 
@@ -52,9 +65,7 @@ gulp.task('build', function () {
 			file.articleData.body = file.contents.toString('utf8');
 
 			file.contents = new Buffer(nunjucks.render('article.tmpl.html', {
-				article: file.articleData,
-				root: '..',
-				prism: true
+				article: file.articleData
 			}));
 
 			callback(null, file);
@@ -74,50 +85,22 @@ gulp.task('build', function () {
 			});
 
 			var out = nunjucks.render('index.tmpl.html', {
-				articles: files,
-				root: '.',
-				prism: false
+				articles: files
 			});
 
 			fs.writeFile('app/index.html', out);
 		});
 });
 
-gulp.task('lesslint', function () {
-	var options = {
-		strictPropertyOrder: false
-	};
-
-	return gulp.src(['app/assets/css/*.css', 'app/assets/less/*.less'])
-		.pipe(plugins.plumber())
-		.pipe(plugins.recess(options));
-});
-
-gulp.task('jshint', function () {
-	return gulp.src(['app/assets/js/*.js', 'gulpfile.js'])
-		.pipe(plugins.plumber())
-		.pipe(plugins.jshint('.jshintrc'))
-		.pipe(plugins.jshint.reporter(stylish));
-});
-
-gulp.task('htmllint', function () {
-	return gulp.src(['app/**/*.html', '!app/assets/js/**/*.html'])
-		.pipe(plugins.plumber())
-		.pipe(plugins.w3cjs());
-});
-
-gulp.task('lint', gulp.parallel('jshint', 'lesslint'));
-
 gulp.task('watchers', function () {
 	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
-	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('build'));
+	gulp.watch('app/assets/js/**/*.js', gulp.parallel('js'));
+	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('html'));
 
 	browserSync.init([
-		'app/assets/build/style.css',
-		'app/assets/css/**/*.css',
+		'app/assets/build/*.{js,css}',
 		'app/assets/imgs/**/*.jpg',
 		'app/assets/imgs/**/*.png',
-		'app/assets/js/**/*.js',
 		'app/**/*.php',
 		'app/**/*.html'
 	], {
@@ -132,4 +115,5 @@ gulp.task('watchers', function () {
 	});
 });
 
-gulp.task('default', gulp.series('lint', 'build', 'watchers'));
+gulp.task('build', gulp.series('html', 'js', 'less'));
+gulp.task('default', gulp.series('build', 'watchers'));
