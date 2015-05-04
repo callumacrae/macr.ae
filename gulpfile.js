@@ -106,7 +106,7 @@ gulp.task('htmllint', function () {
 		.pipe(plugins.w3cjs());
 });
 
-gulp.task('lint', gulp.parallel('jshint', 'lesslint', 'htmllint'));
+gulp.task('lint', gulp.parallel('jshint', 'lesslint'));
 
 gulp.task('watchers', function () {
 	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
