@@ -92,7 +92,9 @@ gulp.task('html', function () {
 		});
 });
 
-gulp.task('watchers', function () {
+gulp.task('default', gulp.series('html', 'js', 'less'));
+
+if (process.argv.indexOf('--watch') !== -1) {
 	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
 	gulp.watch('app/assets/js/**/*.js', gulp.parallel('js'));
 	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('html'));
@@ -113,7 +115,4 @@ gulp.task('watchers', function () {
 			forms: true
 		}
 	});
-});
-
-gulp.task('build', gulp.series('html', 'js', 'less'));
-gulp.task('default', gulp.series('build', 'watchers'));
+}

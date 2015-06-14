@@ -22,7 +22,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "build": "MINIFY=true gulp build"
+    "build": "MINIFY=true gulp"
   },
   "dependencies": {
     "normalize.css": "^3.0.3",
