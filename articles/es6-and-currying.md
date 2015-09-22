@@ -1,7 +1,7 @@
 # ECMAScript 6 and Currying
 - 21st September, 2015
 
-Currying is the act of turning a function into a new function that takes slightly few arguments, achieving a slightly more specific task. For example, we could take a function that surrounds some text in a specified HTML tag, and create a function that specifically surrounds some text in a `<strong>` tag.
+Currying is the act of turning a function into a new function that takes slightly fewer arguments, achieving a slightly more specific task. For example, we could take a function that surrounds some text in a specified HTML tag, and create a function that specifically surrounds some text in a `<strong>` tag.
 
 Here is the function I'll be using as a demo in this article:
 
