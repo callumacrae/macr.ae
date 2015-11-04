@@ -11,7 +11,7 @@ Gulp 3.9 added support for transpilers such as Babel so that you can use ES6 whe
 
 Set up the es2015 preset (as of Babel 6.0, there are no plugins included by default) in `.babelrc` after installing it using `npm install babel-preset-es2015`:
 
-```
+```javascript
 {
   "presets": ["es2015"]
 }
@@ -21,7 +21,7 @@ Set up the es2015 preset (as of Babel 6.0, there are no plugins included by defa
 
 Then, you can use ES6 in your gulpfile. For example:
 
-```
+```javascript
 import gulp from 'gulp';
 
 gulp.task('default', () => console.log('Default task called'));
@@ -31,7 +31,7 @@ That was simple. You can then call `gulp` normally and it will run as expected.
 
 If you want to specify options to babel, it's best to use `.babelrc`. Failing that (for example, if you want to specify a function as one of the options), you can't use the method I just outlined. Instead, create a file called gulpfile.js containing the following:
 
-```
+```javascript
 require('babel/register')({
   nonStandard: process.env.ALLOW_JSX
 });
@@ -45,7 +45,7 @@ Then use gulpfile.babel.js as highlighted above.
 
 To just compile ES6 into ES5 with babel is pretty simple. Use the [gulp-babel] plugin as follows:
 
-```
+```javascript
 var gulp = require('gulp');
 var babel = require('gulp-babel');
  
@@ -71,7 +71,7 @@ If you want to use ES6 modules, which give you the ability to `import` other fil
 
 Browserify, if you haven't heard of it, allows you to use Node.js-style requires in your browser code:
 
-```
+```javascript
 var $ = require('jquery');
 
 $('body').css('background-color', 'orange');
@@ -81,7 +81,7 @@ Browserify supports "transforms", which are effectively plugins—just like ther
 
 One of these transforms is called [babelify], which adds babel support to Browserify. In addition to just allowing you to use ES6 and use `require()`, it also transpiles `import` statements into `require()` statements, allowing you to use ES6 modules in your code:
 
-```
+```javascript
 import $ from 'jquery';
 
 $('body').css('background-color', 'red');
@@ -89,7 +89,7 @@ $('body').css('background-color', 'red');
 
 You can use Browserify and babelify together using the following code:
 
-```
+```javascript
 var fs = require('fs');
 var babelify = require('babelify');
 var browserify = require('browserify');
@@ -106,7 +106,7 @@ The `bundler.bundle()` function returns a readable stream containing the process
 
 In a gulpfile, the previous code could look like this:	
 
-```
+```javascript
 var babelify = require('babelify');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
@@ -128,7 +128,7 @@ gulp.task('default', function () {
 
 Finally—bonus round!—the following code adds support for source maps.
 
-```
+```javascript
 var babelify = require('babelify');
 var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
