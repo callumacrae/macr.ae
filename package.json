@@ -27,6 +27,7 @@
   "dependencies": {
     "normalize.css": "^3.0.3",
     "prismjs": "git://github.com/LeaVerou/prism#gh-pages",
-    "touch-screen": "^0.1.0"
+    "touch-screen": "^0.1.0",
+    "when-scroll": "^0.2.4"
   }
 }
