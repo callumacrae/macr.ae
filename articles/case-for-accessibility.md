@@ -1,4 +1,5 @@
 # The Case For Web Accessibility
+- 1st January, 2016
 
 There are a large number of people with disabilities browsing the internet—people who want to browse your content, read your articles, and buy your products. These people often find using their computers and the internet a lot trickier than we as people who work in tech do and will use assistive technology to aid them, and if we don't think about these people and make adjustments for them, we might find that our websites aren't as useable as they should be.
 
@@ -106,11 +107,11 @@ I've written an article on how to use a screen reader, and will update this post
 
 It's important to make websites accessible. With two million people in the UK with a visual impairment, 11 million people with hearing loss, and 10% of the population with dyslexia, that's a lot of people who you could be excluding by not making your website accessible—and that's not even a comprehensive list of all disabilities.
 
-People with disabilities are protected against discrimination by the law—you have to take reasonable steps to change your site to be accessible to them. By making accessibility related changes, you will also benefit your users who don't have disabilities!
+People with disabilities are protected against discrimination by the law: you have to take reasonable steps to change your site to be accessible to them. By making accessibility related changes, you will also benefit your users who don't have disabilities!
 
 There are a few different ways to test how accessible your website is. There are automated tools like [AChecker], but if you really want to help your users with disabilities, it's worth taking the time to learn how to use a screen reader.
 
-The internet is for everyone. If we don't take measures to make our websites accessible, then we'll be excluding users and it won't be for everyone.
+Tim Berners-Lee said that the internet should be accessible by anyone, regardless of disability. If we don't take measures to make our websites accessible, then we'll be excluding users.
 
 
 
