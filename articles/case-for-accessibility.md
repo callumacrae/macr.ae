@@ -101,7 +101,7 @@ It's important to be aware when testing with a screen reader that issues you fin
 
 Note that improvements you make to your website to make it easier to browse using a screen reader won't necessarily make it easier for people with other disabilities to use your website—it will only help visually impaired users and people with severe dyslexia, who could be using a screen reader. You still have to consider other disabilities.
 
-I've written an article on how to use a screen reader, and will update this post when it is published.
+I've written an article on how to use a screen reader, which can be found here: [Testing using a screen reader](http://12devsofxmas.co.uk/2016/01/day-8-testing-using-a-screen-reader/).
 
 ## Summary
 
