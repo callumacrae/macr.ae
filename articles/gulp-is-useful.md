@@ -106,12 +106,6 @@ The author uses this image to illustrate that there are more plugins available f
 
 Gulp tasks are written in JavaScript and powered by Node. You can load _any_ of the 227,000 npm packages in gulp: you don't need to load a specific gulp plugin.
 
-## gulp is task runner, not a build tool
-
-My final point is this: gulp is at its core not a build tool. It is a task runner.
-
-You don't _have_ to use plugins. Even if you, as the author of the article suggests, just write your code in JavaScript files, gulp does a pretty neat job of organising that. It doesn't, as the author says, mean that "you’re no longer leveraging Gulp": it just means you're only leveraging part of it!
-
 ----
 
 Gulp makes writing tasks in JavaScript to aid you when you're building your website _easy_. Sure, you can probably rewrite the entire thing in shell scripts, but it won't be pleasant, and if your junior developer wants to tweak it? Not a chance.
