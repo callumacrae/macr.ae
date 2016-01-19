@@ -80,7 +80,7 @@ To do that in an npm script, I do this:
 "build": "npm run lint && ( npm run css & npm run js )"
 ```
 
-I'm sure other people will disagree with me, but I prefer the latter syntax.
+I'm sure other people will disagree with me, but I prefer the former syntax.
 
 ## More complicated tasks
 
