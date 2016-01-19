@@ -55,7 +55,7 @@ With gulp, we would use the gulp plugin for [Uglify2]. However, while it has a c
 $ cat src/**/*.js | uglify2 > app.min.js
 ```
 
-That's a shame. Now we need to find a different tool, because we can't use that on.
+That's a shame. Now we need to find a different tool, because we can't use that one.
 
 ### Junior developers
 
