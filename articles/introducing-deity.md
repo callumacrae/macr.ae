@@ -1,5 +1,5 @@
 # Introducing Deity
-- 15th June 2016
+- 20th June 2016
 
 [Deity] is a property generating tool for use when writing generative tests.
 You call it with a string called a generator string saying what kind of data
@@ -94,8 +94,7 @@ types of data. Here are a few of the most useful:
 
 ### String
 
-The string generator generates strings of random length within a specified
-range.
+This generator generates strings of random length within a specified range.
 
 ```javascript
 deity('string:30-50', function (str) {
@@ -138,11 +137,12 @@ deity('number:0-100:0.1', function (num) {
 
 #### Int
 
-Int is similar to number, but only generates whole numbers.
+The int generator is similar to the number generator, but only generates whole
+numbers.
 
 ### Char
 
-The char generator generates single characters within a given range:
+This generator generates single characters within a given range:
 
 ```javascript
 deity('char:A-M', function (char) {
