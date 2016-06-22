@@ -278,7 +278,7 @@ describe('validateUser()', function () {
 
 Writing the same code without Deity would be less than trivial.
 
-## Deity
+## Wrapping up
 
 Deity allows us to easily test data generated randomly from criteria we
 specify. Based on promises, it allows us to perform both synchronous and
