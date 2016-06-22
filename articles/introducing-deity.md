@@ -2,10 +2,9 @@
 - 20th June 2016
 
 [Deity] is a property generating tool for use when writing generative tests.
-You call it with a string called a generator string saying what kind of data
-should be generated, and then it calls a specified testing function a number
-of times (the default is 100, but it is configurable) with some random
-generated data matching what you said you wanted.
+You call it saying what kind of data should be generated, and then it calls a
+specified testing function a number of times (the default is 100 times) with
+some random generated data matching what you said you wanted.
 
 Basically, it does this:
 
@@ -34,6 +33,9 @@ times we want Deity to run the generator.
 The final argument is a function, your testing function, which will be called a
 number of times with different generated data each time. You can then run your
 tests on this data.
+
+Deity is extensible via plugins, and it is easy to write your own plugins: they
+are just ES6 generators.
 
 
 ## An example
@@ -77,10 +79,14 @@ describe('reverse()', function () {
 	it('should return reversed string', function () {
 		return deity('string:5-10', function (str) {
 			assert.equal(reverse(reverse(str)), str);
+			assert.notEqual(reverse(str), str);
 		});
 	});
 });
 ```
+
+I've also added a `.notEqual()` check: otherwise `reverse()` could just return
+the original string and the tests would pass.
 
 Our assertion will be called 100 times with a different random string each time
 with a length between 5 and 10 characters. This is far superior to testing the
@@ -90,7 +96,12 @@ same three strings every time!
 ## Generators
 
 Deity has quite a few built in generators which can be used to generate many
-types of data. Here are a few of the most useful:
+types of data.
+
+You can test all of the generator strings provided in this article by going to
+the [Deity website][Deity] and running them in the form at the top right.
+
+Here are a few of the most useful:
 
 ### String
 
@@ -98,7 +109,7 @@ This generator generates strings of random length within a specified range.
 
 ```javascript
 deity('string:30-50', function (str) {
-	// str will equal a string of between 30 and 50 characters
+	// str will equal a string with a length of between 30 and 50 characters
 });
 ```
 
@@ -140,6 +151,8 @@ deity('number:0-100:0.1', function (num) {
 The int generator is similar to the number generator, but only generates whole
 numbers.
 
+Example: `int:5-10` will return whole numbers between 5 and 10.
+
 ### Char
 
 This generator generates single characters within a given range:
@@ -167,12 +180,13 @@ deity('boolean:0.1', function (value) {
 
 ### oneOf
 
-The oneOf generator is the first of a few generators that takes another
-generator as an argument. This one takes a number of generators as arguments,
-and then picks one randomly to generate a value with each time. For example,
-the generator string `'oneOf:(string:5-10):(int:0-10):(boolean)'` will generate
-a value that is either a string between 5 and 10 characters long, or an integer
-between 0 and 10, or a boolean value.
+The oneOf generator is one of a few generators that takes another generator as
+argumenta: this is called a subgenerator. They are specified like this:
+`oneOf:(string:5-10):(int:0-10):(boolean)`. That's three subgenerators being
+given as arguments, and the oneOf generators then randomly picks one of them.
+
+It will generate either a value that is either a string between 5 and 10
+characters long, or an integer between 0 and 10, or a boolean value.
 
 ```javascript
 deity('oneOf:(string:5-10):(int:0-10):(boolean)', function (value) {
