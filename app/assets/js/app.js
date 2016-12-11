@@ -1,6 +1,7 @@
 'use strict';
 
 require('prismjs');
+require('./hr');
 var whenScroll = require('when-scroll');
 var isTouch = require('touch-screen');
 
