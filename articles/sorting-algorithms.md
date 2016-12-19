@@ -373,7 +373,7 @@ I developed most of the visualisations in CodePen, so if you want to have a play
 
 You can also find the source for this article on [GitHub][macr.ae github].
 
-<small>Thanks to [Chris D Brown] for proof reading :)</small>
+<small>Thanks to [Chris D Brown] and [Juho Vepsäläinen] for proof reading :)</small>
 
 
 <form class="sort-controls">
@@ -399,3 +399,4 @@ You can also find the source for this article on [GitHub][macr.ae github].
 [xoax heaps]: https://www.youtube.com/watch?v=v1YUApMYXO4
 [macr.ae GitHub]: https://github.com/callumacrae/macr.ae/blob/master/articles/sorting-algorithms.md
 [Chris D Brown]: https://twitter.com/ChrisDeeBrown
+[Juho Vepsäläinen]: https://twitter.com/bebraw
