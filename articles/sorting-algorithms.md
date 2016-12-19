@@ -103,7 +103,11 @@ And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the a
 
 <svg class="sorting-demo" id="bogo" height="300" width="800" viewBox="0 0 800 300"></svg>
 
+----
 
+## Codepens
+
+I developed most of the visualisations in CodePen, so if you want to have a play, check them out. Be aware that they're not implementations of the actual algorithms, though: they've been modified to be iterative instead:
 
 - Bubble sort: http://codepen.io/callumacrae/pen/wodVmP
 - Insertion sort: http://codepen.io/callumacrae/pen/Mbvbpx
@@ -113,6 +117,8 @@ And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the a
 - QuickSort: http://codepen.io/callumacrae/pen/Nbyyar
 - Shell sort: http://codepen.io/callumacrae/pen/pNaQRK
 - Bogosort: http://codepen.io/callumacrae/pen/LbjJOv
+
+You can also find the source for this article on [GitHub][macr.ae github].
 
 
 <form class="sort-controls">
@@ -136,3 +142,4 @@ And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the a
 
 [D3.js]: https://d3js.org/
 [xoax heaps]: https://www.youtube.com/watch?v=v1YUApMYXO4
+[GitHub]: https://github.com/callumacrae/macr.ae/blob/master/articles/sorting-algorithms.md

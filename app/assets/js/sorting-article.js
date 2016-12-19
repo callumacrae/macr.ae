@@ -111,8 +111,14 @@ function initChart(selector, algo) {
 		}
 	}
 
-	iterate();
+	if (document.readyState === 'complete') {
+		iterate();
+	} else {
+		window.addEventListener('load', iterate);
+	}
 }
+
+
 
 document.querySelector('#rainbow').addEventListener('change', (e) => {
 	if (e.target.checked) {
