@@ -164,7 +164,7 @@ function shellSort(list) {
 
       for (var j = i; j > gap - 1; j--) {
         if (list[j] < list[j - gap]) {
-          [list[j], list[j - gap]] = [list[j - gap], list[j]];
+          swap(list, j, j - gap);
         } else {
           break;
         }
@@ -205,7 +205,7 @@ function partition(list, l, r) {
       r--;
     }
 
-    [list[l], list[r]] = [list[r], list[l]];
+    swap(list, l, r);
 
     if (pivot === l) {
       pivot = r;
@@ -217,7 +217,15 @@ function partition(list, l, r) {
   return pivot;
 }
 
-function quicksort(list, l = 0, r = list.length - 1) {
+function quicksort(list, l, r) {
+  if (!l) {
+    l = 0;
+  }
+  
+  if (!r) {
+    r = list.length - 1;
+  }
+
   if (l >= r) {
     return;
   }
@@ -248,9 +256,15 @@ function MaxHeap() {
   this.data = [];
 }
 
-MaxHeap.parent = (x) => Math.floor((x - 1) / 2);
-MaxHeap.leftChild = (x) => 2 * x + 1;
-MaxHeap.rightChild = (x) => 2 * x + 2;
+MaxHeap.parent = function (x) {
+  return Math.floor((x - 1) / 2);
+}
+MaxHeap.leftChild = function (x) {
+  return 2 * x + 1;
+};
+MaxHeap.rightChild = function (x) {
+  return 2 * x + 2;
+};
 
 MaxHeap.prototype.push = function (item) {
   var d = this.data;
@@ -258,7 +272,7 @@ MaxHeap.prototype.push = function (item) {
   var parent = MaxHeap.parent(index);
 
   while (parent !== -1 && item > d[parent]) {
-    [d[index], d[parent]] = [d[parent], d[index]];
+    swap(d, index, parent);
     index = parent;
     parent = MaxHeap.parent(parent);
   }
@@ -297,7 +311,7 @@ MaxHeap.prototype.pop = function () {
     }
   
     if (d[index] < d[maxChild]) {
-      [d[index], d[maxChild]] = [d[maxChild], d[index]];
+      swap(d, index, maxChild);
       swapped = true;
       index = maxChild;
     }
@@ -333,14 +347,14 @@ And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the l
 // Warning: don't run this. It's basically an infinite loop.
 
 function shuffleArray(ary) {
-	for (let i = ary.length; i; i--) {
-		let j = Math.floor(Math.random() * i);
-		[ary[i - 1], ary[j]] = [ary[j], ary[i - 1]];
+	for (var i = ary.length; i; i--) {
+		var j = Math.floor(Math.random() * i);
+		swap(ary, i - 1, j);
 	}
 }
 
 function isSorted(ary) {
-	for (let i = 1; i < ary.length; i++) {
+	for (var i = 1; i < ary.length; i++) {
 		if (ary[i] < ary[i - 1]) {
 			return false;
 		}
