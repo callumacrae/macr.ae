@@ -3,7 +3,9 @@
 
 Sometimes you or a computer needs to sort a list of items—say, a list of names into alphabetical order, or a list of objects into length order. To sort this list, especially if it is a large list, you need some kind of process: for example, if you were sorting a list of names into alphabetic order, you could group all the letters by their first letter, then sort the individual groups.
 
-Algorithms used to sort a list of items are called sorting algorithms, and this article will explain and visualise a few of the most well known sorting algorithms. Each section will contain one sorting algorithm, a description of the algorithm, and then a visualisation of the algorithm. Different length bars (seen below) will be sorted from shortest to longest, powered by [D3.js]. There are some controls to the bottom right of the screen: it might help if you adjust the speed of the visualisation a bit.
+Algorithms used to sort a list of items are called sorting algorithms, and this article will explain and visualise a few of the most well known sorting algorithms. Each section will contain one sorting algorithm, a description of the algorithm, a visualisation of the algorithm, and finally an implementation of the algorithm in JavaScript.
+
+Different length bars (seen below) will be sorted from shortest to longest, powered by [D3.js]. There are controls to the bottom right of the screen: it might help if you adjust the speed of the visualisation a bit.
 
 <svg class="sorting-demo" id="unordered" height="300" width="800" viewBox="0 0 800 300"></svg>
 
@@ -21,6 +23,22 @@ The orange bars are the bars being compared, and the darker blue bars are the ba
 
 <svg class="sorting-demo" id="bubble" height="300" width="800" viewBox="0 0 800 300"></svg>
 
+The `swap` function takes three arguments: the array, and the two indexes to swap.
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function bubbleSort(list) {
+  for (var j = list.length; j > 0; j--) {
+    for (var i = 0; i < j; i++) {
+      if (list[i] > list[i + 1]) {
+        swap(list, i, i + 1);
+      }
+    }
+  }
+}
+```
+
 ----
 
 ## Selection sort
@@ -28,6 +46,26 @@ The orange bars are the bars being compared, and the darker blue bars are the ba
 Selection sort works by iterating through the list and finding the smallest unsorted item. Once it has found it, it swaps the item with the left-most unsorted item, marks it as sorted, and starts the search again.
 
 <svg class="sorting-demo" id="selection" height="300" width="800" viewBox="0 0 800 300"></svg>
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function selectionSort(list) {
+  for (var i = 0; i < list.length - 1; i++) {
+    var min = i;
+
+    for (var j = i + 1; j < list.length; j++) {
+      if (list[j] < list[min]) {
+        min = j;
+      }
+    }
+
+    if (min !== i) {
+      swap(list, i, min);
+    }
+  }
+}
+```
 
 ----
 
@@ -38,6 +76,22 @@ Insertion sort iterates through the list, taking one unsorted element at a time,
 While not usually as efficient as some of the more complicated algorithms below, this algorithm is great at sorting lists which are already nearly in order: try clicking "mostly ordered" in the controls to the bottom right to see a demonstration of this (remember to click "random" afterwards when looking at the other algorithms).
 
 <svg class="sorting-demo" id="insertion" height="300" width="800" viewBox="0 0 800 300"></svg>
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function insertionSort(list) {
+  for (var i = 0; i < list.length; i++) {
+    for (var j = i; j > 0; j--) {
+      if (list[j] < list[j - 1]) {
+        swap(list, j, j - 1);
+      } else {
+        break;
+      }
+    }
+  }
+}
+```
 
 ----
 
@@ -55,6 +109,36 @@ Watch the visualisation below for a couple iterations—it makes more sense towa
 
 An algorithm which divides the problem into smaller problems and solves them recursively is known as a divide and conquer algorithm: we'll meet another one later.
 
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function mergeSort(list) {
+  if (list.length === 1) {
+    return list;
+  }
+
+  var listA = mergeSort(list.slice(0, list.length / 2));
+  var listB = mergeSort(list.slice(list.length / 2));
+
+  var i = 0;
+  var j = 0;
+
+  var newList = [];
+
+  while (i < listA.length || j < listB.length) {
+    if (i !== listA.length && (listA[i] < listB[j] || j === listB.length)) {
+      newList.push(listA[i]);
+      i++;
+    } else {
+      newList.push(listB[j]);
+      j++;
+    }
+  }
+
+  return newList;
+}
+```
+
 ----
 
 ## Shell sort
@@ -68,6 +152,29 @@ Once we've iterated through the list, we choose another gap: in this example, to
 This can be faster than just using insertion sort, as it means that elements that are far away from where they need to be don't have to be swapped down one element at a time. It does come with added complexity, though.
 
 <svg class="sorting-demo" id="shell" height="300" width="800" viewBox="0 0 800 300"></svg>
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function shellSort(list) {
+  var gap = Math.floor(list.length / 2);
+
+  while (gap !== 0) {
+    for (var i = gap - 1; i < list.length; i++) {
+
+      for (var j = i; j > gap - 1; j--) {
+        if (list[j] < list[j - gap]) {
+          [list[j], list[j - gap]] = [list[j - gap], list[j]];
+        } else {
+          break;
+        }
+      }
+    }
+
+    gap = Math.floor(gap / 2);
+  }
+}
+```
 
 ----
 
@@ -83,6 +190,44 @@ The dark blue elements are elements that have been marked as sorted, the green e
 
 <svg class="sorting-demo" id="quick" height="300" width="800" viewBox="0 0 800 300"></svg>
 
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function partition(list, l, r) {
+  var pivot = l + Math.floor(Math.random() * (r - l));
+
+  while (l < r) {
+    while (list[l] < list[pivot]) {
+      l++;
+    }
+
+    while (list[r] > list[pivot]) {
+      r--;
+    }
+
+    [list[l], list[r]] = [list[r], list[l]];
+
+    if (pivot === l) {
+      pivot = r;
+    } else if (pivot === r) {
+      pivot = l;
+    }
+  }
+
+  return pivot;
+}
+
+function quicksort(list, l = 0, r = list.length - 1) {
+  if (l >= r) {
+    return;
+  }
+
+  var pivot = partition(list, l, r);
+  quicksort(list, l, pivot - 1);
+  quicksort(list, pivot + 1, r);
+}
+```
+
 ----
 
 ## Heap sort
@@ -95,6 +240,85 @@ In the second stage, once the list has become a heap, the largest element—now 
 
 <svg class="sorting-demo" id="heap" height="300" width="800" viewBox="0 0 800 300"></svg>
 
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+function MaxHeap() {
+  this.data = [];
+}
+
+MaxHeap.parent = (x) => Math.floor((x - 1) / 2);
+MaxHeap.leftChild = (x) => 2 * x + 1;
+MaxHeap.rightChild = (x) => 2 * x + 2;
+
+MaxHeap.prototype.push = function (item) {
+  var d = this.data;
+  var index = d.push(item) - 1;
+  var parent = MaxHeap.parent(index);
+
+  while (parent !== -1 && item > d[parent]) {
+    [d[index], d[parent]] = [d[parent], d[index]];
+    index = parent;
+    parent = MaxHeap.parent(parent);
+  }
+};
+
+MaxHeap.prototype.pop = function () {
+  var d = this.data;
+  
+  if (!d.length) {
+    return null;
+  }
+  
+  var popVal = d[0];
+  
+  if (d.length === 1) {
+    d.splice(0, 1);
+    return popVal;
+  }
+  
+  d[0] = d.splice(d.length - 1, 1)[0];
+  
+  var index = 0;
+  
+  var swapped;
+
+  do {
+    swapped = false;
+    
+    var left = MaxHeap.leftChild(index);
+    var right = MaxHeap.rightChild(index);
+  
+    var maxChild = right >= d.length || d[left] > d[right] ? left : right;
+    
+    if (!maxChild) {
+      break;
+    }
+  
+    if (d[index] < d[maxChild]) {
+      [d[index], d[maxChild]] = [d[maxChild], d[index]];
+      swapped = true;
+      index = maxChild;
+    }
+  } while (swapped);
+  
+  return popVal;
+};
+
+function heapSort(list) {
+  var heap = new MaxHeap();
+
+  var popped;
+  while ((popped = list.pop())) {
+    heap.push(popped);
+  }
+
+  while ((popped = heap.pop())) {
+    list.unshift(popped);
+  }
+}
+```
 ----
 
 ## Bogosort
@@ -102,6 +326,35 @@ In the second stage, once the list has become a heap, the largest element—now 
 And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the list randomly until it is sorted. It can take an infinitely long amount of time to complete: in fact, if we have a list of 20 elements and we shuffle it 1,000 times a second, it will take an average of 77 billion years to complete.
 
 <svg class="sorting-demo" id="bogo" height="300" width="800" viewBox="0 0 800 300"></svg>
+
+[Show JavaScript implementation](#toggle-js)
+
+```js
+// Warning: don't run this. It's basically an infinite loop.
+
+function shuffleArray(ary) {
+	for (let i = ary.length; i; i--) {
+		let j = Math.floor(Math.random() * i);
+		[ary[i - 1], ary[j]] = [ary[j], ary[i - 1]];
+	}
+}
+
+function isSorted(ary) {
+	for (let i = 1; i < ary.length; i++) {
+		if (ary[i] < ary[i - 1]) {
+			return false;
+		}
+	}
+	return true;
+}
+
+function bogosort(list) {
+  while (!isSorted(list)) {
+    shuffleArray(list);
+  }
+}
+```
+
 
 ----
 

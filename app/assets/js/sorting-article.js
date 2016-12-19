@@ -179,6 +179,25 @@ document.querySelector('#offscreen').addEventListener('change', (e) => {
 	config.runOffScreen = e.target.checked;
 });
 
+const codeLinks = document.querySelectorAll('[href="#toggle-js"]');
+for (let i = 0; i < codeLinks.length; i++) {
+	const codeLink = codeLinks[i];
+	const codeBlock = codeLink.parentElement.nextElementSibling;
+
+	codeBlock.style.display = 'none';
+
+	let hidden = true;
+
+	codeLink.addEventListener('click', (e) => {
+		e.preventDefault();
+
+		hidden = !hidden;
+
+		codeLink.textContent = `${hidden ? 'Show' : 'Hide'} JavaScript implementation`;
+		codeBlock.style.display = hidden ? 'none' : 'block';
+	});
+}
+
 function hslScale(d) {
 	return d3.hsl((typeof d === 'object' ? d.d : d) / config.bars * 270, 1, 0.5);
 }
