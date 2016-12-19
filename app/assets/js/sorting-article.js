@@ -1,8 +1,8 @@
 const d3 = require('d3');
 const config = {
-	bars: 20,
+	bars: 30,
 	count: 20,
-	interval: 100,
+	interval: 250,
 	runOffScreen: false
 };
 
@@ -88,7 +88,7 @@ function initChart(selector, algo) {
 	function iterate() {
 		const boundingRect = svg.node().getBoundingClientRect();
 
-		if (config.runOffScreen || (boundingRect.top > -svg.node().scrollHeight && boundingRect.top < window.innerHeight)) {
+		if (config.runOffScreen || (boundingRect.top > -svg.node().scrollHeight + 100 && boundingRect.top < window.innerHeight - 100)) {
 			completed = algoInstance.iterate(data);
 
 			let rects = svg.selectAll('rect')
@@ -510,7 +510,7 @@ initChart('#heap', () => {
 	});
 });
 
-initChart('#quicksort', () => {
+initChart('#quick', () => {
 	let toSort = [[0, startData.length - 1]];
 	let sorting;
 	let pivot;
@@ -575,6 +575,10 @@ initChart('#quicksort', () => {
 
 				if (isCompleted(i)) {
 					return 'completed';
+				}
+
+				if (sorting && (i < sorting[0] || i > sorting[1])) {
+					return 'inactive';
 				}
 			};
 		},
@@ -650,7 +654,7 @@ initChart('#shell', () => {
 	});
 });
 
-initChart('#bogosort', () => {
+initChart('#bogo', () => {
 	return ({
 		transition: false,
 		iterate(data) {
