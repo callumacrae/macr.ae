@@ -1,5 +1,9 @@
-# Sorting algorithms visualised
-- 19th December 2016
+---
+title: Sorting algorithms visualised
+date: 20th December 2016
+description: "If you or a computer needs to sort a list of items, you'll use an algorithm to do it. There are lots of different sorting algorithms: this article explains and visualises some of the common ones."
+image: sorting-algorithms.png
+---
 
 Sometimes you or a computer needs to sort a list of items—say, a list of names into alphabetical order, or a list of objects into length order. To sort this list, especially if it is a large list, you need some kind of process: for example, if you were sorting a list of names into alphabetic order, you could group all the letters by their first letter, then sort the individual groups.
 
