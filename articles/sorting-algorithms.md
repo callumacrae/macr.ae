@@ -398,14 +398,14 @@ function bogosort(list) {
 
 I developed most of the visualisations in CodePen, so if you want to have a play, check them out. Be aware that they're not implementations of the actual algorithms, though: they've been modified to be iterative instead:
 
-- Bubble sort: http://codepen.io/callumacrae/pen/wodVmP
-- Insertion sort: http://codepen.io/callumacrae/pen/Mbvbpx
-- Selection sort: http://codepen.io/callumacrae/pen/dOzKpM
-- Merge sort: http://codepen.io/callumacrae/pen/QGMBEe
-- Heap sort: http://codepen.io/callumacrae/pen/gLvWBP
-- QuickSort: http://codepen.io/callumacrae/pen/Nbyyar
-- Shell sort: http://codepen.io/callumacrae/pen/pNaQRK
-- Bogosort: http://codepen.io/callumacrae/pen/LbjJOv
+- [Bubble sort](http://codepen.io/callumacrae/pen/wodVmP)
+- [Insertion sort](http://codepen.io/callumacrae/pen/Mbvbpx)
+- [Selection sort](http://codepen.io/callumacrae/pen/dOzKpM)
+- [Merge sort](http://codepen.io/callumacrae/pen/QGMBEe)
+- [Heap sort](http://codepen.io/callumacrae/pen/gLvWBP)
+- [QuickSort](http://codepen.io/callumacrae/pen/Nbyyar)
+- [Shell sort](http://codepen.io/callumacrae/pen/pNaQRK)
+- [Bogosort](http://codepen.io/callumacrae/pen/LbjJOv)
 
 You can also find the source for this article on [GitHub][macr.ae github].
 
