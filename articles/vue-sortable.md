@@ -1,6 +1,8 @@
 ---
 title: Making a sortable list in Vue
 date: 14th October, 2016
+description: This article explains how you can represent an array as an HTML list, make it sortable, and make changes to the HTML list be reflected in the original array.
+image: vue-sortable.png
 ---
 
 Last week, I wanted to represent an array as a reorderable list in Vue, where

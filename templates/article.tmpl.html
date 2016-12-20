@@ -2,6 +2,17 @@
 
 {% block title %}{{ article.title }}{% endblock %}
 
+{% block meta %}
+	{% if article.description %}
+		<meta name="description" content="{{ article.description }}">
+	{% endif %}
+
+	{% if article.image %}
+		<meta property="og:image" content="http://macr.ae/assets/imgs/{{ article.image }}">
+		<meta name="twitter:image" content="http://macr.ae/assets/imgs/{{ article.image }}">
+	{% endif %}
+{% endblock %}
+
 {% block page %}article{% endblock %}
 
 {% block body %}
