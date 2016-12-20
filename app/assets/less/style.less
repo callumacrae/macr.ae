@@ -117,6 +117,15 @@ section {
 }
 
 @media all and (max-width: 450px) {
+	body > header {
+		margin-top: 30px;
+		margin-bottom: 30px;
+
+		h1 {
+			font-size: 36px;
+		}
+	}
+
 	header + section a {
 		display: block;
 	}
@@ -289,6 +298,24 @@ footer {
 
 .js .no-js {
 	display: none;
+}
+
+@media all and (max-width: 450px) {
+	h2, h3, h4, h5, h6 {
+		margin: 30px 0 10px;
+	}
+
+	h2 {
+		font-size: 32px;
+	}
+
+	h3 {
+		font-size: 24px;
+	}
+
+	.hr, hr {
+		margin: 30px auto;
+	}
 }
 
 @import "sorting-article";

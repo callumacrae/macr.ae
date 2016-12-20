@@ -15,6 +15,22 @@ Different length bars (seen below) will be sorted from shortest to longest, powe
 
 Most of the sorting algorithms in this article are comparison sorts: two items are chosen from the list and compared to each other to see which should come first.
 
+<form class="sort-controls">
+    <p>
+        <label><input type="checkbox" id="rainbow"> Rainbow mode</label><br>
+        <label><input type="checkbox" id="offscreen"> Run when off screen</label>
+    </p>
+    <p>
+        <label>Interval (ms): <input type="number" id="interval"></label>
+        <button type="button">→</button>
+    </p>
+    <p>
+        <label>Restart with: <input type="number" id="bars"></label>
+        <button type="button">→</button>
+    </p>
+    <p id="restart-links">Restart with <a href>random</a>,<br><a href>reversed</a> or <a href>mostly ordered</a>.</p>
+</form>
+
 ----
 
 ### Bubble sort
@@ -395,22 +411,6 @@ You can also find the source for this article on [GitHub][macr.ae github].
 
 <small>Thanks to [Chris D Brown] and [Juho Vepsäläinen] for proof reading :)</small>
 
-
-<form class="sort-controls">
-    <p>
-        <label><input type="checkbox" id="rainbow"> Rainbow mode</label><br>
-        <label><input type="checkbox" id="offscreen"> Run when off screen</label>
-    </p>
-    <p>
-        <label>Interval (ms): <input type="number" id="interval"></label>
-        <button type="button">→</button>
-    </p>
-    <p>
-        <label>Restart with: <input type="number" id="bars"></label>
-        <button type="button">→</button>
-    </p>
-    <p id="restart-links">Restart with <a href>random</a>,<br><a href>reversed</a> or <a href>mostly ordered</a>.</p>
-</form>
 
 
 <script src="/assets/build/sorting-article.js"></script>
