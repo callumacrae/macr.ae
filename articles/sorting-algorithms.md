@@ -343,6 +343,8 @@ function heapSort(list) {
 
 And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the list randomly until it is sorted. It can take an infinitely long amount of time to complete: in fact, if we have a list of 20 elements and we shuffle it 1,000 times a second, it will take an average of 77 billion years to complete.
 
+Don't use this algorithm.
+
 <svg class="sorting-demo" id="bogo" height="300" width="800" viewBox="0 0 800 300"></svg>
 
 [Show JavaScript implementation](#toggle-js)

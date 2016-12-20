@@ -3,7 +3,8 @@ const config = {
 	bars: 30,
 	count: 20,
 	interval: 250,
-	runOffScreen: false
+	runOffScreen: false,
+	rainbow: false
 };
 
 const startData = d3.range(config.bars);
@@ -121,6 +122,8 @@ function initChart(selector, algo) {
 
 
 document.querySelector('#rainbow').addEventListener('change', (e) => {
+	config.rainbow = e.target.checked;
+
 	if (e.target.checked) {
 		d3.selectAll('rect').style('fill', hslScale);
 	} else {
@@ -142,6 +145,10 @@ barsInput.addEventListener('change', () => {
 	const newData = d3.range(config.bars);
 	shuffleArray(newData);
 	chartUpdaters.forEach((updater) => updater(newData.slice()));
+
+	if (config.rainbow) {
+		d3.selectAll('rect').style('fill', hslScale);
+	}
 });
 
 document.querySelector('#restart-links').addEventListener('click', (e) => {
