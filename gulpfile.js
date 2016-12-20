@@ -9,6 +9,7 @@ var moment = require('moment');
 var nunjucks = require('nunjucks');
 var source = require('vinyl-source-stream');
 var through = require('through2');
+var frontMatter = require('yaml-front-matter');
 var plugins = require('gulp-load-plugins')();
 
 var minify = process.env.MINIFY || false;
@@ -52,19 +53,23 @@ gulp.task('html', function () {
 	return gulp.src('articles/*.md')
 		.pipe(through.obj(function (file, enc, callback) {
 			// Extract article data
-			file.articleData = {};
+			file.articleData = frontMatter.loadFront(file.contents.toString());
 			files.push(file.articleData);
 
-			var lines = file.contents.toString('utf8').split('\n');
-			file.articleData.title = lines.splice(0, 1)[0].slice(2);
-			file.articleData.date = lines.splice(0, 1)[0].slice(2);
+			// Fall back to old behaviour
+			if (!file.articleData.title) {
+				var lines = file.articleData.__content.split('\n');
+				file.articleData.title = lines.splice(0, 1)[0].slice(2);
+				file.articleData.date = lines.splice(0, 1)[0].slice(2);
+
+				file.articleData.__content = lines.join('\n');
+			}
 
 			var date = moment(file.articleData.date, 'D MMMM, YYYY', 'en');
 			file.articleData.datetime = date.format('YYYY-MM-DD 00:00');
-
 			file.articleData.slug = file.path.slice(file.base.length, -3);
 
-			file.contents = new Buffer(lines.join('\n'));
+			file.contents = new Buffer(file.articleData.__content);
 
 			callback(null, file);
 		}))

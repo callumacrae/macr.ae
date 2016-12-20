@@ -1,5 +1,7 @@
-# Making a sortable list in Vue
-- 14th October, 2016
+---
+title: Making a sortable list in Vue
+date: 14th October, 2016
+---
 
 Last week, I wanted to represent an array as a reorderable list in Vue, where
 you could drag and drop the list elements and the array would be changed
