@@ -17,7 +17,7 @@ Most of the sorting algorithms in this article are comparison sorts: two items a
 
 ----
 
-## Bubble sort
+### Bubble sort
 
 Bubble sort is one of the easier sorting algorithms to understand, as it is one of the simplest. It is also one of the slowest to run (although I won't really be talking about algorithm speed or efficiency in this article).
 
@@ -45,7 +45,7 @@ function bubbleSort(list) {
 
 ----
 
-## Selection sort
+### Selection sort
 
 Selection sort works by iterating through the list and finding the smallest unsorted item. Once it has found it, it swaps the item with the left-most unsorted item, marks it as sorted, and starts the search again.
 
@@ -73,7 +73,7 @@ function selectionSort(list) {
 
 ----
 
-## Insertion sort
+### Insertion sort
 
 Insertion sort iterates through the list, taking one unsorted element at a time, and then repeatedly swapping it with the element to the left of it until the element to the left of it is smaller than it, which means that the element is now in the correct place and it can be marked as completed. 
   
@@ -99,7 +99,7 @@ function insertionSort(list) {
 
 ----
 
-## Merge sort
+### Merge sort
 
 All the other algorithms in this article are *in-place* algorithms, meaning that they work within the list, swapping elements. Merge sort is not an in-place algorithm, and uses two lists.
 
@@ -145,7 +145,7 @@ function mergeSort(list) {
 
 ----
 
-## Shell sort
+### Shell sort
 
 Shell sort is a variation on insertion sort, which was explained above. It's different in that it runs through the list multiple times, and starts by comparing elements that are far apart from each other—the distance between them being known as the "gap".
 
@@ -182,7 +182,7 @@ function shellSort(list) {
 
 ----
 
-## QuickSort
+### QuickSort
 
 QuickSort is probably the most efficient algorithm in this article for most cases. Like merge sort, it is a divide and conquer algorithm, but it works differently: it chooses a "pivot" element, and then orders the list so that all the elements smaller than the pivot are below the pivot, and all the elements larger than the pivot are above the pivot (the pivot is then in the correct place). It then runs quicksort on the list below and the list above, choosing new pivots in those lists and running itself again.
 
@@ -242,7 +242,7 @@ function quicksort(list, l, r) {
 
 ----
 
-## Heap sort
+### Heap sort
 
 Heap sort is probably the most complicated of all the algorithms explained in this article, as it relies on some other concepts from Computer Science—heaps.
 
@@ -339,7 +339,7 @@ function heapSort(list) {
 ```
 ----
 
-## Bogosort
+### Bogosort
 
 And, just for fun, here's bogosort. Bogosort works by repeatedly shuffling the list randomly until it is sorted. It can take an infinitely long amount of time to complete: in fact, if we have a list of 20 elements and we shuffle it 1,000 times a second, it will take an average of 77 billion years to complete.
 
@@ -378,7 +378,7 @@ function bogosort(list) {
 
 ----
 
-## Codepens
+### Codepens
 
 I developed most of the visualisations in CodePen, so if you want to have a play, check them out. Be aware that they're not implementations of the actual algorithms, though: they've been modified to be iterative instead:
 
