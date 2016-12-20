@@ -11,7 +11,7 @@
 			<time class="article-date" datetime="{{ article.datetime }}">{{ article.date }}</time>
 		</header>
 
-		{{ article.body }}
+		{{ article.body | safe }}
 	</article>
 
 	<section class="social">

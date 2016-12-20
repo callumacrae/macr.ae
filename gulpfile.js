@@ -37,6 +37,16 @@ gulp.task('html', function () {
 	// Build HTML from MarkDown and template files
 	nunjucks.configure('templates');
 
+	var renderer = new plugins.markdown.marked.Renderer();
+
+	renderer.heading = function (text, level) {
+		var escapedText = text.toLowerCase().replace(/[^\w]+/g, '-');
+
+		return `<h${level} id="${escapedText}">
+				<a class="heading-anchor" href="#${escapedText}"><span>#</span>${text}</a>
+			</h${level}>`;
+	};
+
 	var files = [];
 
 	return gulp.src('articles/*.md')
@@ -59,7 +69,8 @@ gulp.task('html', function () {
 			callback(null, file);
 		}))
 		.pipe(plugins.markdown({
-			langPrefix: 'language-'
+			langPrefix: 'language-',
+			renderer: renderer
 		}))
 		.pipe(through.obj(function (file, enc, callback) {
 			file.articleData.body = file.contents.toString('utf8');
