@@ -2,6 +2,7 @@
 
 var fs = require('fs');
 var browserify = require('browserify');
+var babelify = require('babelify');
 var browserSync = require('browser-sync');
 var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
@@ -24,11 +25,26 @@ gulp.task('less', function () {
 });
 
 gulp.task('js', function () {
-	var bundler = browserify();
-	bundler.add('./app/assets/js/app.js');
+	var bundler = browserify({
+		entries: './app/assets/js/app.js',
+		transform: [babelify]
+	});
 
 	return bundler.bundle()
 		.pipe(source('app.js'))
+		.pipe(buffer())
+		.pipe(minify ? plugins.uglify() : plugins.util.noop())
+		.pipe(gulp.dest('app/assets/build'));
+});
+
+gulp.task('js-sorting', function () {
+	var bundler = browserify({
+		entries: './app/assets/js/sorting-article.js',
+		transform: [babelify]
+	});
+
+	return bundler.bundle()
+		.pipe(source('sorting-article.js'))
 		.pipe(buffer())
 		.pipe(minify ? plugins.uglify() : plugins.util.noop())
 		.pipe(gulp.dest('app/assets/build'));
@@ -108,11 +124,11 @@ gulp.task('html', function () {
 		});
 });
 
-gulp.task('default', gulp.series('html', 'js', 'less'));
+gulp.task('default', gulp.series('html', 'js', 'js-sorting', 'less'));
 
 if (process.argv.indexOf('--watch') !== -1) {
 	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
-	gulp.watch('app/assets/js/**/*.js', gulp.parallel('js'));
+	gulp.watch('app/assets/js/**/*.js', gulp.parallel('js', 'js-sorting'));
 	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('html'));
 
 	browserSync.init([

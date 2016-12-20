@@ -1,0 +1,59 @@
+svg.sorting-demo {
+  max-width: 100%;
+
+  text {
+    font-family: sans-serif;
+    text-anchor: middle;
+    font-size: 14px;
+  }
+
+  rect {
+    fill: rgb(136, 189, 230);
+  }
+
+  rect.completed {
+    fill: rgb(38, 93, 171);
+  }
+
+  rect.active {
+    fill: rgb(251, 178, 88);
+  }
+
+  rect.pivot {
+    fill: rgb(96, 164, 104);
+  }
+
+  rect.inactive {
+    fill: rgb(179, 213, 239);
+  }
+}
+
+.sort-controls {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+
+  padding: 0 1em;
+
+  font-size: 0.7em;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px black solid;
+
+  [type="number"] {
+    width: 4em;
+  }
+
+  button {
+    padding: 0 5px;
+
+    background: none;
+    border: 1px #905 solid;
+    color: #905;
+  }
+
+  p {
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+  }
+}
