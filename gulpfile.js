@@ -16,7 +16,7 @@ var plugins = require('gulp-load-plugins')();
 var minify = process.env.MINIFY || false;
 
 gulp.task('less', function () {
-	return gulp.src('app/assets/less/style.less')
+	return gulp.src(['app/assets/less/style.less', 'app/assets/less/transform-when.less'])
 		.pipe(plugins.plumber())
 		.pipe(plugins.less({ compress: minify }))
 		.pipe(plugins.autoprefixer())
@@ -45,6 +45,19 @@ gulp.task('js-sorting', function () {
 
 	return bundler.bundle()
 		.pipe(source('sorting-article.js'))
+		.pipe(buffer())
+		.pipe(minify ? plugins.uglify() : plugins.util.noop())
+		.pipe(gulp.dest('app/assets/build'));
+});
+
+gulp.task('js-transform-when', function () {
+	var bundler = browserify({
+		entries: './app/assets/js/transform-when.js',
+		transform: [babelify]
+	});
+
+	return bundler.bundle()
+		.pipe(source('transform-when.js'))
 		.pipe(buffer())
 		.pipe(minify ? plugins.uglify() : plugins.util.noop())
 		.pipe(gulp.dest('app/assets/build'));
@@ -124,11 +137,12 @@ gulp.task('html', function () {
 		});
 });
 
-gulp.task('default', gulp.series('html', 'js', 'js-sorting', 'less'));
+gulp.task('all-js', gulp.parallel('js', 'js-sorting', 'js-transform-when'));
+gulp.task('default', gulp.series('html', 'all-js', 'less'));
 
 if (process.argv.indexOf('--watch') !== -1) {
 	gulp.watch('app/assets/less/**/*.less', gulp.parallel('less'));
-	gulp.watch('app/assets/js/**/*.js', gulp.parallel('js', 'js-sorting'));
+	gulp.watch('app/assets/js/**/*.js', gulp.parallel('all-js'));
 	gulp.watch(['articles/*.md', 'templates/*.tmpl.html'], gulp.parallel('html'));
 
 	browserSync.init([

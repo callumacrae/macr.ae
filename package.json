@@ -31,6 +31,7 @@
     "normalize.css": "^3.0.3",
     "prismjs": "git://github.com/LeaVerou/prism#gh-pages",
     "touch-screen": "^0.1.0",
+    "transform-when": "^1.0.0",
     "when-scroll": "^0.2.4",
     "yaml-front-matter": "^3.4.0"
   }
