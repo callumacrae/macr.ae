@@ -13,7 +13,7 @@ html {
 }
 
 body {
-	font-family: "Open Sans", sans-serif;
+	font-family: Lato, sans-serif;
 }
 
 body > header {
@@ -25,7 +25,7 @@ body > header {
 		text-decoration: none;
 	}
 
-	h1 {
+	h2 {
 		margin-bottom: 5px;
 
 		text-transform: uppercase;
@@ -38,12 +38,11 @@ body > header {
 	}
 }
 
-.article body > header h1:hover:before {
+.article body > header h2:hover:before {
 	content: "«";
 	position: absolute;
 
 	transform: translate(-60px, 0);
-
 }
 
 .disqus, article, section {
@@ -52,25 +51,23 @@ body > header {
 	max-width: 800px;
 	margin: 0 auto;
 
-	font-family: "Merriweather", serif;
+	font-family: "Source Sans Pro", serif;
 	line-height: 1.5;
 	font-size: 14pt;
 }
 
 .disqus {
-	margin-top: 100px;
+	margin-top: 40px;
 }
 
 article {
 	header {
-		margin-bottom: 30px;
+		margin-bottom: 60px;
 
-		font-family: "Open Sans", sans-serif;
+		font-family: Lato, sans-serif;
 		line-height: 1;
 
 		.article-date {
-			margin-left: 20px;
-
 			font-size: 10pt;
 			color: grey;
 			font-weight: 300;
@@ -83,7 +80,7 @@ article {
 }
 
 section {
-	h2 {
+	h1 {
 		line-height: 1;
 	}
 
@@ -94,6 +91,10 @@ section {
 
 	li {
 		margin-top: 20px;
+	}
+
+	a {
+		font-weight: bold;
 	}
 
 	time {
@@ -108,6 +109,10 @@ section {
 		float: left;
 		margin-right: 15px;
 		margin-top: 12px;
+	}
+
+	h3 {
+		margin: 0;
 	}
 
 	& + section {
@@ -157,15 +162,16 @@ section {
 	}
 }
 
-h2, h3, h4, h5, h6 {
-	font-family: "Open Sans", sans-serif;
-	margin: 50px 0 30px;
+h1, h3, h4, h5, h6 {
+	font-family: Lato, sans-serif;
+	margin: 3em 0 2em;
 }
 
-h2 {
+h1 {
 	font-size: 32pt;
 	font-weight: 700;
 	line-height: 1.2;
+	margin-bottom: 0.5em;
 }
 
 h3 {
@@ -203,7 +209,8 @@ a:hover {
 }
 
 p {
-	margin-bottom: 20px;
+	margin-top: 2em;
+	margin-bottom: 2em;
 }
 
 ol, ul {
@@ -291,7 +298,7 @@ footer {
 }
 
 .social {
-	margin-top: 40px;
+	margin-top: 150px;
 	height: 26px;
 	text-align: center;
 }
