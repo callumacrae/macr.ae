@@ -1,6 +1,10 @@
 {% extends "base.tmpl.html" %}
 
 {% block body %}
+	<section class="bio">
+		<p>I'm a JavaScript developer and occasional musician based in London, UK, working at <a href="https://www.samknows.com/">SamKnows</a> to make the internet faster for everyone. My current enthusiasms are Vue and SVGs (but only sometimes at the same time). Find me on <a href="https://github.com/callumacrae">GitHub</a> and <a href="https://twitter.com/callumacrae">Twitter</a>, or email me at <a href="mailto:callum@macr.ae">callum@macr.ae</a>.</p>
+	</section>
+
 	<section>
 		<h2>Posts</h2>
 
@@ -9,6 +13,7 @@
 			<li>
 				<a href="article/{{ article.slug }}.html">{{ article.title }}</a>
 				<time datetime="{{ article.datetime }}">{{ article.date }}</time>
+				{% if article.description %}<blockquote>{{ article.description }}</blockquote>{% endif %}
 			</li>
 			{% endfor %}
 		</ul>
