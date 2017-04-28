@@ -6,6 +6,8 @@ description: transform-when is a library I wrote at SamKnows that allows you to 
 
 <link rel="stylesheet" href="/assets/build/transform-when.css">
 
+![](https://camo.githubusercontent.com/74e76f488000f2bdd64c1f115473aeda8ecb9058/68747470733a2f2f6769616e742e6766796361742e636f6d2f536361726365496d6167696e61746976654c616d707265792e676966)
+
 When working on the new homepage for [SamKnows.com], we decided to do something that none of us had ever seen before: create an animation that combined both time and the users position on the page to tell the story of SamKnows in an interactive, fun way. When researching how to develop this, I discovered that the technique is called "scrollytelling", and is a technique used mostly in journalism to tell a story. Unfortunately, most of the examples I found were quite laggy—especially on my 4K display—and didn't even attempt the animation on mobile.
 
 This wasn't good enough for us.
@@ -93,7 +95,9 @@ transform-when can be used to power animations that take a number of variables�
 
 You can find it on GitHub at [samknows/transform-when] and you can see an example of where we're using on the front page of [SamKnows.com].
 
-If you want to work on stuff like this, we're looking to hire a front-end developer right now! Drop me an email at callum [at] samknows.com or find our careers page here (@todo: get link).
+----
+
+If you want to work on stuff like this, we're looking to hire a front-end developer right now! Drop me an email at <callum@samknows.com> or find the job description [on our careers site](https://samknows.com/company/careers/front-end-developer).
 
 <svg class="arrow" width="108" height="304" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 304" >
 	<polyline class="st0" points="105,254.2 54,301 3,254.2 	"/>
