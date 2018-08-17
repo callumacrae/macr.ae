@@ -1,6 +1,6 @@
 ---
 title: Interactive animations with transform-when
-date: 1st March 2017
+date: 2017-03-01
 description: transform-when is a library I wrote at SamKnows that allows you to combine a number of variables—scroll position, time, and user actions—to create beautiful, performant animations. This article demonstrates some of the functionality of the library.
 ---
 

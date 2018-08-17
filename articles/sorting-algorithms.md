@@ -1,6 +1,6 @@
 ---
 title: Sorting algorithms visualised
-date: 20th December 2016
+date: 2016-12-20
 description: "If you or a computer needs to sort a list of items, you'll use an algorithm to do it. There are lots of different sorting algorithms: this article explains and visualises some of the common ones."
 image: sorting-algorithms.png
 ---

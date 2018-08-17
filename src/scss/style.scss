@@ -1,0 +1,20 @@
+@import '~normalize.css';
+@import 'meta/colors';
+
+body {
+  font-family: Source Sans Pro, serif;
+  font-size: 20px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-family: Alegreya Sans, sans-serif;
+}
+
+p {
+  line-height: 1.5;
+}
+
+a {
+  color: $blue;
+}
