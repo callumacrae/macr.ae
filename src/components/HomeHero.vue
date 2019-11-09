@@ -1,10 +1,7 @@
 <template>
   <section
     ref="main"
-    class="hero"
-    :class="'hover--' + activeHover"
-    @mousemove="handleMousemove"
-    @mouseleave="handleMouseleave">
+    class="hero">
     <div class="left-background" :style="{ clipPath: leftBackgroundClipPath }"></div>
     <div class="left">
       <h1>Callum Macrae</h1>
@@ -17,7 +14,7 @@
     </div>
 
     <div class="right">
-      <h1 ref="rightTitleEl" :style="{ clipPath: rightTitleClipPath }">Callum Macrae</h1>
+      <h1 ref="rightTitleEl" role="presentation" :style="{ clipPath: rightTitleClipPath }">Callum Macrae</h1>
 
       <div class="right__content">
         <i class="fab fa-twitter"></i>
@@ -31,27 +28,18 @@
 <script>
 import * as util from '@/util';
 
-const randomMotion = () => ({
-  top: 0.033 * (Math.random() < 0.5 ? -1 : 1),
-  bottom: 0.009 * (Math.random() < 0.5 ? -1 : 1)
-});
-
-const randomPositions = () => ({
-  top: Math.random() * 60 - 30,
-  bottom: Math.random() * 60 - 30
-});
-
 export default {
-  data: () => ({
-    activeHover: 'none',
-    basePosition: 65,
-    nextGlitch: undefined,
-    motion: randomMotion(),
-    positions: randomPositions()
-  }),
-  mounted() {
-    this.nextGlitch = Date.now() + 1500;
+  data() {
+    const startPositions =
+      Math.random() < 0.5 ? { top: -25, bottom: 20 } : { top: 25, bottom: -20 };
 
+    return {
+      i: Math.round(Math.random() * 1e5), // Start at random position
+      startPositions,
+      positions: Object.assign({}, startPositions)
+    };
+  },
+  mounted() {
     requestAnimationFrame(this.frame);
   },
   destroyed() {
@@ -59,74 +47,14 @@ export default {
   },
   methods: {
     frame() {
-      this.positions.top += this.motion.top;
-      this.positions.bottom += this.motion.bottom;
+      this.i++;
 
-      // This is configuration
-      const basePositionTendTo = {
-        none: 65,
-        left: 67,
-        right: 63
-      }[this.activeHover];
-
-      if (util.roundDp(this.basePosition, 1) !== basePositionTendTo) {
-        this.basePosition = util.roundDp(
-          basePositionTendTo * 0.1 + this.basePosition * 0.9,
-          2
-        );
-      } else if (
-        Date.now() > this.nextGlitch ||
-        Math.abs(this.positions.top) > 100 ||
-        Math.abs(this.positions.bottom) > 100
-      ) {
-        const oldPositionTop = this.positions.top;
-        const oldPositionBottom = this.positions.bottom;
-
-        this.positions = randomPositions();
-
-        if (Date.now() > this.nextGlitch && Math.random() < 0.75) {
-          setTimeout(() => {
-            const newPositionTop = this.positions.top;
-            const newPositionBottom = this.positions.bottom;
-
-            this.positions.top = oldPositionTop;
-            this.positions.bottom = oldPositionBottom;
-
-            if (Math.random() < 0.5) {
-              setTimeout(() => {
-                this.positions.top = newPositionTop;
-                this.positions.bottom = newPositionBottom;
-              }, 100);
-
-              if (Math.random() < 0.5) {
-                setTimeout(() => {
-                  this.positions.top = oldPositionTop;
-                  this.positions.bottom = oldPositionBottom;
-                }, 100);
-              }
-            }
-          }, 100);
-        } else {
-          this.motion = randomMotion();
-        }
-
-        this.nextGlitch = Date.now() + 800 + Math.random() * 3500;
-      }
+      this.positions.top =
+        this.startPositions.top + Math.sin(this.i / 1700) * 15;
+      this.positions.bottom =
+        this.startPositions.bottom + Math.sin(this.i / 700) * 15;
 
       requestAnimationFrame(this.frame);
-    },
-    handleMousemove(e) {
-      const mainRect = this.$refs.main.getBoundingClientRect();
-      const mousePerc = e.pageY / mainRect.height;
-      const lineXAtY =
-        this.basePosition * 0.01 * mainRect.width +
-        (1 - mousePerc) * this.positions.top +
-        mousePerc * this.positions.bottom;
-
-      this.activeHover = lineXAtY > e.pageX ? 'left' : 'right';
-    },
-    handleMouseleave() {
-      this.activeHover = 'none';
     }
   },
   computed: {
@@ -135,8 +63,8 @@ export default {
       const offsetBottom = util.roundDp(this.positions.bottom, 3);
 
       return `polygon(
-        0 0%, calc(${this.basePosition}% + ${offsetTop}px) 0%,
-        calc(${this.basePosition}% + ${offsetBottom}px) 100%, 0% 100%
+        0 0%, calc(65% + ${offsetTop}px) 0%,
+        calc(65% + ${offsetBottom}px) 100%, 0% 100%
       )`;
     },
     rightTitleClipPath() {
@@ -167,8 +95,8 @@ export default {
           (rectTop + rect.height);
 
       return `polygon(
-        calc(${this.basePosition}% + ${generatedOffsetTop}px) 0%, 100% 0%,
-        100% 100%, calc(${this.basePosition}% + ${generatedOffsetBottom}px) 100%
+        calc(65% + ${generatedOffsetTop}px) 0%, 100% 0%,
+        100% 100%, calc(65% + ${generatedOffsetBottom}px) 100%
       )`;
     }
   }

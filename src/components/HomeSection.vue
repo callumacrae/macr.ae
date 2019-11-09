@@ -1,5 +1,5 @@
 <template>
-  <section class="section" :class="`section--${i}`">
+  <section class="section" :class="`section--${n}`">
     <header :style="{ clipPath: headerClipPath }">
       <h2>{{ title }}</h2>
     </header>
@@ -13,30 +13,27 @@
 <script>
 import * as util from '@/util';
 
-const randomPositions = () => ({
-  left: Math.random() * 20 + 10,
-  right: Math.random() * 20 + 10
-});
-
-const randomMotion = () => ({
-  left: 0.017 * (Math.random() < 0.5 ? -1 : 1),
-  right: 0.005 * (Math.random() < 0.5 ? -1 : 1)
-});
-
 export default {
   props: {
     title: {
       type: String,
       required: true
     },
-    i: {
+    n: {
       type: Number
     }
   },
-  data: () => ({
-    positions: randomPositions(),
-    motion: randomMotion()
-  }),
+  data() {
+    const startPositions =
+      this.n % 0 ? { left: 10, right: 50 } : { left: 50, right: 10 };
+
+    return {
+      i: Math.round(Math.random() * 1e5), // Start at random position
+      startPositions,
+      // positions can be 0 to 60
+      positions: Object.assign({}, startPositions)
+    };
+  },
   mounted() {
     requestAnimationFrame(this.frame);
   },
@@ -45,43 +42,31 @@ export default {
   },
   methods: {
     frame() {
-      this.positions.left += this.motion.left;
-      this.positions.right += this.motion.right;
+      this.i++;
 
-      if (Math.random() < 0.002) {
-        this.positions = randomPositions();
-        this.motion = randomMotion;
-      } else {
-        if (this.positions.left > 30 || this.positions.left <= 0) {
-          this.motion.left *= -1;
-        }
-        if (this.positions.right > 30 || this.positions.right <= 0) {
-          this.motion.right *= -1;
-        }
-      }
+      this.positions.left =
+        this.startPositions.left + Math.sin(this.i / 900) * 10;
+      this.positions.right =
+        this.startPositions.right + Math.sin(this.i / 500) * 10;
 
       requestAnimationFrame(this.frame);
     }
   },
   computed: {
     headerClipPath() {
-      const offsetLeft = util.roundDp(this.positions.left, 3);
-      const offsetRight = util.roundDp(this.positions.right, 3);
+      const positionLeft = util.roundDp(this.positions.left, 3);
+      const positionRight = util.roundDp(this.positions.right, 3);
 
       let top = '0 0%, 100% 0%';
 
-      if (this.i > 0) {
-        // top = `0% calc(0% + ${30 - offsetRight}px), 100% calc(0% + ${30 - offsetLeft}px)`;
-        top = `0% calc(0% + ${offsetLeft +
-          (this.i % 2 ? 0 : 30)}px), 100% calc(0% + ${offsetRight +
-          (this.i % 2 ? 30 : 0)}px)`;
+      if (this.n > 0) {
+        top = `0% calc(0% + ${positionLeft}px), 100% calc(0% + ${positionRight}px)`;
       }
 
       return `polygon(
         ${top},
-        100% calc(100% - ${offsetLeft +
-          (this.i % 2 ? 0 : 30)}px), 0% calc(100% - ${offsetRight +
-        (this.i % 2 ? 30 : 0)}px)
+        100% calc(100% - ${60 - positionRight}px),
+        0% calc(100% - ${60 - positionLeft}px)
       )`;
     }
   }

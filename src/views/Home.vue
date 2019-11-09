@@ -2,7 +2,7 @@
   <div>
     <home-hero />
 
-    <home-section title="Books" :i="0">
+    <home-section title="Books" :n="0">
       <book
         link="http://shop.oreilly.com/product/0636920103455.do"
         cover="https://covers.oreillystatic.com/images/0636920103455/lrg.jpg"
@@ -24,7 +24,7 @@
       </book>
     </home-section>
 
-    <home-section title="Articles" :i="1">
+    <home-section title="Articles" :n="1">
       <ul class="articles">
         <li v-for="article in articles" :key="article.attributes.path">
           <router-link :to="`article/${article.attributes.path}`">{{ article.attributes.title }}</router-link>
