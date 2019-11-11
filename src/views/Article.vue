@@ -26,3 +26,13 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.article-date {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 2em;
+  opacity: 0.66;
+  font-size: 0.9em;
+}
+</style>

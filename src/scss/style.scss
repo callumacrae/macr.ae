@@ -18,3 +18,18 @@ p {
 a {
   color: $blue;
 }
+
+pre {
+  padding: 0.5em 0.75em;
+
+  background-color: rgba($pink, 0.05);
+  border: 1px rgba($blue, 0.2) solid;
+}
+
+:not(pre) > code {
+  padding: 0 4px;
+
+  background-color: rgba($pink, 0.05);
+  border: 1px rgba($blue, 0.2) solid;
+  color: $orange;
+}
