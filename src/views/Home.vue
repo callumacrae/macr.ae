@@ -1,9 +1,9 @@
 <template>
   <div>
-    <home-hero />
+    <HomeHero />
 
-    <home-section title="Books" :n="0">
-      <book
+    <TitledSection title="Books" :n="0">
+      <BookInfo
         link="http://shop.oreilly.com/product/0636920103455.do"
         cover="https://covers.oreillystatic.com/images/0636920103455/lrg.jpg"
         title="Vue.js: Up and Running"
@@ -22,9 +22,9 @@
           amazon.co.uk</a
         >,
         <a href="https://www.amazon.com/_/dp/1491997249">amazon.com</a>
-      </book>
+      </BookInfo>
 
-      <book
+      <BookInfo
         link="http://shop.oreilly.com/product/0636920026280.do"
         cover="https://covers.oreillystatic.com/images/0636920026280/cat.gif"
         title="Learning from jQuery"
@@ -48,10 +48,10 @@
         >
           amazon.com
         </a>
-      </book>
-    </home-section>
+      </BookInfo>
+    </TitledSection>
 
-    <home-section title="Talks" :n="1">
+    <TitledSection title="Talks" :n="1">
       <p>@wip</p>
       <ul>
         <li>Front-end Love 2020</li>
@@ -65,9 +65,9 @@
         <li>that tiny conference</li>
         <li>meetups? FEL, halfstack, enriques</li>
       </ul>
-    </home-section>
+    </TitledSection>
 
-    <home-section title="Articles" :n="2">
+    <TitledSection title="Articles" :n="2">
       <ul class="articles">
         <li v-for="article in limitedArticles" :key="article.attributes.path">
           <router-link :to="`article/${article.attributes.path}`">
@@ -83,14 +83,14 @@
           <a @click="showAll = true">Show more…</a>
         </li>
       </ul>
-    </home-section>
+    </TitledSection>
   </div>
 </template>
 
 <script>
-import Book from '@/components/Book';
+import BookInfo from '@/components/BookInfo';
 import HomeHero from '@/components/HomeHero';
-import HomeSection from '@/components/HomeSection';
+import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
 export default {
@@ -106,9 +106,9 @@ export default {
     }
   },
   components: {
-    Book,
+    BookInfo,
     HomeHero,
-    HomeSection
+    TitledSection
   }
 };
 </script>

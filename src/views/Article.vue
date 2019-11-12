@@ -1,5 +1,5 @@
 <template>
-  <home-section title="Callum Macrae" :n="0">
+  <TitledSection title="Callum Macrae" :n="0">
     <h1>{{ article.attributes.title }}</h1>
 
     <time
@@ -10,11 +10,11 @@
     </time>
 
     <div v-html="article.body"></div>
-  </home-section>
+  </TitledSection>
 </template>
 
 <script>
-import HomeSection from '@/components/HomeSection';
+import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
 export default {
@@ -27,7 +27,7 @@ export default {
     }
   },
   components: {
-    HomeSection
+    TitledSection
   }
 };
 </script>
