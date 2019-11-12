@@ -1,5 +1,5 @@
 # Introducing Deity
-- 22nd June 2016
+- 2016-06-22
 
 [Deity] is a property generating tool for use when writing generative tests.
 You call it saying what kind of data should be generated, and then it calls a

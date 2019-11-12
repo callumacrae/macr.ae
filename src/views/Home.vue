@@ -26,14 +26,14 @@
 
     <home-section title="Articles" :n="1">
       <ul class="articles">
-        <li v-for="article in articles" :key="article.attributes.path">
+        <li v-for="article in limitedArticles" :key="article.attributes.path">
           <router-link :to="`article/${article.attributes.path}`">{{ article.attributes.title }}</router-link>
           <time :datetime="article.attributes.date.toISOString()">{{ article.attributes.date | niceDate }}</time>
           <blockquote>{{ article.attributes.description }}</blockquote>
         </li>
 
-        <li v-if="articles.length > 5" class="show-more">
-          <a href>Show more…</a>
+        <li v-if="articles.length > 5 && !showAll" class="show-more">
+          <a @click="showAll = true">Show more…</a>
         </li>
 
       </ul>
@@ -53,8 +53,10 @@ export default {
   }),
   computed: {
     articles() {
-      const articles = util.getArticles();
-      return this.showAll ? articles : articles.slice(0, 5);
+      return util.getArticles();
+    },
+    limitedArticles() {
+      return this.showAll ? this.articles : this.articles.slice(0, 5);
     }
   },
   components: {
@@ -121,6 +123,7 @@ export default {
     font-size: 0.8em;
     color: #666;
     text-decoration: none;
+    cursor: pointer;
   }
 }
 </style>

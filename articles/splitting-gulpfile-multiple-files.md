@@ -1,5 +1,5 @@
 # Splitting a gulpfile into multiple files
-- 20th January, 2015
+- 2015-01-20
 
 In some projects, your gulpfile will get big enough that it's worth splitting it into multiple files, with one task per file. There are a couple approaches you can take to achieve this; both are pretty simple.
 

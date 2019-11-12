@@ -1,5 +1,5 @@
 # Counting eslint-disabled occurrences in your JavaScript
-- 26th September, 2016
+- 2016-10-26
 
 You're probably familiar with the following:
 

@@ -1,5 +1,5 @@
 # Playing with iterators and generators in ECMAScript 6
-- 12th February, 2014
+- 2014-02-12
 
 This article will cover for…of loops, iterators and generators, features all in the Harmony (ECMAScript 6) proposal. As this hasn't actually happened yet, browser support isn't great—most of the features mentioned in this article only currently work in Firefox nightly. You can see a full list of feature support in browsers in [this table](http://kangax.github.io/es5-compat-table/es6/).
 

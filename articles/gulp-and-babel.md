@@ -1,5 +1,5 @@
 # Using gulp with Babel
-- 4th November, 2015
+- 2015-11-04
 
 [Babel] is a JavaScript compiler which can be used to transpile ECMAScript 6, the next version of JavaScript adding some additional features and syntax, into ECMAScript 5, meaning that you can use JavaScript features currently not supported in some engines—for example, classes and fat arrow functions—in those engines. In this article, I'll be explaining how you can use Babel with gulp.
 

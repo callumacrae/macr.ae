@@ -18,6 +18,16 @@ module.exports = source => {
 
   source = frontmatter(source);
 
+  // Support old date + title syntax
+  if (!source.attributes.title && source.body.startsWith('# ')) {
+    const lines = source.body.split('\n');
+
+    source.attributes.title = lines.splice(0, 1)[0].slice(2);
+    source.attributes.date = lines.splice(0, 1)[0].slice(2);
+
+    source.body = lines.join('\n');
+  }
+
   source.body = marked(source.body, {
     renderer
   });

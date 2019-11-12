@@ -1,5 +1,5 @@
 # Immediate Functions
-- 25th March 2014
+- 2014-03-25
 
 This is an article I wrote in early 2012, originally published on [lynx.io](http://lynx.io/article/javascript-immediate-functions), my old website. I haven't made many changes to the article; I've only fixed a few grammar errors.
 

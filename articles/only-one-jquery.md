@@ -1,5 +1,5 @@
 # Loading only one version of jQuery in Browserify
-- 4th May, 2015
+- 2015-05-04
 
 We had a problem at [Lost My Name] a while back where our bundled JavaScript file included both jQuery 1 and jQuery 2. This would be a problem for most websites due to the overhead from the duplicate code alone, but it was especially a problem for us as we support Internet Explorer 8—loading jQuery 2 broke the site in Internet Explorer. Also, it caused some weirdness where custom events fired from one of the versions of jQuery weren't being picked up by the other version, which was causing some major headaches and frustration.
 

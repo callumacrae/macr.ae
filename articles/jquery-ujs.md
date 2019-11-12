@@ -1,5 +1,5 @@
 # Why I don't like jquery-ujs
-- 28th March, 2015
+- 2015-03-28
 
 [jquery-ujs] is a JavaScript library designed to make things easier when writing a website with a Rails-powered backend. It provides a number of (completely unrelated) features such as turning links into forms so that you can send POST requests instead of GET requests, disabling submit buttons when they've been clicked, magically AJAXifying forms, and obliterating your users' experience with confirm boxes.
 

@@ -1,5 +1,5 @@
 # Gulp is an unnecessary abstraction? Not always.
-- 19th January, 2016
+- 2016-01-19
 
 An article entitled [Why I Left Gulp and Grunt for npm Scripts] has been doing the rounds on Twitter over the last couple days, and I figured I'd share my thoughts about why I disagree with the article and the many similar articles like it.
 

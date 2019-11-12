@@ -1,5 +1,5 @@
 # Easy regular expressions with JSVerbalExpressions
-- 31st January, 2014
+- 2014-01-31
 
 [VerbalExpressions](http://verbalexpressions.github.io/) is a collection of libraries for many languages (including JavaScript, PHP, Python, Ruby and even PowerShell) which make writing regular expressions a lot easier—in fact, you don't need to write regular expressions at all; it writes them for you. [JSVerbalExpressions](https://github.com/VerbalExpressions/JSVerbalExpressions) is the library for JavaScript, and the one that I'll be covering in this article. They're all pretty similar to each other, though.
 

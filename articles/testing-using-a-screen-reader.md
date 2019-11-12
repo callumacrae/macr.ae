@@ -1,5 +1,5 @@
 # Testing using a screen reader (external)
-- 2nd January, 2016
+- 2016-01-02
 
 <img alt="The internet is for everyone" src="http://i.imgur.com/ZUBKnS5.jpg" style="display:block; margin: 0 auto">
 

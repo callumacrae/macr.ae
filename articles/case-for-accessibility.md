@@ -1,5 +1,5 @@
 # The Case For Web Accessibility
-- 1st January, 2016
+- 2016-01-01
 
 There are a large number of people with disabilities browsing the internet—people who want to browse your content, read your articles, and buy your products. These people often find using their computers and the internet a lot trickier than we as people who work in tech do and will use assistive technology to aid them, and if we don't think about these people and make adjustments for them, we might find that our websites aren't as useable as they should be.
 

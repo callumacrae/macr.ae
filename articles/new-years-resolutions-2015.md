@@ -1,5 +1,5 @@
 # New Year's resolutions 2015
-- 2nd January, 2015
+- 2015-01-02
 
 I've never written down my New Year's resolutions before—I can't imagine that anyone cares too much—but last year I failed or forgot *all* of them, so this year I'm posting my resolutions so that I remember them, and so that I can be held accountable to them.
 

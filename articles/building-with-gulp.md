@@ -1,5 +1,5 @@
 # Building with Gulp (external)
-- 11th June, 2014
+- 2014-06-11
 
 <img alt="Gulp" src="https://i.imgur.com/f9afCn7.png" style="display:block; margin: 0 auto">
 

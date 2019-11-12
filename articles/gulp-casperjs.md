@@ -1,5 +1,5 @@
 # Running CasperJS tests from gulp
-- 26th January, 2014
+- 2014-01-26
 
 [CasperJS](http://casperjs.org/) is a navigation scripting and testing utility built on [PhantomJS](http://phantomjs.org/) which allows you to run tests from Node.js as if they were in a browser—so, seeing whether elements exist, checking that the page title is a specified value, and seeing if a form is handled correctly on submission.
 
