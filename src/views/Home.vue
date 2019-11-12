@@ -111,14 +111,6 @@ export default {
     color: #666;
   }
 
-  blockquote {
-    font-size: 0.9em;
-    line-height: 1.5;
-    padding-left: 15px;
-    margin: 1.5em 0 2em 15px;
-    border-left: 5px rgba(79, 79, 171, 0.25) solid;
-  }
-
   .show-more a {
     font-size: 0.8em;
     color: #666;

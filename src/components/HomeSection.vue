@@ -1,7 +1,7 @@
 <template>
   <section class="section" :class="`section--${n}`">
     <header ref="animated" :style="{ clipPath: headerClipPath }">
-      <h2>{{ title }}</h2>
+      <h2 class="section__title">{{ title }}</h2>
     </header>
 
     <div class="section__content">
@@ -71,10 +71,12 @@ export default {
     text-align: center;
 
     background-color: $blue;
+  }
 
-    h2 {
-      color: $pink;
-    }
+  &__title {
+    margin: 0;
+    font-size: 3.5em;
+    color: $pink;
   }
 
   &__content {

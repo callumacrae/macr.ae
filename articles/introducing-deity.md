@@ -10,8 +10,8 @@ Basically, it does this:
 
 ```javascript
 deity('number:10-20', function (num) {
-	// This function will be called 100 times
-	// num will equal a random number between 10 and 20 each time
+	// This function will be called 100 times: num will
+	// equal a random number between 10 and 20 each time
 });
 ```
 
@@ -109,7 +109,8 @@ This generator generates strings of random length within a specified range.
 
 ```javascript
 deity('string:30-50', function (str) {
-	// str will equal a string with a length of between 30 and 50 characters
+	// str will equal a string with a length of between
+	// 30 and 50 characters
 });
 ```
 
@@ -142,7 +143,8 @@ previously would be rounded to `17.519`.
 
 ```javascript
 deity('number:0-100:0.1', function (num) {
-	// number will equal a number between 0 and 100 with no more than one decimal place
+	// number will equal a number between 0 and 100 with
+	// no more than one decimal place
 });
 ```
 

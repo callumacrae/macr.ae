@@ -28,6 +28,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  margin: 0;
+}
+
 .article-date {
   display: block;
   margin-top: 0.5em;

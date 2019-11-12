@@ -33,6 +33,10 @@ export default {
     transition: box-shadow 400ms;
   }
 
+  h3 {
+    font-size: 1.5em;
+  }
+
   &:nth-child(odd) img {
     float: left;
     margin-right: 2em;

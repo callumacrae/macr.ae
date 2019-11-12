@@ -142,7 +142,10 @@ h1 {
   position: absolute;
   top: calc(50% - 220px);
   left: 0;
+
+  margin: 0;
   width: 100vw;
+
   text-align: center;
 
   color: inherit;

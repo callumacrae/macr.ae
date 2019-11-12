@@ -8,20 +8,33 @@ body {
   color: rgba(black, 0.75);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 2em 0 1em;
   font-family: Literata, serif;
   font-weight: 500;
 
   color: black;
 }
 
+h1 {
+  font-size: 2.5em;
+}
+
 h2 {
-  font-size: 3.5em;
+  font-size: 2em;
 }
 
 h3 {
   font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1.25em;
 }
 
 p {
@@ -33,6 +46,7 @@ a {
 }
 
 pre {
+  margin: 1.5em 0;
   padding: 0.5em 0.75em;
 
   background-color: rgba($pink, 0.05);
@@ -45,4 +59,35 @@ pre {
   background-color: rgba($pink, 0.05);
   border: 1px rgba($blue, 0.2) solid;
   color: $orange;
+}
+
+img {
+  max-width: 100%;
+}
+
+.heading-anchor {
+  text-decoration: none;
+
+  color: inherit;
+
+  span {
+    display: inline-block;
+    width: 25px;
+    margin-left: -25px;
+
+    font-size: 25px;
+
+    color: $blue;
+  }
+
+  &:not(:hover) span {
+    visibility: hidden;
+  }
+}
+
+blockquote {
+  font-size: 0.9em;
+  padding-left: 15px;
+  margin: 1.5em 0 2em 15px;
+  border-left: 5px rgba($blue, 0.25) solid;
 }
