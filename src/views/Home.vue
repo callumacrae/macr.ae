@@ -24,7 +24,20 @@
       </book>
     </home-section>
 
-    <home-section title="Articles" :n="1">
+    <home-section title="Talks" :n="1">
+      <p>@wip</p>
+      <ul>
+        <li>Front-end Love 2020</li>
+        <li>Vue.js Amsterdam: Accessibility in Single Page Apps: https://www.youtube.com/watch?v=1Rvg_XkFH8Q</li>
+        <li>Vue.js Toronto</li>
+        <li>Vue.js London</li>
+        <li>VueConf Poland</li>
+        <li>that tiny conference</li>
+        <li>meetups? FEL, halfstack, enriques</li>
+      </ul>
+    </home-section>
+
+    <home-section title="Articles" :n="2">
       <ul class="articles">
         <li v-for="article in limitedArticles" :key="article.attributes.path">
           <router-link :to="`article/${article.attributes.path}`">{{ article.attributes.title }}</router-link>
