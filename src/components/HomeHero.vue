@@ -1,22 +1,39 @@
 <template>
-  <section
-    ref="main"
-    class="hero">
-    <div ref="animated" class="left-background" :style="{ clipPath: leftBackgroundClipPath }"></div>
+  <section ref="main" class="hero">
+    <div
+      ref="animated"
+      class="left-background"
+      :style="{ clipPath: leftBackgroundClipPath }"
+    ></div>
     <div class="left">
       <h1>Callum Macrae</h1>
 
       <div class="left__content">
-        <p>I'm a JavaScript developer and occasional musician based in London, UK, working at <a href="https://samknows.com/">SamKnows</a> to make the internet faster for everyone. My current enthusiasms are Vue and SVGs (but only sometimes at the same time).</p>
+        <p>
+          I'm a JavaScript developer and occasional musician based in London,
+          UK, working at <a href="https://samknows.com/">SamKnows</a> to make
+          the internet faster for everyone. My current enthusiasms are Vue and
+          SVGs (but only sometimes at the same time).
+        </p>
         <p>I write and speak, some of which you can find below.</p>
         <a @click="handleScrollClick">
-          <i class="fas fa-arrow-down fa-2x" data-fa-transform="shrink-6" data-fa-mask="fas fa-circle"></i>
+          <i
+            class="fas fa-arrow-down fa-2x"
+            data-fa-transform="shrink-6"
+            data-fa-mask="fas fa-circle"
+          ></i>
         </a>
       </div>
     </div>
 
     <div class="right">
-      <h1 ref="rightTitleEl" role="presentation" :style="{ clipPath: rightTitleClipPath }">Callum Macrae</h1>
+      <h1
+        ref="rightTitleEl"
+        role="presentation"
+        :style="{ clipPath: rightTitleClipPath }"
+      >
+        Callum Macrae
+      </h1>
 
       <div class="right__content">
         <a href="https://twitter.com/callumacrae" target="_blank">

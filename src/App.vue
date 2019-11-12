@@ -1,6 +1,5 @@
 <template>
-  <router-view/>
+  <router-view />
 </template>
 
-<script src="./scss/style.scss">
-</script>
+<script src="./scss/style.scss" lang="scss"></script>

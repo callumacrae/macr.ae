@@ -6,21 +6,48 @@
       <book
         link="http://shop.oreilly.com/product/0636920103455.do"
         cover="https://covers.oreillystatic.com/images/0636920103455/lrg.jpg"
-        title="Vue.js: Up and Running">
-        Get a brisk introduction to building fast, interactive single-page web applications with Vue.js, the popular JavaScript framework that organizes and simplifies web development. With this practical guide, you’ll quickly move from basics to custom components and advanced features—including JSX, the JavaScript syntax extension.
-        <a href="http://shop.oreilly.com/product/0636920103455.do">O'Reilly Shop</a>,
-        <a href="https://www.amazon.co.uk/Vue-js-Up-Running-Callum-Macrae/dp/1491997249">amazon.co.uk</a>,
+        title="Vue.js: Up and Running"
+      >
+        Get a brisk introduction to building fast, interactive single-page web
+        applications with Vue.js, the popular JavaScript framework that
+        organizes and simplifies web development. With this practical guide,
+        you’ll quickly move from basics to custom components and advanced
+        features—including JSX, the JavaScript syntax extension.
+        <a href="http://shop.oreilly.com/product/0636920103455.do">
+          O'Reilly Shop</a
+        >,
+        <a
+          href="https://www.amazon.co.uk/Vue-js-Up-Running-Callum-Macrae/dp/1491997249"
+        >
+          amazon.co.uk</a
+        >,
         <a href="https://www.amazon.com/_/dp/1491997249">amazon.com</a>
       </book>
 
       <book
         link="http://shop.oreilly.com/product/0636920026280.do"
         cover="https://covers.oreillystatic.com/images/0636920026280/cat.gif"
-        title="Learning from jQuery">
-        If you’re comfortable with jQuery but a bit shaky with JavaScript, this concise guide will help you expand your knowledge of the language—especially the code that jQuery covers up for you. Many jQuery devotees write as little code as possible, but with some JavaScript under your belt, you can prevent errors, reduce overhead, and make your application code more efficient.
-        <a href="http://shop.oreilly.com/product/0636920026280.do">O'Reilly Shop</a>,
-        <a href="http://www.amazon.co.uk/Learning-jQuery-Callum-Macrae/dp/1449335195">amazon.co.uk</a>,
-        <a href="http://www.amazon.com/Learning-jQuery-Callum-Macrae/dp/1449335195">amazon.com</a>
+        title="Learning from jQuery"
+      >
+        If you’re comfortable with jQuery but a bit shaky with JavaScript, this
+        concise guide will help you expand your knowledge of the
+        language—especially the code that jQuery covers up for you. Many jQuery
+        devotees write as little code as possible, but with some JavaScript
+        under your belt, you can prevent errors, reduce overhead, and make your
+        application code more efficient.
+        <a href="http://shop.oreilly.com/product/0636920026280.do">
+          O'Reilly Shop</a
+        >,
+        <a
+          href="http://www.amazon.co.uk/Learning-jQuery-Callum-Macrae/dp/1449335195"
+        >
+          amazon.co.uk</a
+        >,
+        <a
+          href="http://www.amazon.com/Learning-jQuery-Callum-Macrae/dp/1449335195"
+        >
+          amazon.com
+        </a>
       </book>
     </home-section>
 
@@ -28,7 +55,10 @@
       <p>@wip</p>
       <ul>
         <li>Front-end Love 2020</li>
-        <li>Vue.js Amsterdam: Accessibility in Single Page Apps: https://www.youtube.com/watch?v=1Rvg_XkFH8Q</li>
+        <li>
+          Vue.js Amsterdam: Accessibility in Single Page Apps:
+          https://www.youtube.com/watch?v=1Rvg_XkFH8Q
+        </li>
         <li>Vue.js Toronto</li>
         <li>Vue.js London</li>
         <li>VueConf Poland</li>
@@ -40,15 +70,18 @@
     <home-section title="Articles" :n="2">
       <ul class="articles">
         <li v-for="article in limitedArticles" :key="article.attributes.path">
-          <router-link :to="`article/${article.attributes.path}`">{{ article.attributes.title }}</router-link>
-          <time :datetime="article.attributes.date.toISOString()">{{ article.attributes.date | niceDate }}</time>
+          <router-link :to="`article/${article.attributes.path}`">
+            {{ article.attributes.title }}
+          </router-link>
+          <time :datetime="article.attributes.date.toISOString()">
+            {{ article.attributes.date | niceDate }}
+          </time>
           <blockquote>{{ article.attributes.description }}</blockquote>
         </li>
 
         <li v-if="articles.length > 5 && !showAll" class="show-more">
           <a @click="showAll = true">Show more…</a>
         </li>
-
       </ul>
     </home-section>
   </div>

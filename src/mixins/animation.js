@@ -1,7 +1,7 @@
 export default {
   data: () => ({
     i: Math.round(Math.random() * 1e5), // Start at random position
-    isIntersecting: true,
+    isIntersecting: true
   }),
   mounted() {
     this.observer = new IntersectionObserver(([entry]) => {

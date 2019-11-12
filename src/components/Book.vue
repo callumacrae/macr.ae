@@ -1,6 +1,8 @@
 <template>
   <div class="book">
-    <a :href="link"><img :src="cover" :alt="title"></a>
+    <a :href="link">
+      <img :src="cover" :alt="title" />
+    </a>
     <h3>{{ title }}</h3>
     <p>
       <slot></slot>
