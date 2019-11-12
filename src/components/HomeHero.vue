@@ -2,7 +2,7 @@
   <section
     ref="main"
     class="hero">
-    <div class="left-background" :style="{ clipPath: leftBackgroundClipPath }"></div>
+    <div ref="animated" class="left-background" :style="{ clipPath: leftBackgroundClipPath }"></div>
     <div class="left">
       <h1>Callum Macrae</h1>
 
@@ -27,37 +27,25 @@
 
 <script>
 import * as util from '@/util';
+import animationMixin from '@/mixins/animation';
 
 export default {
+  mixins: [animationMixin],
   data() {
-    const startPositions =
-      Math.random() < 0.5 ? { top: -25, bottom: 20 } : { top: 25, bottom: -20 };
-
     return {
-      i: Math.round(Math.random() * 1e5), // Start at random position
-      startPositions,
-      positions: Object.assign({}, startPositions)
+      startPositions:
+        Math.random() < 0.5
+          ? { top: -25, bottom: 20 }
+          : { top: 25, bottom: -20 }
     };
   },
-  mounted() {
-    requestAnimationFrame(this.frame);
-  },
-  destroyed() {
-    cancelAnimationFrame(this.frame);
-  },
-  methods: {
-    frame() {
-      this.i++;
-
-      this.positions.top =
-        this.startPositions.top + Math.sin(this.i / 1700) * 15;
-      this.positions.bottom =
-        this.startPositions.bottom + Math.sin(this.i / 700) * 15;
-
-      requestAnimationFrame(this.frame);
-    }
-  },
   computed: {
+    positions() {
+      return {
+        top: this.startPositions.top + Math.sin(this.i / 900) * 15,
+        bottom: this.startPositions.bottom + Math.sin(this.i / 500) * 15
+      };
+    },
     leftBackgroundClipPath() {
       const offsetTop = util.roundDp(this.positions.top, 3);
       const offsetBottom = util.roundDp(this.positions.bottom, 3);

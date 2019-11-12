@@ -1,6 +1,6 @@
 <template>
   <section class="section" :class="`section--${n}`">
-    <header :style="{ clipPath: headerClipPath }">
+    <header ref="animated" :style="{ clipPath: headerClipPath }">
       <h2>{{ title }}</h2>
     </header>
 
@@ -12,8 +12,10 @@
 
 <script>
 import * as util from '@/util';
+import animationMixin from '@/mixins/animation';
 
 export default {
+  mixins: [animationMixin],
   props: {
     title: {
       type: String,
@@ -24,35 +26,18 @@ export default {
     }
   },
   data() {
-    const startPositions =
-      this.n % 0 ? { left: 10, right: 50 } : { left: 50, right: 10 };
-
     return {
-      i: Math.round(Math.random() * 1e5), // Start at random position
-      startPositions,
-      // positions can be 0 to 60
-      positions: Object.assign({}, startPositions)
+      startPositions:
+        this.n % 2 ? { left: 10, right: 50 } : { left: 50, right: 10 }
     };
   },
-  mounted() {
-    requestAnimationFrame(this.frame);
-  },
-  destroyed() {
-    cancelAnimationFrame(this.frame);
-  },
-  methods: {
-    frame() {
-      this.i++;
-
-      this.positions.left =
-        this.startPositions.left + Math.sin(this.i / 900) * 10;
-      this.positions.right =
-        this.startPositions.right + Math.sin(this.i / 500) * 10;
-
-      requestAnimationFrame(this.frame);
-    }
-  },
   computed: {
+    positions() {
+      return {
+        left: this.startPositions.left + Math.sin(this.i / 500) * 10,
+        right: this.startPositions.right + Math.sin(this.i / 350) * 10
+      };
+    },
     headerClipPath() {
       const positionLeft = util.roundDp(this.positions.left, 3);
       const positionRight = util.roundDp(this.positions.right, 3);
