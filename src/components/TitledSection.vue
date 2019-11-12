@@ -1,7 +1,10 @@
 <template>
   <section class="section" :class="`section--${n}`">
     <header ref="animated" :style="{ clipPath: headerClipPath }">
-      <h2 class="section__title">{{ title }}</h2>
+      <a v-if="linkBack" href="/" class="section__link-back">
+        <h2 class="section__title">{{ title }}</h2>
+      </a>
+      <h2 v-else class="section__title">{{ title }}</h2>
     </header>
 
     <div class="section__content">
@@ -23,6 +26,10 @@ export default {
     },
     n: {
       type: Number
+    },
+    linkBack: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -71,6 +78,13 @@ export default {
     text-align: center;
 
     background-color: $blue;
+  }
+
+  &__link-back:hover .section__title::before {
+    position: absolute;
+    transform: translate(-60px, 0);
+
+    content: '«';
   }
 
   &__title {

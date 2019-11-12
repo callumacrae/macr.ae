@@ -1,5 +1,5 @@
 <template>
-  <TitledSection title="Callum Macrae" :n="0">
+  <TitledSection title="Callum Macrae" link-back :n="0">
     <h1>{{ article.attributes.title }}</h1>
 
     <time
