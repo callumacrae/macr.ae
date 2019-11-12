@@ -19,9 +19,15 @@
       <h1 ref="rightTitleEl" role="presentation" :style="{ clipPath: rightTitleClipPath }">Callum Macrae</h1>
 
       <div class="right__content">
-        <i class="fab fa-twitter"></i>
-        <i class="fab fa-github"></i>
-        <i class="fab fa-codepen"></i>
+        <a href="https://twitter.com/callumacrae" target="_blank">
+          <i class="fab fa-twitter"></i>
+        </a>
+        <a href="https://github.com/callumacrae" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="https://codepen.io/callumacrae" target="_blank">
+          <i class="fab fa-codepen"></i>
+        </a>
       </div>
     </div>
   </section>
@@ -204,6 +210,10 @@ h1 {
     text-align: right;
 
     transition: opacity 600ms;
+
+    a {
+      color: inherit;
+    }
 
     .svg-inline--fa {
       display: block;
