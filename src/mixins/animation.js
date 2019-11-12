@@ -4,16 +4,18 @@ export default {
     isIntersecting: true,
   }),
   mounted() {
-    let observer = new IntersectionObserver(([entry]) => {
+    this.observer = new IntersectionObserver(([entry]) => {
       this.isIntersecting = entry.isIntersecting;
     });
 
-    observer.observe(this.$refs.animated);
+    this.observer.observe(this.$refs.animated);
 
     requestAnimationFrame(this.frame);
   },
   destroyed() {
     cancelAnimationFrame(this.frame);
+
+    this.observer.disconnect();
   },
   methods: {
     frame() {
