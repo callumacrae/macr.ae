@@ -6,6 +6,7 @@ node_modules
 app/assets/build
 app/article
 app/index.html
+dist
 
 # Random folders
 app/stuff
