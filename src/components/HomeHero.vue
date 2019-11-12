@@ -9,7 +9,9 @@
       <div class="left__content">
         <p>I'm a JavaScript developer and occasional musician based in London, UK, working at <a href="https://samknows.com/">SamKnows</a> to make the internet faster for everyone. My current enthusiasms are Vue and SVGs (but only sometimes at the same time).</p>
         <p>I write and speak, some of which you can find below.</p>
-        <i class="fas fa-arrow-down fa-2x" data-fa-transform="shrink-6" data-fa-mask="fas fa-circle"></i>
+        <a @click="handleScrollClick">
+          <i class="fas fa-arrow-down fa-2x" data-fa-transform="shrink-6" data-fa-mask="fas fa-circle"></i>
+        </a>
       </div>
     </div>
 
@@ -87,6 +89,38 @@ export default {
         100% 100%, calc(65% + ${generatedOffsetBottom}px) 100%
       )`;
     }
+  },
+  methods: {
+    handleScrollClick() {
+      // behaviour: 'smooth' doesn't have great browser support unfortunately
+
+      const startPosition = window.scrollY;
+      const scrollOffset =
+        this.$refs.main.getBoundingClientRect().height - startPosition;
+
+      const startTime = Date.now();
+      const duration = 1000;
+
+      const frame = () => {
+        const percentage = (Date.now() - startTime) / duration;
+
+        if (percentage < 1) {
+          requestAnimationFrame(frame);
+        }
+
+        // Quart easing
+        const adjustedPercentage =
+          percentage < 0.5
+            ? 8 * percentage ** 4
+            : 1 - 8 * (percentage - 1) ** 4;
+
+        window.scrollTo({
+          top: scrollOffset * adjustedPercentage + startPosition
+        });
+      };
+
+      requestAnimationFrame(frame);
+    }
   }
 };
 </script>
@@ -135,8 +169,9 @@ h1 {
 
     transition: opacity 600ms;
 
-    a[href] {
+    a {
       color: inherit;
+      cursor: pointer;
 
       &:hover {
         text-decoration: none;
