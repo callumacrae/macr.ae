@@ -144,6 +144,8 @@ h1 {
   left: 0;
   width: 100vw;
   text-align: center;
+
+  color: inherit;
 }
 
 .left-background {

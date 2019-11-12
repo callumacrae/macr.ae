@@ -73,8 +73,6 @@ export default {
     background-color: $blue;
 
     h2 {
-      font-size: 60px;
-
       color: $pink;
     }
   }

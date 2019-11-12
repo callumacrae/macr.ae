@@ -2,13 +2,26 @@
 @import 'meta/colors';
 
 body {
-  font-family: Source Sans Pro, serif;
-  font-size: 20px;
+  font-family: Open Sans, serif;
+  font-size: 18px;
+
+  color: rgba(black, 0.75);
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
-  font-family: Alegreya Sans, sans-serif;
+  font-family: Literata, sans-serif;
+  font-weight: 500;
+
+  color: black;
+}
+
+h2 {
+  font-size: 3.5em;
+}
+
+h3 {
+  font-size: 1.5em;
 }
 
 p {
