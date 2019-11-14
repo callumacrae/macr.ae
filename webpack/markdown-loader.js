@@ -1,5 +1,14 @@
 const frontmatter = require('front-matter');
 const marked = require('marked');
+const Prism = require('prismjs');
+
+console.log(Prism.languages);
+
+marked.setOptions({
+  highlight: function(code, lang) {
+    return Prism.highlight(code, Prism.languages[lang], lang);
+  }
+});
 
 const renderer = new marked.Renderer();
 
