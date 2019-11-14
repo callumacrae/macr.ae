@@ -4,8 +4,6 @@ date: 2017-03-01
 description: transform-when is a library I wrote at SamKnows that allows you to combine a number of variables—scroll position, time, and user actions—to create beautiful, performant animations. This article demonstrates some of the functionality of the library.
 ---
 
-<link rel="stylesheet" href="/assets/build/transform-when.css">
-
 ![](https://camo.githubusercontent.com/74e76f488000f2bdd64c1f115473aeda8ecb9058/68747470733a2f2f6769616e742e6766796361742e636f6d2f536361726365496d6167696e61746976654c616d707265792e676966)
 
 When working on the new homepage for [SamKnows.com], we decided to do something that none of us had ever seen before: create an animation that combined both time and the users position on the page to tell the story of SamKnows in an interactive, fun way. When researching how to develop this, I discovered that the technique is called "scrollytelling"\*, and is a technique used mostly in journalism to tell a story. Unfortunately, most of the examples I found were quite laggy—especially on my 4K display—and didn't even attempt the animation on mobile.
@@ -109,8 +107,6 @@ If you want to work on stuff like this, we're looking to hire a front-end develo
 <svg class="demo" width="210" height="210" viewBox="0 0 210 210" xmlns="http://www.w3.org/2000/svg">
     <rect transform="translate(105 105)" x="-70" y="-70" width="140" height="140" rx="70" ry="70" />
 </svg>
-
-<script src="/assets/build/transform-when.js"></script>
 
 
 [SamKnows.com]: https://www.samknows.com/

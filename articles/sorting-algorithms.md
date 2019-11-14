@@ -413,8 +413,6 @@ You can also find the source for this article on [GitHub][macr.ae github].
 
 
 
-<script src="/assets/build/sorting-article.js"></script>
-
 [D3.js]: https://d3js.org/
 [xoax heaps]: https://www.youtube.com/watch?v=v1YUApMYXO4
 [macr.ae GitHub]: https://github.com/callumacrae/macr.ae/blob/master/articles/sorting-algorithms.md

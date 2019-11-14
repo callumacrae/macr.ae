@@ -9,7 +9,7 @@
       {{ article.attributes.date | niceDate }}
     </time>
 
-    <div v-html="article.body"></div>
+    <div v-html="article.body" class="article"></div>
   </TitledSection>
 </template>
 
@@ -18,12 +18,35 @@ import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
 export default {
+  mounted() {
+    this.init();
+  },
   computed: {
     article() {
       const articles = util.getArticles();
       const slug = this.$route.params.slug;
 
       return articles.find(article => article.attributes.path === slug);
+    }
+  },
+  watch: {
+    $route: 'init'
+  },
+  methods: {
+    init() {
+      if (this.$route.path.includes('sorting-algorithms')) {
+        import(
+          /* webpackChunkName: "sorting-algos" */ '../article-js/sorting-algorithms'
+        ).then(({ default: init }) => {
+          init();
+        });
+      } else if (this.$route.path.includes('transform-when')) {
+        import(
+          /* webpackChunkName: "transform-when" */ '../article-js/transform-when'
+        ).then(({ default: init }) => {
+          init();
+        });
+      }
     }
   },
   components: {
