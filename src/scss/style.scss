@@ -6,7 +6,7 @@ body {
   font-family: Open Sans, sans-serif;
   font-size: 18px;
 
-  color: rgba(black, 0.75);
+  color: hsl(0, 0%, 27%);
 }
 
 h1,
@@ -52,6 +52,7 @@ pre {
 
   background-color: rgba($pink, 0.05);
   border: 1px rgba($blue, 0.2) solid;
+  border-radius: 2px;
 }
 
 :not(pre) > code {
@@ -59,6 +60,7 @@ pre {
 
   background-color: rgba($pink, 0.05);
   border: 1px rgba($blue, 0.2) solid;
+  border-radius: 2px;
   color: $orange;
 }
 
