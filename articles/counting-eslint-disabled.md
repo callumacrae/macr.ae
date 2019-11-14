@@ -18,7 +18,7 @@ Use this command to find out:
 
 Here's the command as text:
 
-```sh
+```shell
 grep -r 'eslint-disable' -h ./src |    # Find all lines containing "eslint-disable"
     sed -E 's/^.*\/[*/] | \*\/|,//g' | # Remove whitespace and brackets
     tr ' ' '\n' |                      # Put every word on own line
@@ -30,6 +30,6 @@ grep -r 'eslint-disable' -h ./src |    # Find all lines containing "eslint-disab
 
 And again on one line:
 
-```sh
+```shell
 grep -r 'eslint-disable' -h ./src | sed -E 's/^.*\/[*/] | \*\/|,//g' | tr ' ' '\n' | grep -v 'eslint' | sort | uniq -c | sort -bgr
 ```

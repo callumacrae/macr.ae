@@ -1,11 +1,16 @@
 const frontmatter = require('front-matter');
 const marked = require('marked');
 const Prism = require('prismjs');
-
-console.log(Prism.languages);
+const loadLanguages = require('prismjs/components/');
+loadLanguages(['bash']);
 
 marked.setOptions({
-  highlight: function(code, lang) {
+  highlight(code, lang) {
+    if (!Prism.languages[lang]) {
+      console.error(`Highlighting unavailable for "${lang}".`);
+      return code;
+    }
+
     return Prism.highlight(code, Prism.languages[lang], lang);
   }
 });
