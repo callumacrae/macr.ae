@@ -68,6 +68,13 @@ pre {
   color: $orange;
 }
 
+hr {
+  margin: 2em 0;
+
+  border: none;
+  border-bottom: 1px rgba($blue, 0.2) solid;
+}
+
 img {
   max-width: 100%;
 }
