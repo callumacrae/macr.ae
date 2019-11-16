@@ -1,19 +1,24 @@
 <template>
-  <TitledSection title="Callum Macrae" link-back :n="0">
-    <h1>{{ article.attributes.title }}</h1>
+  <div>
+    <TitledSection title="Callum Macrae" link-back :n="0">
+      <h1>{{ article.attributes.title }}</h1>
 
-    <time
-      class="article-date"
-      :datetime="article.attributes.date.toISOString()"
-    >
-      {{ article.attributes.date | niceDate }}
-    </time>
+      <time
+        class="article-date"
+        :datetime="article.attributes.date.toISOString()"
+      >
+        {{ article.attributes.date | niceDate }}
+      </time>
 
-    <div v-html="article.body" class="article"></div>
-  </TitledSection>
+      <div v-html="article.body" class="article"></div>
+    </TitledSection>
+
+    <TheFooter :n="1" />
+  </div>
 </template>
 
 <script>
+import TheFooter from '@/components/TheFooter';
 import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
@@ -50,6 +55,7 @@ export default {
     }
   },
   components: {
+    TheFooter,
     TitledSection
   }
 };
