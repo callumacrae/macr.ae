@@ -94,6 +94,10 @@ import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
 export default {
+  metaInfo: {
+    title: 'Callum Macrae',
+    titleTemplate: null
+  },
   data: () => ({
     showAll: false
   }),

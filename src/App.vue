@@ -4,24 +4,15 @@
 
 <script>
 export default {
-  mounted() {
-    this.init();
-  },
-  watch: {
-    $route: 'init'
-  },
-  methods: {
-    init() {
-      if (typeof document === 'undefined') {
-        return;
+  metaInfo() {
+    return {
+      titleTemplate: '%s | Callum Macrae',
+      bodyAttrs: {
+        class: [
+          this.$route.path.includes('transform-when') ? 'transform-when' : ''
+        ]
       }
-
-      // @todo use vue-meta for this
-      document.body.classList.toggle(
-        'transform-when',
-        this.$route.path.includes('transform-when')
-      );
-    }
+    };
   }
 };
 </script>

@@ -23,6 +23,11 @@ import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
 export default {
+  metaInfo() {
+    return {
+      title: this.article.attributes.title
+    };
+  },
   mounted() {
     this.init();
   },
