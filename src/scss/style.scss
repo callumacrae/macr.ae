@@ -105,3 +105,8 @@ blockquote {
   margin: 1.5em 0 2em 15px;
   border-left: 5px rgba($blue, 0.25) solid;
 }
+
+noscript {
+  color: $orange;
+  font-weight: bold;
+}

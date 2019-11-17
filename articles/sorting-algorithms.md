@@ -5,7 +5,9 @@ description: "If you or a computer needs to sort a list of items, you'll use an 
 image: sorting-algorithms.png
 ---
 
-Sometimes you or a computer needs to sort a list of items—say, a list of names into alphabetical order, or a list of objects into length order. To sort this list, especially if it is a large list, you need some kind of process: for example, if you were sorting a list of names into alphabetic order, you could group all the letters by their first letter, then sort the individual groups.
+<noscript>This article contains functionality that won't work correctly when JavaScript is disabled!</noscript>
+
+Sometimes you or a computer needs to sort a list of items—say, a list of names into alphabetical order, or a list of objects into length order. To sort this list, especially if it is a large list, you need some kind of process: for example, if you were sorting a list of names into alphabetic order, you could group all the names by their first letter, then sort the individual groups.
 
 Algorithms used to sort a list of items are called sorting algorithms, and this article will explain and visualise a few of the most well known sorting algorithms. Each section will contain one sorting algorithm, a description of the algorithm, a visualisation of the algorithm, and finally an implementation of the algorithm in JavaScript.
 
