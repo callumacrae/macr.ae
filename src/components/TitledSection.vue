@@ -1,9 +1,9 @@
 <template>
   <section class="section" :class="`section--${n}`">
     <header ref="animated" :style="{ clipPath: headerClipPath }">
-      <a v-if="linkBack" href="/" class="section__link-back">
+      <router-link v-if="linkBack" to="/" class="section__link-back">
         <h2 class="section__title">{{ title }}</h2>
-      </a>
+      </router-link>
       <h2 v-else class="section__title">{{ title }}</h2>
     </header>
 
