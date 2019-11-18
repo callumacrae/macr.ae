@@ -8,6 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "chrome-aws-lambda": "^2.0.0",
     "d3": "^4.13.0",
     "front-matter": "^3.0.2",
     "json-loader": "^0.5.7",
@@ -15,6 +16,8 @@
     "normalize.css": "^8.0.0",
     "prerender-spa-plugin": "^3.4.0",
     "prismjs": "^1.17.1",
+    "promise-limit": "^2.7.0",
+    "puppeteer-core": "^2.0.0",
     "transform-when": "^1.2.0",
     "vue": "^2.6.10",
     "vue-meta": "^2.3.1",

@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const Renderer = require('./webpack/zeit-renderer');
 
 const articles = fs
   .readdirSync('./articles/')
@@ -11,7 +12,8 @@ module.exports = {
     plugins: [
       new PrerenderSPAPlugin({
         staticDir: path.join(__dirname, 'dist'),
-        routes: ['/', ...articles]
+        routes: ['/', ...articles],
+        renderer: new Renderer()
       })
     ]
   }
