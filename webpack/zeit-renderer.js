@@ -3,6 +3,7 @@
 
 const promiseLimit = require('promise-limit');
 const chromium = require('chrome-aws-lambda');
+const puppeteer = require('puppeteer-core');
 
 const waitForRender = function(options) {
   options = options || {};
@@ -45,7 +46,7 @@ class PuppeteerRenderer {
 
   async initialize() {
     try {
-      this._puppeteer = await chromium.puppeteer.launch({
+      this._puppeteer = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath,
