@@ -46,6 +46,12 @@ class PuppeteerRenderer {
 
   async initialize() {
     try {
+      console.log({
+        args: chromium.args,
+        defaultViewport: chromium.defaultViewport,
+        executablePath: await chromium.executablePath,
+        headless: chromium.headless,
+      });
       this._puppeteer = await puppeteer.launch({
         args: chromium.args,
         defaultViewport: chromium.defaultViewport,
