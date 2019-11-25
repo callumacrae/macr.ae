@@ -49,6 +49,16 @@ a {
   color: $blue;
 }
 
+button {
+  padding: 15px 25px;
+
+  background-color: white;
+  border: 2px $blue solid;
+  border-radius: 5px;
+  color: $blue;
+  cursor: pointer;
+}
+
 pre {
   margin: 1.5em 0;
   padding: 0.5em 0.75em;
@@ -109,4 +119,9 @@ blockquote {
 noscript {
   color: $orange;
   font-weight: bold;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
 }

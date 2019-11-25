@@ -7,8 +7,6 @@ import './filters';
 
 Vue.use(VueMeta);
 
-console.log('test');
-
 Vue.config.productionTip = false;
 
 new Vue({

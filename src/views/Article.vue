@@ -13,11 +13,14 @@
       <div v-html="article.body" class="article"></div>
     </TitledSection>
 
+    <LazyComments :slug="$route.params.slug" />
+
     <TheFooter :n="1" />
   </div>
 </template>
 
 <script>
+import LazyComments from '@/components/LazyComments';
 import TheFooter from '@/components/TheFooter';
 import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
@@ -60,6 +63,7 @@ export default {
     }
   },
   components: {
+    LazyComments,
     TheFooter,
     TitledSection
   }

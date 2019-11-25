@@ -81,7 +81,7 @@ export default {
 @import '../scss/meta/colors';
 
 .the-footer {
-  margin-top: 100px;
+  margin-top: 80px;
   padding-top: 1px;
   padding-bottom: 1px;
 
