@@ -1,3 +1,10 @@
 {
-	"name": "macr.ae"
+  "name": "macr.ae",
+  "routes": [
+    {
+      "src": "/article/(.*).html",
+      "status": 301,
+      "headers": { "Location": "/article/$1" }
+    }
+  ]
 }
