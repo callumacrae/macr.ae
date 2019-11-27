@@ -15,6 +15,10 @@ export default new Router({
       component: Home
     },
     {
+      path: '/article/:slug.html',
+      redirect: to => `/article/${to.params.slug}`
+    },
+    {
       path: '/article/:slug',
       name: 'article',
       component: Article
