@@ -50,11 +50,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../scss/meta/mixins';
+
 .comments {
-  margin-top: 100px;
+  margin-top: 60px;
 
   &__button {
     text-align: center;
+  }
+
+  @include desktop {
+    margin-top: 100px;
   }
 }
 </style>

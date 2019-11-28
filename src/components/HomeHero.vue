@@ -149,7 +149,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/meta/colors';
+@import '../scss/meta/variables';
 
 .hero {
   position: relative;

@@ -5,7 +5,7 @@
     :class="`section--${n}`"
     :style="{ clipPath: headerClipPath }"
   >
-    <div class="the-footer__content">
+    <div class="the-footer__content container">
       <div class="left">
         <img class="the-footer__photo" src="../assets/me-speaking.png" />
       </div>
@@ -52,16 +52,21 @@ export default {
     }
   },
   data() {
+    const maxOffset = window.innerWidth < 500 ? 40 : 60;
     return {
+      maxOffset,
       startPositions:
-        this.n % 2 ? { left: 10, right: 50 } : { left: 50, right: 10 }
+        this.n % 2
+          ? { left: 10, right: maxOffset - 10 }
+          : { left: maxOffset - 10, right: 10 }
     };
   },
   computed: {
     positions() {
+      const max = this.maxOffset / 6;
       return {
-        left: this.startPositions.left + Math.sin(this.i / 500) * 10,
-        right: this.startPositions.right + Math.sin(this.i / 350) * 10
+        left: this.startPositions.left + Math.sin(this.i / 500) * max,
+        right: this.startPositions.right + Math.sin(this.i / 350) * max
       };
     },
     headerClipPath() {
@@ -78,10 +83,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/meta/colors';
+@import '../scss/meta/variables';
+@import '../scss/meta/mixins';
 
 .the-footer {
-  margin-top: 80px;
+  margin-top: 50px;
   padding-top: 1px;
   padding-bottom: 1px;
 
@@ -89,12 +95,14 @@ export default {
   color: rgba(white, 0.8);
 
   &__content {
-    width: 800px;
-    margin: 120px auto 80px;
+    margin-top: 90px;
+    margin-bottom: 50px;
 
     display: flex;
 
     .left {
+      display: none;
+
       min-width: 190px;
       width: 190px;
       margin-right: 40px;
@@ -107,7 +115,7 @@ export default {
 
   h2 {
     margin-top: -5px; // -5px so that it lines up with the image
-    margin-bottom: 30px;
+    margin-bottom: 0.75em;
 
     line-height: 1em;
 
@@ -124,6 +132,19 @@ export default {
     a {
       color: $pink;
       margin-right: 0.5em;
+    }
+  }
+
+  @include desktop {
+    margin-top: 80px;
+
+    &__content {
+      margin-top: 120px;
+      margin-bottom: 80px;
+    }
+
+    .left {
+      display: block;
     }
   }
 }

@@ -7,98 +7,97 @@ body.transform-when {
     position: relative;
     left: 100px;
   }
-}
-
-// @todo make this more specific
-.demo {
-  position: fixed;
-  right: calc(50% + 330px);
-  top: 33.3333%;
-  transform: translateY(-50%);
-
-  rect {
-    stroke: $samknows;
-    stroke-width: 4px;
-    stroke-linecap: round;
-    fill: $samknows;
-  }
-}
-
-.transform {
-  margin-top: 5em;
-  margin-bottom: 5em;
-}
-
-.transform strong {
-  display: block;
-  line-height: 50px;
-
-  margin-left: -1000px;
-  margin-right: -1000px;
-
-  color: rgba(0, 0, 0, 0);
-
-  &.start {
-    background: url(../assets/transform-start.svg) no-repeat 970px 0;
-    border-top: 2px #bde1f1 solid;
-  }
-
-  &.end {
-    background: url(../assets/transform-end.svg) no-repeat 970px 0;
-  }
-
-  border-bottom: 2px #bde1f1 solid;
-}
-
-.arrow {
-  position: fixed;
-  top: -3px;
-  right: calc(50% + 380px);
-
-  * {
-    fill: none;
-    stroke: $blue;
-    stroke-width: 4px;
-    stroke-linecap: round;
-  }
-}
-
-@media all and (max-width: 450px) {
-  body > *:not(header) {
-    left: 0;
-    padding-left: 30px;
-  }
 
   .demo {
-    right: auto;
-    left: 0;
+    position: fixed;
+    right: calc(50% + 330px);
+    top: 33.3333%;
+    transform: translateY(-50%);
 
-    width: 50px;
-    height: 50px;
-  }
-
-  .arrow {
-    right: auto;
-    top: 200px;
-    left: 5px;
-
-    width: 40px;
+    rect {
+      stroke: $samknows;
+      stroke-width: 4px;
+      stroke-linecap: round;
+      fill: $samknows;
+    }
   }
 
   .transform {
-    margin-top: 3em;
-    margin-bottom: 3em;
+    margin-top: 5em;
+    margin-bottom: 5em;
   }
 
   .transform strong {
-    margin-left: 0;
-    margin-right: 0;
+    display: block;
+    line-height: 50px;
 
-    line-height: 30px;
+    margin-left: -1000px;
+    margin-right: -1000px;
 
-    &.start,
+    color: rgba(0, 0, 0, 0);
+
+    &.start {
+      background: url(../assets/transform-start.svg) no-repeat 970px 0;
+      border-top: 2px #bde1f1 solid;
+    }
+
     &.end {
-      background-position: 0 3px;
+      background: url(../assets/transform-end.svg) no-repeat 970px 0;
+    }
+
+    border-bottom: 2px #bde1f1 solid;
+  }
+
+  .arrow {
+    position: fixed;
+    top: -3px;
+    right: calc(50% + 380px);
+
+    * {
+      fill: none;
+      stroke: $blue;
+      stroke-width: 4px;
+      stroke-linecap: round;
+    }
+  }
+
+  @media all and (max-width: 450px) {
+    > section > *:not(header) {
+      left: 0;
+      padding-left: 30px;
+    }
+
+    .demo {
+      right: auto;
+      left: 0;
+
+      width: 50px;
+      height: 50px;
+    }
+
+    .arrow {
+      right: auto;
+      top: 200px;
+      left: 5px;
+
+      width: 40px;
+    }
+
+    .transform {
+      margin-top: 3em;
+      margin-bottom: 3em;
+    }
+
+    .transform strong {
+      margin-left: 0;
+      margin-right: 0;
+
+      line-height: 30px;
+
+      &.start,
+      &.end {
+        background-position: 0 3px;
+      }
     }
   }
 }

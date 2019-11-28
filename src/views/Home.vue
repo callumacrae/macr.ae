@@ -118,7 +118,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/meta/colors';
+@import '../scss/meta/variables';
 
 .articles {
   list-style-type: none;

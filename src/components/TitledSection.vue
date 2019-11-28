@@ -7,7 +7,7 @@
       <h2 v-else class="section__title">{{ title }}</h2>
     </header>
 
-    <div class="section__content">
+    <div class="container">
       <slot></slot>
     </div>
   </section>
@@ -33,16 +33,21 @@ export default {
     }
   },
   data() {
+    const maxOffset = window.innerWidth < 500 ? 40 : 60;
     return {
+      maxOffset,
       startPositions:
-        this.n % 2 ? { left: 10, right: 50 } : { left: 50, right: 10 }
+        this.n % 2
+          ? { left: 10, right: maxOffset - 10 }
+          : { left: maxOffset - 10, right: 10 }
     };
   },
   computed: {
     positions() {
+      const max = this.maxOffset / 6;
       return {
-        left: this.startPositions.left + Math.sin(this.i / 500) * 10,
-        right: this.startPositions.right + Math.sin(this.i / 350) * 10
+        left: this.startPositions.left + Math.sin(this.i / 500) * max,
+        right: this.startPositions.right + Math.sin(this.i / 350) * max
       };
     },
     headerClipPath() {
@@ -57,8 +62,8 @@ export default {
 
       return `polygon(
         ${top},
-        100% calc(100% - ${60 - positionRight}px),
-        0% calc(100% - ${60 - positionLeft}px)
+        100% calc(100% - ${this.maxOffset - positionRight}px),
+        0% calc(100% - ${this.maxOffset - positionLeft}px)
       )`;
     }
   }
@@ -66,14 +71,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../scss/meta/colors';
+@import '../scss/meta/variables';
+@import '../scss/meta/mixins';
 
 .section {
   margin-top: 100px;
 
   header {
-    margin-bottom: 50px;
-    padding: 80px 20px;
+    margin-bottom: 20px;
+    padding: 60px 20px;
 
     text-align: center;
 
@@ -89,19 +95,30 @@ export default {
 
   &__title {
     margin: 0;
-    font-size: 3.5em;
+    font-size: 2.5em;
     color: $pink;
-  }
-
-  &__content {
-    width: 800px;
-    margin: 0 auto;
   }
 
   &--0 {
     margin-top: 0;
 
     header {
+      padding-top: 30px;
+    }
+  }
+
+  @include desktop {
+    header {
+      margin-bottom: 50px;
+      padding-top: 80px;
+      padding-bottom: 80px;
+    }
+
+    &__title {
+      font-size: 3.5em;
+    }
+
+    &--0 header {
       padding-top: 50px;
     }
   }
