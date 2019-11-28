@@ -3,7 +3,10 @@
     <div
       ref="animated"
       class="left-background"
-      :style="{ clipPath: leftBackgroundClipPath }"
+      :style="{
+        clipPath: leftBackgroundClipPath,
+        '-webkit-clip-path': leftBackgroundClipPath
+      }"
     ></div>
     <div class="left">
       <h1>Callum Macrae</h1>
@@ -30,7 +33,10 @@
       <h1
         ref="rightTitleEl"
         role="presentation"
-        :style="{ clipPath: rightTitleClipPath }"
+        :style="{
+          clipPath: rightTitleClipPath,
+          '-webkit-clip-path': rightTitleClipPath
+        }"
       >
         Callum Macrae
       </h1>

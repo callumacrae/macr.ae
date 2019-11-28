@@ -1,6 +1,9 @@
 <template>
   <section class="section" :class="`section--${n}`">
-    <header ref="animated" :style="{ clipPath: headerClipPath }">
+    <header
+      ref="animated"
+      :style="{ clipPath: headerClipPath, '-webkit-clip-path': headerClipPath }"
+    >
       <router-link v-if="linkBack" to="/" class="section__link-back">
         <h2 class="section__title">{{ title }}</h2>
       </router-link>

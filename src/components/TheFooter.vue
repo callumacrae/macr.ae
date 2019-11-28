@@ -3,7 +3,7 @@
     ref="animated"
     class="the-footer"
     :class="`section--${n}`"
-    :style="{ clipPath: headerClipPath }"
+    :style="{ clipPath: footerClipPath, '-webkit-clip-path': footerClipPath }"
   >
     <div class="the-footer__content container">
       <div class="left">
@@ -69,7 +69,7 @@ export default {
         right: this.startPositions.right + Math.sin(this.i / 350) * max
       };
     },
-    headerClipPath() {
+    footerClipPath() {
       const positionLeft = util.roundDp(this.positions.left, 3);
       const positionRight = util.roundDp(this.positions.right, 3);
 
