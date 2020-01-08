@@ -15,6 +15,10 @@
 
     <LazyComments :slug="$route.params.slug" />
 
+    <p class="text-center">
+      <router-link to="/">« Return to home</router-link>
+    </p>
+
     <TheFooter :n="1" />
   </div>
 </template>
