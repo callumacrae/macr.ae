@@ -19,13 +19,24 @@
           SVGs (but only sometimes at the same time).
         </p>
         <p>I write and speak, some of which you can find below.</p>
-        <a @click="handleScrollClick">
+        <a class="down-arrow" @click="handleScrollClick">
           <i
             class="fas fa-arrow-down fa-2x"
             data-fa-transform="shrink-6"
             data-fa-mask="fas fa-circle"
           ></i>
         </a>
+        <div class="social-links">
+          <a href="https://twitter.com/callumacrae" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="https://github.com/callumacrae" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://codepen.io/callumacrae" target="_blank">
+            <i class="fab fa-codepen"></i>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -53,25 +64,44 @@
         </a>
       </div>
     </div>
+
+    <GlobalEvents target="window" @resize="handlePageResize" />
   </section>
 </template>
 
 <script>
+import GlobalEvents from 'vue-global-events';
 import * as util from '@/util';
 import animationMixin from '@/mixins/animation';
 
 export default {
   mixins: [animationMixin],
   data() {
+    const isMobile = window.innerWidth < 500;
+
     return {
+      isMobile,
       startPositions:
         Math.random() < 0.5
           ? { top: -25, bottom: 20 }
-          : { top: 25, bottom: -20 }
+          : { top: 25, bottom: -20 },
+      // @todo refactor the logic to not have to use these massive numbers!
+      startPositionsMobile: { top: -1900, bottom: 4000 }
     };
+  },
+  components: {
+    GlobalEvents
   },
   computed: {
     positions() {
+      if (this.isMobile) {
+        const startPositions = this.startPositionsMobile;
+        return {
+          top: startPositions.top + Math.sin(this.i / 650) * 50,
+          bottom: startPositions.bottom + Math.sin(this.i / 350) * 50
+        };
+      }
+
       return {
         top: this.startPositions.top + Math.sin(this.i / 900) * 15,
         bottom: this.startPositions.bottom + Math.sin(this.i / 500) * 15
@@ -149,12 +179,16 @@ export default {
       };
 
       requestAnimationFrame(frame);
+    },
+    handlePageResize() {
+      this.isMobile = window.innerWidth < 500;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
+@import '../scss/meta/mixins';
 @import '../scss/meta/variables';
 
 .hero {
@@ -178,6 +212,11 @@ h1 {
   text-align: center;
 
   color: inherit;
+
+  @include mobile {
+    top: 60px;
+    font-size: 80px;
+  }
 }
 
 .left-background {
@@ -205,15 +244,41 @@ h1 {
 
     a {
       color: inherit;
+    }
+
+    .down-arrow {
       cursor: pointer;
 
       &:hover {
         text-decoration: none;
       }
+
+      .svg-inline--fa {
+        opacity: 0.66;
+      }
     }
 
-    .svg-inline--fa {
-      opacity: 0.66;
+    .social-links a {
+      font-size: 1.5em;
+      margin-right: 10px;
+    }
+
+    @include mobile {
+      padding: 0 30px;
+      width: 100vw;
+      left: 0;
+      top: auto;
+      bottom: 60px;
+
+      .down-arrow {
+        display: none;
+      }
+    }
+
+    @include desktop {
+      .social-links {
+        display: none;
+      }
     }
   }
 }
@@ -242,6 +307,10 @@ h1 {
       display: block;
       margin-bottom: 15px;
       margin-left: auto;
+    }
+
+    @include mobile {
+      display: none;
     }
   }
 }
