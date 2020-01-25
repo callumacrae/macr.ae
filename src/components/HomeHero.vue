@@ -1,5 +1,5 @@
 <template>
-  <section ref="main" class="hero">
+  <section ref="main" class="hero" :style="{ height: `${pageHeight}px` }">
     <div
       ref="animated"
       class="left-background"
@@ -80,6 +80,7 @@ export default {
     const isMobile = window.innerWidth < 500;
 
     return {
+      pageHeight: window.innerHeight,
       isMobile,
       startPositions:
         Math.random() < 0.5
@@ -181,6 +182,7 @@ export default {
       requestAnimationFrame(frame);
     },
     handlePageResize() {
+      this.pageHeight = window.innerHeight;
       this.isMobile = window.innerWidth < 500;
     }
   }
