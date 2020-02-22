@@ -15,13 +15,12 @@
         </h2>
 
         <p>
-          Callum Macrae is a JavaScript developer and occasional musician based
-          in London, UK, working at SamKnows to make the internet faster for
-          everyone. His current favourite things to work with are Vue, and SVGs
-          (but only sometimes at the same time). He regularly contributes to
-          open source projects including gulp and his own projects and is the
-          author of Vue.js: Up and Running, a book about getting started with
-          Vue.
+          Callum Macrae is a developer and occasional musician based in London,
+          UK, with a passion for using JavaScript to solve complicated problems.
+          His current favourite things to work with are Vue and SVGs (but only
+          sometimes at the same time). He regularly contributes to open source
+          projects including gulp and his own projects and is the author of
+          Vue.js: Up and Running, a book about getting started with Vue.
         </p>
 
         <div class="the-footer__links">
