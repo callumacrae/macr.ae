@@ -30,9 +30,10 @@ export default {
         this.status = 'loaded';
       };
 
+      const slug = this.slug;
       window.disqus_config = function() {
         // Use urls from old site!
-        this.page.url = `http://macr.ae/article/${this.slug}.html`;
+        this.page.url = `http://macr.ae/article/${slug}.html`;
 
         this.callbacks.onReady.push(handleLoaded);
       };
