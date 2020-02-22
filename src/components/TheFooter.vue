@@ -7,7 +7,9 @@
   >
     <div class="the-footer__content container">
       <div class="left">
-        <img class="the-footer__photo" src="../assets/me-speaking.png" />
+        <LazyContent>
+          <img class="the-footer__photo" src="../assets/me-speaking.png" />
+        </LazyContent>
       </div>
       <div class="right">
         <h2>
@@ -41,9 +43,11 @@
 <script>
 import * as util from '@/util';
 import animationMixin from '@/mixins/animation';
+import LazyContent from './LazyContent';
 
 export default {
   mixins: [animationMixin],
+  components: { LazyContent },
   props: {
     n: {
       type: Number

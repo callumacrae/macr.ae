@@ -1,7 +1,9 @@
 <template>
   <div class="book">
     <a :href="link">
-      <img :src="cover" :alt="title" />
+      <LazyContent>
+        <img :src="cover" :alt="title" />
+      </LazyContent>
     </a>
     <h3>{{ title }}</h3>
     <p>
@@ -11,6 +13,8 @@
 </template>
 
 <script>
+import LazyContent from '@/components/LazyContent';
+
 export default {
   props: {
     link: {
@@ -22,7 +26,8 @@ export default {
     title: {
       type: String
     }
-  }
+  },
+  components: { LazyContent }
 };
 </script>
 
