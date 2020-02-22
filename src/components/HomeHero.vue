@@ -14,10 +14,9 @@
 
       <div class="left__content">
         <p>
-          I'm a JavaScript developer and occasional musician based in London,
-          UK, working at <a href="https://samknows.com/">SamKnows</a> to make
-          the internet faster for everyone. My current enthusiasms are Vue and
-          SVGs (but only sometimes at the same time).
+          I'm a developer and occasional musician based in London, UK, with a
+          passion for using JavaScript to solve complicated problems. My current
+          enthusiasms are Vue and SVGs (but only sometimes at the same time).
         </p>
         <p>I write and speak, some of which you can find below.</p>
         <a class="down-arrow" @click="handleScrollClick">
