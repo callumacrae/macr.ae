@@ -3,9 +3,9 @@ $samknows: #009fe3;
 body.transform-when {
   overflow-x: hidden; // o god why
 
-  > section > *:not(header) {
+  section > *:not(header) {
     position: relative;
-    left: 100px;
+    left: 70px;
   }
 
   .demo {
@@ -62,9 +62,9 @@ body.transform-when {
   }
 
   @media all and (max-width: 450px) {
-    > section > *:not(header) {
+    section > *:not(header) {
       left: 0;
-      padding-left: 30px;
+      padding-left: 60px;
     }
 
     .demo {

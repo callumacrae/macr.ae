@@ -1,6 +1,5 @@
 import Transformer from 'transform-when';
 
-const rect = document.querySelector('.demo rect');
 let transform;
 
 export default function init() {
@@ -8,11 +7,35 @@ export default function init() {
     transform.reset();
   }
 
+  new Transformer([
+    {
+      el: document.querySelector('.arrow'),
+      styles: [['opacity', y => Transformer.transform([0, 400], [1, 0], y)]]
+    }
+  ]);
+
+  const rect = document.querySelector('.demo rect');
+  rect.style.opacity = 1;
+
+  rect.addEventListener('click', function() {
+    transform.trigger('example', 2000);
+  });
+
+  document
+    .querySelector('.trigger-action')
+    .addEventListener('click', function(e) {
+      e.preventDefault();
+
+      transform.trigger('example', 2000);
+    });
+
   const scenes = {
     drawCircle: getScene('draw-circle'),
     scroll: getScene('scroll'),
     time: getScene('time')
   };
+
+  console.log(scenes);
 
   const pathLength = Math.ceil(rect.getAttribute('width') * Math.PI);
 
@@ -94,13 +117,6 @@ export default function init() {
   ]);
 }
 
-new Transformer([
-  {
-    el: document.querySelector('.arrow'),
-    styles: [['opacity', y => Transformer.transform([0, 400], [1, 0], y)]]
-  }
-]);
-
 function getScene(name) {
   const transformEl = document.querySelector('[data-transform="' + name + '"]');
 
@@ -109,33 +125,12 @@ function getScene(name) {
 
   // This is required because the article is position: relative
   const articleOffset = transformEl.parentElement.offsetTop;
-  console.log(articleOffset);
 
   return [
-    startEl.offsetTop + articleOffset - window.innerHeight / 3 + 10,
-    endEl.offsetTop + articleOffset - window.innerHeight / 3 + 10
+    startEl.offsetTop + articleOffset - window.innerHeight / 3 + 120,
+    endEl.offsetTop + articleOffset - window.innerHeight / 3 + 120
   ];
 }
 
-rect.addEventListener('click', function() {
-  transform.trigger('example', 2000);
-});
-
-document
-  .querySelector('.trigger-action')
-  .addEventListener('click', function(e) {
-    e.preventDefault();
-
-    transform.trigger('example', 2000);
-  });
-
 // @todo fix this
-window.addEventListener('load', function() {
-  init();
-
-  rect.style.opacity = 1;
-
-  // Do this early to prevent it messing with FPS later
-  window.loadSocial();
-});
 window.addEventListener('resize', init);
