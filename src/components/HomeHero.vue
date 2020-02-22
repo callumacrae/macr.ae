@@ -5,7 +5,8 @@
       class="left-background"
       :style="{
         clipPath: leftBackgroundClipPath,
-        '-webkit-clip-path': leftBackgroundClipPath
+        '-webkit-clip-path': leftBackgroundClipPath,
+        height: `${pageHeight}px`
       }"
     ></div>
     <div class="left">
@@ -196,7 +197,7 @@ export default {
 .hero {
   position: relative;
   display: flex;
-  height: 100vh;
+  height: 100vh; // Overridden by JavaScript
   min-height: 500px;
   background-color: $orange;
 }
@@ -226,7 +227,7 @@ h1 {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: 100vh; // Overridden by JavaScript
   min-height: 500px;
   background-color: $purple;
 }
