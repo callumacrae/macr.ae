@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const PrerenderSPAPlugin = require('prerender-spa-plugin');
+const PrerenderSPAPlugin = require('./webpack/prerender-spa-plugin');
 const chromium = require('chrome-aws-lambda');
 const Renderer = require('./webpack/zeit-renderer');
 
