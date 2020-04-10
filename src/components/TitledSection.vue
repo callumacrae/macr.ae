@@ -113,6 +113,10 @@ export default {
   @include desktop {
     margin-top: 100px;
 
+    &--0 {
+      margin-top: 0;
+    }
+
     header {
       margin-bottom: 50px;
       padding-top: 80px;
