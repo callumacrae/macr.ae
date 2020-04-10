@@ -18,6 +18,8 @@ console.log({
 });
 
 console.log(process.env.AWS_LAMBDA_FUNCTION_NAME)
+console.log(process.env.FUNCTION_NAME)
+console.log(process.env.FUNCTION_TARGET)
 
 if (chromium.headless) {
   plugins.push(
