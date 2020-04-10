@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Home from './views/Home.vue';
 import Article from './views/Article.vue';
+import NotFoundPage from './views/NotFoundPage.vue';
 
 Vue.use(Router);
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/article/:slug',
       name: 'article',
       component: Article
+    },
+    {
+      path: '*',
+      name: '404',
+      component: NotFoundPage
     }
   ],
   scrollBehavior(to, from, savedPosition) {

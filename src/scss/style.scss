@@ -49,8 +49,12 @@ h4 {
   font-size: 1.125em;
 }
 
-p {
+p, li {
   line-height: 1.5;
+}
+
+li {
+  margin-bottom: 0.5em;
 }
 
 @include desktop {
@@ -70,7 +74,7 @@ p {
     font-size: 1.25em;
   }
 
-  p {
+  p, li {
     line-height: 1.5;
   }
 }
