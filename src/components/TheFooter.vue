@@ -26,16 +26,16 @@
 
         <div class="the-footer__links">
           <a href="https://twitter.com/callumacrae" target="_blank">
-            <i class="fab fa-twitter"></i>
+            <FontAwesomeIcon :icon="['fab', 'twitter']" />
           </a>
           <a href="https://github.com/callumacrae" target="_blank">
-            <i class="fab fa-github"></i>
+            <FontAwesomeIcon :icon="['fab', 'github']" />
           </a>
           <a href="https://codepen.io/callumacrae" target="_blank">
-            <i class="fab fa-codepen"></i>
+            <FontAwesomeIcon :icon="['fab', 'codepen']" />
           </a>
           <a href="mailto:callum@macr.ae">
-            <i class="far fa-envelope"></i>
+            <FontAwesomeIcon :icon="['far', 'envelope']" />
           </a>
         </div>
       </div>

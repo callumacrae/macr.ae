@@ -24,21 +24,22 @@
           <a href="mailto:callum@macr.ae">callum@macr.ae</a>.
         </p>
         <a class="down-arrow" @click="handleScrollClick">
-          <i
-            class="fas fa-arrow-down fa-2x"
-            data-fa-transform="shrink-6"
-            data-fa-mask="fas fa-circle"
-          ></i>
+          <FontAwesomeIcon
+            :icon="['fas', 'arrow-down']"
+            :mask="['fas', 'circle']"
+            transform="shrink-6"
+            class="fa-2x"
+          />
         </a>
         <div class="social-links">
           <a href="https://twitter.com/callumacrae" target="_blank">
-            <i class="fab fa-twitter"></i>
+            <FontAwesomeIcon :icon="['fab', 'twitter']" />
           </a>
           <a href="https://github.com/callumacrae" target="_blank">
-            <i class="fab fa-github"></i>
+            <FontAwesomeIcon :icon="['fab', 'github']" />
           </a>
           <a href="https://codepen.io/callumacrae" target="_blank">
-            <i class="fab fa-codepen"></i>
+            <FontAwesomeIcon :icon="['fab', 'codepen']" />
           </a>
         </div>
       </div>
@@ -58,13 +59,13 @@
 
       <div class="right__content">
         <a href="https://twitter.com/callumacrae" target="_blank">
-          <i class="fab fa-twitter"></i>
+          <FontAwesomeIcon :icon="['fab', 'twitter']" />
         </a>
         <a href="https://github.com/callumacrae" target="_blank">
-          <i class="fab fa-github"></i>
+          <FontAwesomeIcon :icon="['fab', 'github']" />
         </a>
         <a href="https://codepen.io/callumacrae" target="_blank">
-          <i class="fab fa-codepen"></i>
+          <FontAwesomeIcon :icon="['fab', 'codepen']" />
         </a>
       </div>
     </div>
