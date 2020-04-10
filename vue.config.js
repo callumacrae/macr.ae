@@ -1,8 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const PrerenderSPAPlugin = require('./webpack/prerender-spa-plugin');
-const chromium = require('chrome-aws-lambda');
-const Renderer = require('./webpack/zeit-renderer');
+const PrerenderSPAPlugin = require('prerender-spa-plugin');
 
 const articles = fs
   .readdirSync('./articles/')
@@ -10,26 +8,12 @@ const articles = fs
 
 const plugins = [];
 
-console.log({
-  args: chromium.args,
-  defaultViewport: chromium.defaultViewport,
-  executablePath: chromium.executablePath,
-  headless: chromium.headless,
-});
-
-console.log(process.env.AWS_LAMBDA_FUNCTION_NAME)
-console.log(process.env.FUNCTION_NAME)
-console.log(process.env.FUNCTION_TARGET)
-
-if (chromium.headless) {
-  plugins.push(
-    new PrerenderSPAPlugin({
-      staticDir: path.join(__dirname, 'dist'),
-      routes: ['/', ...articles],
-      renderer: new Renderer()
-    })
-  );
-}
+plugins.push(
+  new PrerenderSPAPlugin({
+    staticDir: path.join(__dirname, 'dist'),
+    routes: ['/', ...articles]
+  })
+);
 
 module.exports = {
   configureWebpack: {
