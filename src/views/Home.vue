@@ -52,9 +52,21 @@
     </TitledSection>
 
     <TitledSection title="Talks" :n="1">
-      <p>@wip</p>
+      <p style="text-align: center">
+        <LazyContent>
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
+            alt="This section is still under construction"
+          />
+        </LazyContent>
+      </p>
       <ul>
-        <li>Front-end Love 2020</li>
+        <li>Vue.js Amsterdam meetup</li>
+        <li>Orbis connect: battle of the frameworks</li>
+        <li>
+          Vue.js Amsterdam 2020: Climate Change and the Tech Community:
+          https://www.youtube.com/watch?v=rs1CY8ChF6U
+        </li>
         <li>
           Vue.js Amsterdam: Accessibility in Single Page Apps:
           https://www.youtube.com/watch?v=1Rvg_XkFH8Q
@@ -90,6 +102,7 @@
 <script>
 import BookInfo from '@/components/BookInfo';
 import HomeHero from '@/components/HomeHero';
+import LazyContent from '@/components/LazyContent';
 import TitledSection from '@/components/TitledSection';
 import * as util from '@/util';
 
@@ -112,6 +125,7 @@ export default {
   components: {
     BookInfo,
     HomeHero,
+    LazyContent,
     TitledSection
   }
 };

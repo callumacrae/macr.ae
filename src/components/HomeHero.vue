@@ -18,7 +18,11 @@
           passion for using JavaScript to solve complicated problems. My current
           enthusiasms are Vue and SVGs (but only sometimes at the same time).
         </p>
-        <p>I write and speak, some of which you can find below.</p>
+        <p>
+          I write and speak, some of which you can find below. I'm also
+          available for work: contact me at
+          <a href="mailto:callum@macr.ae">callum@macr.ae</a>.
+        </p>
         <a class="down-arrow" @click="handleScrollClick">
           <i
             class="fas fa-arrow-down fa-2x"
@@ -182,8 +186,13 @@ export default {
       requestAnimationFrame(frame);
     },
     handlePageResize() {
-      this.pageHeight = window.innerHeight;
+      const wasMobile = this.isMobile;
       this.isMobile = window.innerWidth < 500;
+
+      // Don't react to user scrolling down
+      if (!this.isMobile || !wasMobile) {
+        this.pageHeight = window.innerHeight;
+      }
     }
   }
 };

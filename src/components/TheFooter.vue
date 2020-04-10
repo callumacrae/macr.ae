@@ -34,6 +34,9 @@
           <a href="https://codepen.io/callumacrae" target="_blank">
             <i class="fab fa-codepen"></i>
           </a>
+          <a href="mailto:callum@macr.ae">
+            <i class="far fa-envelope"></i>
+          </a>
         </div>
       </div>
     </div>

@@ -23,5 +23,8 @@ if (chromium.headless) {
 module.exports = {
   configureWebpack: {
     plugins
+  },
+  devServer: {
+    disableHostCheck: true
   }
 };
