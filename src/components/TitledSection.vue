@@ -78,7 +78,7 @@ export default {
 @import '../scss/meta/mixins';
 
 .section {
-  margin-top: 100px;
+  margin-top: 60px;
 
   header {
     margin-bottom: 20px;
@@ -111,6 +111,8 @@ export default {
   }
 
   @include desktop {
+    margin-top: 100px;
+
     header {
       margin-bottom: 50px;
       padding-top: 80px;
