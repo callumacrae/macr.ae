@@ -17,6 +17,8 @@ console.log({
   headless: chromium.headless,
 });
 
+console.log(process.env.AWS_LAMBDA_FUNCTION_NAME)
+
 if (chromium.headless) {
   plugins.push(
     new PrerenderSPAPlugin({
