@@ -10,6 +10,13 @@ const articles = fs
 
 const plugins = [];
 
+console.log({
+  args: chromium.args,
+  defaultViewport: chromium.defaultViewport,
+  executablePath: chromium.executablePath,
+  headless: chromium.headless,
+});
+
 if (chromium.headless) {
   plugins.push(
     new PrerenderSPAPlugin({
