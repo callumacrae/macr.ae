@@ -1,0 +1,3 @@
+User-Agent: *
+Disallow: /curriculum-vitae.pages
+Disallow: /curriculum-vitae.pdf

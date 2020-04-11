@@ -102,7 +102,14 @@ import * as util from '@/util';
 export default {
   metaInfo: {
     title: 'Callum Macrae',
-    titleTemplate: null
+    titleTemplate: null,
+    meta: [
+      {
+        name: 'description',
+        content:
+          'Callum Macrae is a developer and occasional musician based in London, UK, with a passion for using JavaScript to solve complicated problems.'
+      }
+    ]
   },
   data: () => ({
     showAll: false,
