@@ -1,8 +1,9 @@
 <template>
   <div class="book">
     <a :href="link">
+      <span class="sr-only">{{ title }}</span>
       <LazyContent>
-        <img :src="cover" :alt="title" />
+        <img :src="cover" role="presentation" />
       </LazyContent>
     </a>
     <h3>{{ title }}</h3>

@@ -64,7 +64,10 @@
             </p>
             <TruncatedText :text="talk.description" />
             <p v-if="talk.video">
-              Video: <a :href="talk.video" target="_blank">{{ talk.video }}</a>
+              Video:
+              <a :href="talk.video" target="_blank" rel="noopener">
+                {{ talk.video }}
+              </a>
             </p>
           </blockquote>
         </li>

@@ -32,15 +32,15 @@
           />
         </a>
         <div class="social-links">
-          <a href="https://twitter.com/callumacrae" target="_blank">
+          <a href="https://twitter.com/callumacrae" target="_blank" rel="noopener">
             <span class="sr-only">Twitter</span>
             <FontAwesomeIcon :icon="['fab', 'twitter']" />
           </a>
-          <a href="https://github.com/callumacrae" target="_blank">
+          <a href="https://github.com/callumacrae" target="_blank" rel="noopener">
             <span class="sr-only">Github</span>
             <FontAwesomeIcon :icon="['fab', 'github']" />
           </a>
-          <a href="https://codepen.io/callumacrae" target="_blank">
+          <a href="https://codepen.io/callumacrae" target="_blank" rel="noopener">
             <span class="sr-only">Codepen</span>
             <FontAwesomeIcon :icon="['fab', 'codepen']" />
           </a>
@@ -61,15 +61,15 @@
       </h1>
 
       <div class="right__content">
-        <a href="https://twitter.com/callumacrae" target="_blank">
+        <a href="https://twitter.com/callumacrae" target="_blank" rel="noopener">
           <span class="sr-only">Twitter</span>
           <FontAwesomeIcon :icon="['fab', 'twitter']" />
         </a>
-        <a href="https://github.com/callumacrae" target="_blank">
+        <a href="https://github.com/callumacrae" target="_blank" rel="noopener">
           <span class="sr-only">Github</span>
           <FontAwesomeIcon :icon="['fab', 'github']" />
         </a>
-        <a href="https://codepen.io/callumacrae" target="_blank">
+        <a href="https://codepen.io/callumacrae" target="_blank" rel="noopener">
           <span class="sr-only">Codepen</span>
           <FontAwesomeIcon :icon="['fab', 'codepen']" />
         </a>
