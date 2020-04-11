@@ -31,13 +31,26 @@ import * as util from '@/util';
 
 export default {
   metaInfo() {
-    const meta = [];
+    const meta = [
+      { name: 'og:type', content: 'article' },
+      { name: 'og:url', content: `https://macr.ae${this.$route.path}` },
+      {
+        name: 'og:title',
+        content: this.article.attributes.title
+      }
+    ];
 
     if (this.article.attributes.description) {
-      meta.push({
-        name: 'description',
-        content: this.article.attributes.description
-      });
+      meta.push(
+        {
+          name: 'description',
+          content: this.article.attributes.description
+        },
+        {
+          name: 'og:description',
+          content: this.article.attributes.description
+        }
+      );
     }
 
     if (this.article.attributes.image) {

@@ -102,15 +102,22 @@ import TitledSection from '@/components/TitledSection';
 import TruncatedText from '@/components/TruncatedText';
 import * as util from '@/util';
 
+const bio =
+  'Callum Macrae is a developer and occasional musician based in London, UK, with a passion for using JavaScript to solve complicated problems.';
+
 export default {
   metaInfo: {
     title: 'Callum Macrae',
     titleTemplate: null,
     meta: [
+      { name: 'og:type', content: 'website' },
+      { name: 'og:title', content: 'Callum Macrae' },
+      { name: 'description', content: bio },
+      { name: 'og:description', content: bio },
+      { name: 'og:url', content: 'https://macr.ae/' },
       {
-        name: 'description',
-        content:
-          'Callum Macrae is a developer and occasional musician based in London, UK, with a passion for using JavaScript to solve complicated problems.'
+        name: 'og:image',
+        content: require('../assets/me-speaking.png')
       }
     ]
   },
