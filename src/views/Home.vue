@@ -52,38 +52,31 @@
     </TitledSection>
 
     <TitledSection title="Talks" :n="1">
-      <p style="text-align: center">
-        <LazyContent>
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/1/19/Under_construction_graphic.gif"
-            alt="This section is still under construction"
-          />
-        </LazyContent>
-      </p>
-      <ul>
-        <li>Vue.js Amsterdam meetup</li>
-        <li>Orbis connect: battle of the frameworks</li>
-        <li>
-          Vue.js Amsterdam 2020: Climate Change and the Tech Community:
-          https://www.youtube.com/watch?v=rs1CY8ChF6U
+      <ul class="articles">
+        <li v-for="talk in talks" :key="talk.title">
+          <h3>{{ talk.title }}</h3>
+          <time :datetime="talk.date.toISOString()">
+            {{ talk.date | niceDate }}
+          </time>
+          <blockquote>
+            <p v-if="talk.event">
+              Event{{ talk.event.includes(',') ? 's' : '' }}: {{ talk.event }}
+            </p>
+            <TruncatedText :text="talk.description" />
+            <p v-if="talk.video">
+              Video: <a :href="talk.video" target="_blank">{{ talk.video }}</a>
+            </p>
+          </blockquote>
         </li>
-        <li>
-          Vue.js Amsterdam: Accessibility in Single Page Apps:
-          https://www.youtube.com/watch?v=1Rvg_XkFH8Q
-        </li>
-        <li>Vue.js Toronto</li>
-        <li>Vue.js London</li>
-        <li>VueConf Poland</li>
-        <li>that tiny conference</li>
-        <li>meetups? FEL, halfstack, enriques</li>
       </ul>
+      <p>This list is incomplete!</p>
     </TitledSection>
 
     <TitledSection title="Articles" :n="2">
       <ul class="articles">
         <li v-for="article in limitedArticles" :key="article.attributes.path">
           <router-link :to="`article/${article.attributes.path}`">
-            {{ article.attributes.title }}
+            <h3>{{ article.attributes.title }}</h3>
           </router-link>
           <time :datetime="article.attributes.date.toISOString()">
             {{ article.attributes.date | niceDate }}
@@ -102,8 +95,8 @@
 <script>
 import BookInfo from '@/components/BookInfo';
 import HomeHero from '@/components/HomeHero';
-import LazyContent from '@/components/LazyContent';
 import TitledSection from '@/components/TitledSection';
+import TruncatedText from '@/components/TruncatedText';
 import * as util from '@/util';
 
 export default {
@@ -112,7 +105,57 @@ export default {
     titleTemplate: null
   },
   data: () => ({
-    showAll: false
+    showAll: false,
+    talks: [
+      {
+        title: 'Vue.js and SVG',
+        date: new Date(2020, 3, 9),
+        event: 'Vue.js Amsterdam Virtual Meetup',
+        description:
+          'In addition to being able to use Vue.js to generate HTML documents, you can also use it to display SVGs. This talk will demonstrate how you can do just that!',
+        video: 'https://youtu.be/wJIU6ApgzTI?t=5080'
+      },
+      {
+        title: 'Battle of the Frameworks meetup',
+        date: new Date(2020, 3, 1),
+        description:
+          'Battle of the Frameworks was a meetup hosted by Orbis Connect with three speakers; one representing React; one representing Angular, and one representing Vue.js.',
+        video: 'https://www.crowdcast.io/e/battle-of-the-frameworks'
+      },
+      {
+        title: 'Climate change and the tech community',
+        date: new Date(2020, 1, 20),
+        event: 'Vue.js Amsterdam 2020',
+        description:
+          'The internet is responsible for about the same level of carbon emissions as the aviation industry. This talk looks at the impact we as a community are having on the environment and what measures we can take to reduce it.',
+        video: 'https://www.youtube.com/watch?v=rs1CY8ChF6U'
+      },
+      {
+        title: 'Data visualisation and Vue.js',
+        date: new Date(2018, 0, 10),
+        event: 'London AJAX, Front-end London',
+        description:
+          "Vue.js is the latest big front-end framework. It's blazingly fast, easy to learn, and a valuable tool to have in your arsenal. Did you know you can work with SVGs directly in your Vue.js templates? This talk will explain the basics of Vue, explore some of the things you can do with SVGs, and show you how you can visualise some simple data without using a library like d3 or Highcharts."
+      },
+      {
+        title: 'Accessibility in Single Page Apps',
+        date: new Date(2017, 5, 22),
+        event:
+          'VueConf Poland (2017), Vue Toronto (2018), and Vue.js Amsterdam (2019)',
+        description: [
+          "As developers, we have a responsibility to make sure that as many people as possible can use the websites and applications that we create. But with a new generation of websites—single page applications—come a new set of challenges for users with disabilities, and the assistive technology they use to browse the web. Client-side routing, custom input elements, and shiny animated content: all things that screen readers can struggle with if the developer who implemented it didn't consider accessibility.\n\n",
+          "During this talk, I'll explain what we as developers can do to ensure that our single page applications are usable by everyone, including people who might not use a keyboard, mouse and screen like the majority of us do. I'll show how some assistive technology is used, and demonstrate how some common mistakes we make affect people using that assistive technology."
+        ],
+        video: 'https://www.youtube.com/watch?v=1Rvg_XkFH8Q'
+      },
+      {
+        title: 'Building with Gulp',
+        date: new Date(2015, 1, 10),
+        event: 'London Ajax',
+        description:
+          'Gulp is a build tool which you can use to automate tasks involved in the development of a website, such as compiling Sass, minifying JavaScript, and generating sprites. The talk will introduce Gulp and some of the things you can do with it, and will also explain some of the differences between the current version of Gulp and the upcoming version of Gulp, Gulp 4.'
+      }
+    ]
   }),
   computed: {
     articles() {
@@ -125,8 +168,8 @@ export default {
   components: {
     BookInfo,
     HomeHero,
-    LazyContent,
-    TitledSection
+    TitledSection,
+    TruncatedText
   }
 };
 </script>
@@ -143,12 +186,22 @@ export default {
   }
 
   li:not(.show-more) a {
+    text-decoration: none;
+
+    > h3 {
+      color: inherit;
+    }
+  }
+
+  li:not(.show-more) h3 {
     position: relative;
 
+    display: inline;
     padding-bottom: 4px;
 
+    font-size: 1em;
+    font-family: inherit;
     font-weight: bold;
-    text-decoration: none;
 
     &::after {
       position: absolute;
@@ -164,7 +217,7 @@ export default {
     }
   }
 
-  li:not(.show-more):hover a::after {
+  li:not(.show-more):hover h3::after {
     width: 100%;
   }
 
