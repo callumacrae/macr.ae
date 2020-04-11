@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import VueMeta from 'vue-meta';
 
+import WebFontLoader from 'webfontloader';
+
 import App from './App.vue';
 import router from './router';
 import './filters';
@@ -19,6 +21,12 @@ library.add(faCodepen, faGithub, faTwitter, faEnvelope, faArrowDown, faCircle);
 Vue.component('FontAwesomeIcon', FontAwesomeIcon);
 
 Vue.use(VueMeta);
+
+WebFontLoader.load({
+  google: {
+    families: ['Literata:500', 'Open+Sans:400,400i,700&display=swap']
+  }
+});
 
 Vue.config.productionTip = false;
 
