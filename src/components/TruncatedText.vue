@@ -49,7 +49,7 @@ export default {
       let i = 0;
 
       // Start with averageLength to minimise the amount of work to be done
-      const averageLength = window.innerWidth < 500 ? 70 : 180;
+      const averageLength = window.innerWidth <= 500 ? 70 : 180;
       for (
         ;
         i < splitText.length && truncatedText.length < averageLength;

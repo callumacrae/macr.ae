@@ -82,7 +82,7 @@ import animationMixin from '@/mixins/animation';
 export default {
   mixins: [animationMixin],
   data() {
-    const isMobile = window.innerWidth < 500;
+    const isMobile = window.innerWidth <= 500;
 
     return {
       pageHeight: window.innerHeight,
@@ -188,7 +188,7 @@ export default {
     },
     handlePageResize() {
       const wasMobile = this.isMobile;
-      this.isMobile = window.innerWidth < 500;
+      this.isMobile = window.innerWidth <= 500;
 
       // Don't react to user scrolling down
       if (!this.isMobile || !wasMobile) {

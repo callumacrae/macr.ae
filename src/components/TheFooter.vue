@@ -57,7 +57,7 @@ export default {
     }
   },
   data() {
-    const maxOffset = window.innerWidth < 500 ? 40 : 60;
+    const maxOffset = window.innerWidth <= 500 ? 40 : 60;
     return {
       maxOffset,
       startPositions:
