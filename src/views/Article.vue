@@ -31,8 +31,25 @@ import * as util from '@/util';
 
 export default {
   metaInfo() {
+    const meta = [];
+
+    if (this.article.attributes.description) {
+      meta.push({
+        name: 'description',
+        content: this.article.attributes.description
+      });
+    }
+
+    if (this.article.attributes.image) {
+      meta.push({
+        property: 'og:image',
+        content: `/article-images/${this.article.attributes.image}`
+      });
+    }
+
     return {
-      title: this.article.attributes.title
+      title: this.article.attributes.title,
+      meta
     };
   },
   mounted() {
@@ -83,7 +100,7 @@ h1 {
   display: block;
   margin-top: 0.5em;
   margin-bottom: 2em;
-  opacity: 0.66;
+  opacity: 0.75;
   font-size: 0.9em;
 }
 </style>

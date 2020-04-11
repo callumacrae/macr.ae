@@ -23,7 +23,7 @@
           available for work: contact me at
           <a href="mailto:callum@macr.ae">callum@macr.ae</a>.
         </p>
-        <a class="down-arrow" @click="handleScrollClick">
+        <a class="down-arrow" role="presentation" @click="handleScrollClick">
           <FontAwesomeIcon
             :icon="['fas', 'arrow-down']"
             :mask="['fas', 'circle']"
@@ -33,12 +33,15 @@
         </a>
         <div class="social-links">
           <a href="https://twitter.com/callumacrae" target="_blank">
+            <span class="sr-only">Twitter</span>
             <FontAwesomeIcon :icon="['fab', 'twitter']" />
           </a>
           <a href="https://github.com/callumacrae" target="_blank">
+            <span class="sr-only">Github</span>
             <FontAwesomeIcon :icon="['fab', 'github']" />
           </a>
           <a href="https://codepen.io/callumacrae" target="_blank">
+            <span class="sr-only">Codepen</span>
             <FontAwesomeIcon :icon="['fab', 'codepen']" />
           </a>
         </div>
@@ -59,12 +62,15 @@
 
       <div class="right__content">
         <a href="https://twitter.com/callumacrae" target="_blank">
+          <span class="sr-only">Twitter</span>
           <FontAwesomeIcon :icon="['fab', 'twitter']" />
         </a>
         <a href="https://github.com/callumacrae" target="_blank">
+          <span class="sr-only">Github</span>
           <FontAwesomeIcon :icon="['fab', 'github']" />
         </a>
         <a href="https://codepen.io/callumacrae" target="_blank">
+          <span class="sr-only">Codepen</span>
           <FontAwesomeIcon :icon="['fab', 'codepen']" />
         </a>
       </div>

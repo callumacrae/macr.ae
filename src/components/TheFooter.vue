@@ -8,7 +8,11 @@
     <div class="the-footer__content container">
       <div class="left">
         <LazyContent>
-          <img class="the-footer__photo" src="../assets/me-speaking.png" />
+          <img
+            class="the-footer__photo"
+            src="../assets/me-speaking.png"
+            alt="Photo of me speaking at Vue.js London in 2018"
+          />
         </LazyContent>
       </div>
       <div class="right">
@@ -26,15 +30,19 @@
 
         <div class="the-footer__links">
           <a href="https://twitter.com/callumacrae" target="_blank">
+            <span class="sr-only">Twitter</span>
             <FontAwesomeIcon :icon="['fab', 'twitter']" />
           </a>
           <a href="https://github.com/callumacrae" target="_blank">
+            <span class="sr-only">Github</span>
             <FontAwesomeIcon :icon="['fab', 'github']" />
           </a>
           <a href="https://codepen.io/callumacrae" target="_blank">
+            <span class="sr-only">Codepen</span>
             <FontAwesomeIcon :icon="['fab', 'codepen']" />
           </a>
           <a href="mailto:callum@macr.ae">
+            <span class="sr-only">Email</span>
             <FontAwesomeIcon :icon="['far', 'envelope']" />
           </a>
         </div>
