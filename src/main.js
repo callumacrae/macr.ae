@@ -22,11 +22,14 @@ Vue.component('FontAwesomeIcon', FontAwesomeIcon);
 
 Vue.use(VueMeta);
 
-WebFontLoader.load({
-  google: {
-    families: ['Literata:500', 'Open+Sans:400,400i,700&display=swap']
-  }
-});
+// Don't prerender this or it'll be included in the <head>
+if (!navigator.userAgent.includes('HeadlessChrome')) {
+  WebFontLoader.load({
+    google: {
+      families: ['Literata:500', 'Open+Sans:400,400i,700&display=swap']
+    }
+  });
+}
 
 Vue.config.productionTip = false;
 
