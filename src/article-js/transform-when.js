@@ -10,7 +10,9 @@ export default function init() {
   new Transformer([
     {
       el: document.querySelector('.arrow'),
-      styles: [['opacity', y => Transformer.transform([0, 400], [1, 0], y)]]
+      styles: [
+        ['opacity', ['y', y => Transformer.transform([0, 400], [1, 0], y)]]
+      ]
     }
   ]);
 
@@ -44,18 +46,31 @@ export default function init() {
       el: rect,
       visible: [scenes.drawCircle[0], Infinity],
       styles: [
-        ['stroke-dasharray', y => (y < scenes.time[0] ? pathLength : 'none')],
+        [
+          'stroke-dasharray',
+          ['y', y => (y < scenes.time[0] ? pathLength : 'none')]
+        ],
         [
           'stroke-dashoffset',
-          function(y) {
-            return Transformer.transform(scenes.drawCircle, [pathLength, 0], y);
-          }
+          [
+            'y',
+            function(y) {
+              return Transformer.transform(
+                scenes.drawCircle,
+                [pathLength, 0],
+                y
+              );
+            }
+          ]
         ],
         [
           'fill-opacity',
-          function(y) {
-            return Transformer.transform(scenes.scroll, [0, 1], y);
-          }
+          [
+            'y',
+            function(y) {
+              return Transformer.transform(scenes.scroll, [0, 1], y);
+            }
+          ]
         ]
       ],
       scaleScale: Transformer.transformObj({
@@ -66,24 +81,33 @@ export default function init() {
       transforms: [
         [
           'scale',
-          function(y, actions) {
-            if (actions.example) {
-              return this.scaleScale(actions.example);
-            }
+          [
+            'y',
+            'actions',
+            function(y, actions) {
+              if (actions.example) {
+                return this.scaleScale(actions.example);
+              }
 
-            return Transformer.transform(scenes.scroll, [1.2, 1], y);
-          }
+              return Transformer.transform(scenes.scroll, [1.2, 1], y);
+            }
+          ]
         ],
         [
           'rotate',
-          function(y, i, actions) {
-            var extra = 0;
-            if (actions.example) {
-              extra = -720 * actions.example;
-            }
+          [
+            'y',
+            'i',
+            'actions',
+            function(y, i, actions) {
+              var extra = 0;
+              if (actions.example) {
+                extra = -720 * actions.example;
+              }
 
-            return y < scenes.time[0] ? 0 : (i % 360) + extra;
-          }
+              return y < scenes.time[0] ? 0 : (i % 360) + extra;
+            }
+          ]
         ]
       ],
       rxScale: Transformer.transformObj({
@@ -94,23 +118,31 @@ export default function init() {
       attrs: [
         [
           'rx',
-          function(y, actions) {
-            if (actions.example && y >= scenes.time[1]) {
-              return this.rxScale(actions.example);
-            }
+          [
+            'y',
+            'actions',
+            function(y, actions) {
+              if (actions.example && y >= scenes.time[1]) {
+                return this.rxScale(actions.example);
+              }
 
-            return Transformer.transform(scenes.time, [70, 0], y);
-          }
+              return Transformer.transform(scenes.time, [70, 0], y);
+            }
+          ]
         ],
         [
           'ry',
-          function(y, actions) {
-            if (actions.example && y >= scenes.time[1]) {
-              return this.rxScale(actions.example);
-            }
+          [
+            'y',
+            'actions',
+            function(y, actions) {
+              if (actions.example && y >= scenes.time[1]) {
+                return this.rxScale(actions.example);
+              }
 
-            return Transformer.transform(scenes.time, [70, 0], y);
-          }
+              return Transformer.transform(scenes.time, [70, 0], y);
+            }
+          ]
         ]
       ]
     }
