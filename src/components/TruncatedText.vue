@@ -39,6 +39,11 @@ export default {
   },
   methods: {
     generateTruncated() {
+      // Don't truncate server-side
+      if (navigator.userAgent.includes('HeadlessChrome')) {
+        return;
+      }
+
       this.expanded = false;
 
       const firstLine = Array.isArray(this.text) ? this.text[0] : this.text;
