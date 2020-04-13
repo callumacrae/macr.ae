@@ -136,7 +136,7 @@ export default {
         title: 'Battle of the Frameworks meetup',
         date: new Date(2020, 3, 1),
         description:
-          'Battle of the Frameworks was a meetup hosted by Orbis Connect with three speakers; one representing React; one representing Angular, and one representing Vue.js.',
+          'Battle of the Frameworks was a meetup hosted by Orbis Connect with three speakers; one representing React; one representing Angular, and one representing Vue.js. I represented Vue!',
         video: 'https://www.crowdcast.io/e/battle-of-the-frameworks'
       },
       {
