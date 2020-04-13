@@ -1,5 +1,10 @@
 <template>
-  <section ref="main" class="hero" :style="{ height: `${pageHeight}px` }">
+  <section
+    ref="main"
+    class="hero"
+    :class="{ 'is-ie': isIE }"
+    :style="{ height: `${pageHeight}px` }"
+  >
     <div
       ref="animated"
       class="left-background"
@@ -231,6 +236,10 @@ export default {
   height: 100vh; // Overridden by JavaScript
   min-height: 500px;
   background-color: $orange;
+
+  &.is-ie {
+    background-color: $purple;
+  }
 }
 
 h1 {
@@ -321,6 +330,14 @@ h1 {
   flex: 0 0 35%;
 
   color: $purple;
+
+  .is-ie & {
+    color: $orange;
+
+    h1 {
+      display: none;
+    }
+  }
 
   &__content {
     position: absolute;
