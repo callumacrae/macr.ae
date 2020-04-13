@@ -6,7 +6,7 @@ import NotFoundPage from './views/NotFoundPage.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -42,3 +42,12 @@ export default new Router({
     return { x: 0, y: 0 };
   }
 });
+
+router.afterEach(to => {
+  if (window.ga) {
+    window.ga('set', 'page', to.path);
+    window.ga('send', 'pageview');
+  }
+});
+
+export default router;
