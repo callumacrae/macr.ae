@@ -1,10 +1,12 @@
 ---
-title: Building an animated COVID-19 tracker in Vue.js
-date: 2020-05-08
-description: todo write a description
+title: Building an animated COVID-19 tracker using Vue.js
+date: 2020-05-12
+description: Did you know that you can use Vue.js to create interactive, animated visualisations using SVGs? This article will explore how you can do just that, by building an animated COVID-19 tracker.
 ---
 
 I've given a few talks with the title "Data Visualisation in Vue.js": this is an article version which goes a bit more in depth with a specific example.
+
+The code for this entire article can be found on GitHub: [callumacrae/covid-visualisations](https://github.com/callumacrae/covid-visualisations).
 
 If you've been on the internet in the last couple months or so, there's a good chance you'll have seen a visualisation that looked something like this:
 
@@ -242,9 +244,9 @@ In this case, it's not too tricky as a lot of the existing media coverage cites 
 
 Now that we've found that, it's a case of working what data in there we want to visualise—I'm using `time_series_covid19_confirmed_global.csv`—and transforming the data into the exact data we want to visualise. In this case, I want to visualise the data by country, not by region, so I've got some logic to add the total up for each country.
 
-@todo link to logic
+You can find my code for getting the data and transforming it in [data/get-data.js](https://github.com/callumacrae/covid-visualisations/blob/master/data/get-data.js).
 
-The end result can be found @todo
+Alternatively, I've committed the generated JSON file too—it's in [data/country-cases.json](https://github.com/callumacrae/covid-visualisations/blob/master/data/country-cases.json) (and is probably a bit out of date).
 
 ## Building a static chart
 
@@ -469,7 +471,7 @@ Range inputs are great for moving quickly through data, but can make looking at 
   />
 </div>
 
-@todo add link to source
+You can find the source for this component in [src/DayInput.vue](https://github.com/callumacrae/covid-visualisations/blob/master/src/DayInput.vue) on the repository.
 
 ----
 
@@ -507,8 +509,6 @@ We're also going to move the bar slightly to the right so that the country text 
     :animation-duration="0.3"
   />
 </div>
-
-@todo add link to code
 
 I hope you're starting to see why SVG is such a powerful tool. Achieving something like the above graph is _possible_ in HTML, but wouldn't be especially fun. And we've barely scraped the surface of what SVG can do!
 
@@ -876,6 +876,8 @@ Here is our complete COVID-19 tracker, animated and interactive:
 
 You can now see that when you change the day, the numbers are animated as well as the bar widths.
 
+The code on GitHub contains a couple extra features such as configurable animation time and smarter bar heights—here's the link again: [callumacrae/covid-visualisation](https://github.com/callumacrae/covid-visualisations).
+
 ----
 
 So what have we learned here?
@@ -886,6 +888,6 @@ So what have we learned here?
 - CSS transitions also work just fine in SVGs, which was useful for animating positions when elements were being reordered.
 - Finally, while Vue doesn't provide us with any help here, animating state doesn't have to be difficult, especially if we use the help of a library like GSAP.
 
-There's loads of other potential applications for this, and not just in data visualisation. In a future article I hope write about how you can use d3-shape directly with Vue without having to load the rest of d3 to create and visualise data on a world map. If that's something you'd be interested in, make sure to [follow me on Twitter](https://twitter.com/callumacrae) so that you can see when I post it.
+There's loads of other potential applications for this, and not just in data visualisation. In a future article I hope write about how you can use d3-shape directly with Vue to display and visualise data on a world map. If that's something you'd be interested in, make sure to [follow me on Twitter](https://twitter.com/callumacrae) so that you can see when I post it.
 
 I hope you found this useful, and stay safe!
