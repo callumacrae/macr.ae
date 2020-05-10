@@ -26,5 +26,6 @@ module.exports = {
   devServer: {
     disableHostCheck: true
   },
-  runtimeCompiler: true
+  runtimeCompiler: true,
+  lintOnSave: false
 };

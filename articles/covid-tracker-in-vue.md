@@ -263,18 +263,19 @@ const data = {
   dates: ['1/22/20', '2/11/20', '3/27/20'],
   countryData: {
     China: [548, 44386, 81897],
+    'United Kingdom': [0, 8, 14745],
     'United States': [1, 11, 101657]
   }
 };
 
 new Vue({
-  data: () => ({
+  data: {
     day: 2
-  })
+  }
 });
 ```
 
-This is a tiny subset of the data: three days worth of data in two countries. As the final dataset isn't _that_ big—it's not like we have to wait two hours for the visualisation to render—it doesn't have to be perfect and we don't have to test all cases before giving it all the data. We just have to make sure that _something_ is displayed.
+This is a tiny subset of the data: three days worth of data in three countries. As the final dataset isn't _that_ big—it's not like we have to wait two hours for the visualisation to render—it doesn't have to be perfect and we don't have to test all cases before giving it all the data. We just have to make sure that _something_ is displayed.
 
 Note that we're storing the data in an object outside of the Vue instance. This means that anything we add consuming that data won't be reactive, but that's okay—that object declaration is eventually going to turn into an `import` statement to get the JSON file anyway.
 
@@ -282,8 +283,9 @@ We're aiming to display the number of cases in each country on a given day, so w
 
 ```json
 [
+  { "country": "United States", "value": 101657 },
   { "country": "China", "value": 81897 },
-  { "country": "United States", "value": 101657 }
+  { "country": "United Kingdom", "value": 14745 }
 ]
 ```
 
@@ -299,7 +301,8 @@ computed: {
           value: dataArray[this.day]
         };
       })
-      .filter(({ value }) => value);
+      .filter(({ value }) => value)
+      .sort((a, b) => b.value - a.value);
   }
 }
 ```
@@ -308,6 +311,424 @@ When we get to animating the chart, Vue's reactivity means that if we modify `th
 
 For now though, we've got enough to move to the template and start displaying some stuff on screen.
 
+----
+
+In our template, let's loop through `chartData` outputting a `<rect>` element for each country:
+
+```html
+<svg
+  width="760" height="170"
+  xmlns="http://www.w3.org/2000/svg">
+  <rect
+    v-for="({ country, value }, i) in chartData"
+    :width="760 / 101657 * value" height="50"
+    x="0" :y="i * 60"
+    fill="hsl(10, 80%, 70%)"
+  />
+</svg>
+```
+
+This uses a `v-for` directive to loop through the data, destructuring each object to get `country` and `value`, and also getting `i` to set the position with.
+
+Then, we calculate the width as a percentage of the maximum value (101657) multiplied by the width of the SVG, so that the widest bar is 100% of the width and the other bars are scaled proportional to that.
+
+Finally, we're using `i` to set the y position of each rectangle, so that they display one below each other.
+
+This outputs:
+
+<svg
+  class="covid-simple-data"
+  width="760" height="170"
+  viewBox="0 0 760 170"
+  xmlns="http://www.w3.org/2000/svg">
+  <rect
+    v-for="({ country, value }, i) in chartData"
+    :width="760 / 101657 * value" height="50"
+    x="0" :y="i * 60"
+    fill="hsl(10, 80%, 70%)"
+  />
+</svg>
+
+There's a few numbers and calculations that are hardcoded that probably shouldn't be, so let's move them out into the Vue instance:
+
+```javascript
+new Vue({
+  data: {
+    day: 2,
+    chartWidth: 760,
+  },
+  computed: {
+    chartData() { /* ... */ },
+    maxValue() {
+      return this.chartData.reduce((max, { value }) => Math.max(value, max), 0);
+    },
+  },
+  methods: {
+    barWidth(value) {
+      return this.chartWidth / this.maxValue * value;
+    }
+  }
+})
+```
+
+And the new template:
+
+```html
+<svg
+  :width="chartWidth" height="170"
+  xmlns="http://www.w3.org/2000/svg">
+  <rect
+    v-for="({ country, value }, i) in chartData"
+    :width="barWidth(value)" height="50"
+    x="0" :y="i * 60"
+  />
+</svg>
+```
+
+<small>(to avoid repetition, I've also moved the fill out into CSS now)</small>
+
+----
+
+The new step we'll take is to add some text—eventually we want to add both the country names and numeric values, but let's just add the country names for now. Remember when we used groups in the first section of this article and I said it would come in handy again? Now is that time!
+
+Let's wrap the `<rect>` element in a `<g>` tag, move the positioning to the group (remember, using translate instead of x and y attributes), and add our `<text>` as well:
+
+```html
+<svg
+  :width="chartWidth" height="170"
+  xmlns="http://www.w3.org/2000/svg">
+  <g
+    v-for="({ country, value }, i) in chartData"
+    :transform="`translate(0, ${i * 60})`">
+    <rect :width="barWidth(value)" height="50" />
+    <text
+      x="10" y="25"
+      alignment-baseline="middle">
+      {{ country }}
+    </text>
+  </g>
+</svg>
+```
+
+<svg
+  class="covid-simple-data"
+  width="760" height="170"
+  viewBox="0 0 760 170"
+  xmlns="http://www.w3.org/2000/svg">
+  <g
+    v-for="({ country, value }, i) in chartData"
+    :transform="`translate(0, ${i * 60})`">
+    <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
+    <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+  </g>
+</svg>
+
+Great. I think we're ready to start using the real data now.
+
+----
+
+To use the real data, we're just going to replace the `data` declaration with an import statement, getting the JSON file we created earlier.
+
+Now, after changing `day` to 63, the chart looks like this:
+
+<svg
+  class="covid-full-data"
+  width="760" height="410"
+  viewBox="0 0 760 410"
+  xmlns="http://www.w3.org/2000/svg">
+  <g
+    v-for="({ country, value }, i) in chartData"
+    :transform="`translate(0, ${i * 60})`">
+    <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
+    <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+  </g>
+</svg>
+
+You'll notice if you inspect the SVG in the DOM that there are many more elements being output to the DOM than are actually displaying on screen—174 to be precise—but that's okay. It'll actually come in handy later when we start animating the chart.
+
+----
+
+Now that we've got our data displaying on screen, let's add some way of moving through the data. To do that, we'll need some kind of input.
+
+Range inputs are great for moving quickly through data, but can make looking at a specific day a bit tricky. Text inputs are good for looking at specific days, but again, are less optimised for moving through data. In this case, we care more about moving through the data, so I've added a component which uses [vue-slider-component](https://github.com/NightCatSama/vue-slider-component) for a prettier range slider (with a hidden `<input type="range">` element as fallback for screen readers—from a quick test it seems like vue-slider-component isn't accessible by itself) and a play button to automatically go to the next day of data after a short interval.
+
+<div class="covid-full-data">
+  <svg
+    width="760" height="410"
+    viewBox="0 0 760 410"
+    xmlns="http://www.w3.org/2000/svg">
+    <g
+      v-for="({ country, value }, i) in chartData"
+      :transform="`translate(0, ${i * 60})`">
+      <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
+      <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+    </g>
+  </svg>
+  <day-input
+    v-model="day"
+    :dates="dates"
+    :animation-duration="0.3"
+  />
+</div>
+
+@todo add link to source
+
+----
+
+Finally, let's make a change adding another piece of text saying the value of the bar, and move the start of the bar so that the country text displays to the left of the bar.
+
+It's a bit difficult to know the _scale_ of the data as it has no visual information on it. We could either add an axis, or we could display a numerical value on each bar, but I think we'll go with displaying a value for each bar for this project—not just for the sake of simplicity, but it's also a bit more precise and won't clutter the chart too much.
+
+We're also going to move the bar slightly to the right so that the country text isn't on top of it. This will involve changing the maths slightly as the bar widths will be slightly narrower.
+
+<div class="covid-full-data">
+  <svg
+    width="760" height="410"
+    viewBox="0 0 760 410"
+    xmlns="http://www.w3.org/2000/svg">
+    <g
+      v-for="({ country, value }, i) in chartData"
+      :transform="`translate(0, ${i * 60})`">
+      <rect :x="barStart" :width="barWidthSpaced(value)" height="50" fill="hsl(10, 80%, 70%)" />
+      <text :x="barStart - 10" y="25" alignment-baseline="middle" text-anchor="end">{{ country }}</text>
+      <text
+        y="25"
+        alignment-baseline="middle"
+        :x="barStart + barWidthSpaced(value)"
+        :fill="value < maxValue * 0.8 ? 'black' : 'white'"
+        :text-anchor="value < maxValue * 0.8 ? 'start' : 'end'"
+        :transform="`translate(${value < maxValue * 0.8 ? '' : '-'}10, 0)`"
+      >
+        {{ value }}
+      </text>
+    </g>
+  </svg>
+  <day-input
+    v-model="day"
+    :dates="dates"
+    :animation-duration="0.3"
+  />
+</div>
+
+@todo add link to code
+
+I hope you're starting to see why SVG is such a powerful tool. Achieving something like the above graph is _possible_ in HTML, but wouldn't be especially fun. And we've barely scraped the surface of what SVG can do!
+
 ## Animating the chart
 
-Talk about properties that are animatable in CSS vs SVG
+Now that we've got our chart, let's look at animating it.
+
+We want to animate the following things:
+
+- When the countries change order, their position should be transitioned.
+- When a new country sees their first case, it should fade in.
+- When a countries case count increases or decreases, the bar width should change smoothly.
+
+Vue's [list transitions](https://vuejs.org/v2/guide/transitions.html#List-Transitions) can help us with the first two, but it can't really help us with the width change, as that's a state transition.
+
+Before we start animating the chart, let's move the bar logic into a separate component which will be passed the value and be responsible for the width - that means the animation will also happen inside the component.
+
+Let's call our component `ChartBar` and give it the following API:
+
+```html
+<ChartBar
+  v-for="({ country, value }, i) in chartData"
+  :transform="`translate(0, ${i * 60})`"
+  :country="country"
+  :max-value="maxValue"
+  :value="value"
+  :chart-width="chartWidth"
+/>
+```
+
+We could also pass in `i` and have the component be responsible for its own positioning, but I decided it would be better outside the component. It doesn't really make much difference!
+
+@todo should this have the full code of the component?
+
+### List enter and leave transitions
+
+Let's start by fading in countries when they're added and fading them out again when they're removed.
+
+Vue has a bunch of helpers built for animating and transitioning content. You can find the full documentation for it here: [Transitions & Animation](https://vuejs.org/v2/guide/transitions.html).
+
+The list enter and leave transitions in particular are what we will be using here. In fact, there's an example in the documentation which is almost exactly what we want to do, just with HTML instead of SVG (which has implications we'll get to in a bit)!
+
+Using Vue's list transitions is usually pretty straightforward. To start with, let's wrap the `<ChartBar>` element with a `<transition-group>` component:
+
+```html
+<transition-group name="country-list">
+  <ChartBar
+    v-for="({ country, value }, i) in chartData"
+    class="country"
+    :transform="`translate(0, ${i * 60})`"
+    :country="country"
+    :max-value="maxValue"
+    :value="value"
+    :chart-width="chartWidth"
+  />
+</transition-group>
+```
+
+Now, when an element enters or leaves the DOM, Vue will add a class that we can use to apply a CSS transition to the change.
+
+Let's add the following CSS to our main file (not the ChartBar component) to utilise the classes Vue is adding:
+
+```css
+.country {
+  transition: opacity 0.3s linear;
+}
+.country-list-enter,
+.country-list-leave-to {
+  opacity: 0;
+}
+```
+
+`.country-list-enter` is added before the element is added to the DOM and removed immediately afterwards, so the element will fade in, and `.country-list-leave-to` is added when an element is going to be removed, so the element will fade out.
+
+@todo preview 
+
+### List move transitions?
+
+Vue contains "list move transition" functionality where it applies [the FLIP technique](https://css-tricks.com/animating-layouts-with-the-flip-technique/) to elements being reordered to smoothly transition them to the new position. At first glance, it looks like it might come in handy here, but it turns out we don't have to use it in this case as we're positioning groups using `transform` in the first place.
+
+All we have to do is add a transition for `transform` to the existing `.country` transition declaration:
+
+```css
+.country {
+  transition: opacity 0.3s linear,
+    transform 0.3s linear;
+}
+.country-list-enter,
+.country-list-leave-to {
+  opacity: 0;
+}
+```
+
+Unfortunately, I ran into [what looked like an issue with Vue](https://github.com/vuejs/vue/issues/11310) here and had to make some changes to work around it. While currently `i` is the index of the country in `chartData` (a sorted array), that caused some strange unexpected behaviour.
+
+To work around the issue, we have to sort the data in another array and add a `position` property to the object for each country instead.
+
+Our modified `chartData` function looks like this:
+
+```javascript
+chartData() {
+  const chartData = Object.entries(data.countryData)
+    .map(([country, dataArray]) => {
+      return {
+        country,
+        value: dataArray[this.day]
+      };
+    })
+    .filter(({ value }) => value);
+
+  const sortedData = chartData.slice().sort((a, b) => b.value - a.value);
+
+  return chartData.map(item => ({
+    position: sortedData.indexOf(item),
+    ...item
+  }));
+},
+```
+
+Now the order of `chartData` isn't changed so the issue won't occur, but we have to use `position` instead of `i`. Let's go ahead and make that change:
+
+```html
+<transition-group name="country-list">
+  <ChartBar
+    v-for="({ country, value, position }) in chartData"
+    class="country"
+    :transform="`translate(0, ${position * 60})`"
+    :country="country"
+    :max-value="maxValue"
+    :value="value"
+    :chart-width="chartWidth"
+  />
+</transition-group>
+```
+
+You could even just call it `i` if you wanted!
+
+@todo preview
+
+### Bar width transition
+
+Now for the fun one!
+
+Transitioning the width of the bar is much more complicated than the previous transitions we've looked at, as it involves transitioning the data itself, not just the width—otherwise the numbers displayed on the visualisation would be wrong.
+
+This is a large part of the reason we created the `ChartBar` component—handling the transition logic for each bar in the component is a lot simpler than handling the transition logic for every single bar at the same time in the main file.
+
+So how do we transition state?
+
+There's a few different ways we can approach this, but the one we'll go for is as follows:
+
+- Add a new property of the data object of the ChartBar component called `tweenedValue`.
+- Add a watcher watching for when the `value` prop is changed.
+- When the `value` prop is changed, transition `tweenedValue` from the old value to the new value.
+- Use `tweenedValue` instead of `value` in the bar width calculation.
+
+We also have to do the same to the `maxValue` prop to ensure that the bar width is transitioned smoothly.
+
+To transition a value from one number to another, we could use `requestAnimationFrame` and transition the value ourselves, but for the sake of simplicity we'll use one of a number of available tweening libraries to do it for us.
+
+<small>Sidenote: if you're interested in how this could work without a library, [check out this codepen](https://codepen.io/callumacrae/pen/oyXXWR) where I tween the values using `requestAnimationFrame`.</small>
+
+Tweening (short for in-betweening) is the process in animation of generating the frames between two images, called key frames. For example, if you wanted to animate an element from one position to another and slow down when it's reaching its destination, a tweening library can help you with that.
+
+In this case, we're not going to use the tweening library to change an element in the DOM, we're just going to use it to change a value on the data object.
+
+[GSAP](https://greensock.com/gsap/) (GreenSock Animation Platform) is a widely used animation library that provides pretty much everything you'd need to animate anything on your website or application. It turns out that its tweening functionality, in addition to being able to modify DOM elements, can also be used to smoothly transition values on the Vue data object.
+
+It's important to note at this point that loading all of GSAP just to transition a number is definitely overkill—there's other smaller libraries that can do a good job of this, I just wanted to stick with a well known example.
+
+Let's look at a quick example of how this works.
+
+<div id="gsap-tweening-example" style="padding: 20px; border: 1px rgba(41, 61, 163, 0.2) solid">
+  <p style="margin-top: 0"><code>number</code> is {{ number }}.</p>
+  <p><code>tweenedNumber</code> is {{ Math.round(tweenedNumber) }}.</p>
+  <button @click="newNumber">Click for a new number</button>
+</div>
+
+Here's what happens when we click on the button:
+
+```javascript
+this.number = Math.round(Math.random() * 10000);
+gsap.to(this.$data, {
+  tweenedNumber: this.number
+});
+```
+
+`this.number` is being set directly the new randomly-generated number. This simulates the `width` prop of the ChartBar component.
+
+We're then calling `gsap.to()` to tell GSAP to tween `tweenedNumber` from its previous value to the new random number. `this.$data` is the data object of the current Vue instance - we could also pass it just `this`, but `this.$data` makes it clearer what is going on.
+
+In affect, GSAP then repeatedly increases `this.$data.tweenedNumber` (aka `this.tweenedNumber`) until it equals the value specified.
+
+----
+
+Now let's apply this to `width` and `maxWidth`:
+
+```javascript
+maxValue(newMax) {
+  gsap.to(this.$data, {
+    tweenedMaxValue: newMax
+  });
+},
+value(newValue) {
+  gsap.to(this.$data, {
+    tweenedValue: newValue
+  });
+}
+```
+
+And now, after changing the bar width logic to use `tweenedValue` instead of `value`, this is what we get:
+
+@todo example
+
+Nice!
+
+The final piece is to display the tweened number on the bar instead of the actual value, so that it increases as the bar changes width. To do that, we'll also need to round it.
+
+Our final animated COVID-19 tracker is as follows:
+
+@todo example
