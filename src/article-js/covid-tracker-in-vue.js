@@ -2,8 +2,16 @@ import Vue from 'vue';
 import { gsap } from 'gsap';
 import covidData from './covid-data.json';
 import DayInput from './covid-tracker-day-input.vue';
+import ChartBar from './covid-tracker-chart-bar.vue';
 
 export default function init() {
+  if (!navigator.userAgent.includes('HeadlessChrome')) {
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = 'https://platform.twitter.com/widgets.js';
+    document.body.appendChild(script);
+  }
+
   new Vue({
     el: '#text-position-demo',
     data: {
@@ -81,7 +89,7 @@ export default function init() {
   fullDatas.forEach(el => {
     new Vue({
       el,
-      components: { DayInput },
+      components: { ChartBar, DayInput },
       data: {
         day: 63,
         dates: covidData.dates,
@@ -90,15 +98,23 @@ export default function init() {
       },
       computed: {
         chartData() {
-          return Object.entries(covidData.countryData)
+          const chartData = Object.entries(covidData.countryData)
             .map(([country, dataArray]) => {
               return {
                 country,
                 value: dataArray[this.day]
               };
             })
-            .filter(({ value }) => value)
+            .filter(({ value }) => value);
+
+          const sortedData = chartData
+            .slice()
             .sort((a, b) => b.value - a.value);
+
+          return chartData.map(item => ({
+            position: sortedData.indexOf(item),
+            ...item
+          }));
         },
         maxValue() {
           return this.chartData.reduce(
