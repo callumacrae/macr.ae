@@ -5,6 +5,7 @@ description:
   Did you know that you can use Vue.js to create interactive, animated
   visualisations using SVGs? This article will explore how you can do just that,
   by building an animated COVID-19 tracker.
+image: covid-tracker.png
 ---
 
 I've given a few talks with the title "Data Visualisation in Vue.js": this is
