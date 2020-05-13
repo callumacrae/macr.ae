@@ -13,9 +13,6 @@ export default {
       return;
     }
 
-    // DISABLED because of high CPU and GPU usage
-    return;
-
     this.observer = new IntersectionObserver(([entry]) => {
       this.isIntersecting = entry.isIntersecting;
     });
@@ -31,6 +28,9 @@ export default {
   },
   methods: {
     frame() {
+      // DISABLED because of high CPU and GPU usage
+      return;
+
       requestAnimationFrame(this.frame);
 
       if (this.isIntersecting) {
