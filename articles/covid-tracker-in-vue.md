@@ -1096,3 +1096,7 @@ something you'd be interested in, make sure to
 I post it.
 
 I hope you found this useful, and stay safe!
+
+<small>Big thanks to [Darek Gusto](https://twitter.com/gustojs) and
+[Bartosz Trzos](https://twitter.com/remotelydev) for proof reading this
+article!</small>
