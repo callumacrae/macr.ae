@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="margin-top: 1em">
     <input
       class="sr-only"
       type="range"

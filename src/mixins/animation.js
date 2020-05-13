@@ -13,6 +13,9 @@ export default {
       return;
     }
 
+    // DISABLED because of high CPU and GPU usage
+    return;
+
     this.observer = new IntersectionObserver(([entry]) => {
       this.isIntersecting = entry.isIntersecting;
     });
