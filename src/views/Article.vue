@@ -93,6 +93,12 @@ export default {
         ).then(({ default: init }) => {
           init();
         });
+      } else if (this.$route.path.includes('covid-tracker-vue')) {
+        import(
+          /* webpackChunkName: "transform-when" */ '../article-js/covid-tracker-in-vue'
+        ).then(({ default: init }) => {
+          init();
+        });
       }
     }
   },

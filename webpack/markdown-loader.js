@@ -2,7 +2,7 @@ const frontmatter = require('front-matter');
 const marked = require('marked');
 const Prism = require('prismjs');
 const loadLanguages = require('prismjs/components/');
-loadLanguages(['bash']);
+loadLanguages(['bash', 'json']);
 
 marked.setOptions({
   highlight(code, lang) {
