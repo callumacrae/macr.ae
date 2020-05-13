@@ -20,6 +20,10 @@ export default {
     this.observer.observe(this.$refs.animated);
 
     requestAnimationFrame(this.frame);
+
+    this.$nextTick(() => {
+      this.i++;
+    });
   },
   destroyed() {
     cancelAnimationFrame(this.frame);
