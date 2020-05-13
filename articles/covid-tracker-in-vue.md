@@ -38,7 +38,7 @@ it's actually possible to use Vue.js to generate and manipulate SVGs directly!
 
 Let's take a brief look at how SVGs work and how you can write them by hand,
 before we look at how we can produce them using JavaScript. If you're familiar
-with SVGs, feel free to skip this section.
+with SVGs, feel free to [skip this section](#getting-the-data).
 
 To write SVG directly into an HTML document, you can use the `<svg>` tag, like
 so:
@@ -131,7 +131,7 @@ There are three things to note here:
   later.
 - The text is displaying above the rectangle, not inside it. This is because by
   default, text is positioned so that the baseline of the text lies on the point
-  specified by `x` and `y`. This is configurable with the `alignment-baseline`
+  specified by `x` and `y`. This is configurable with the `dominant-baseline`
   attribute, which again, we will be looking in a bit.
 - While text inside the SVG element inherits font size and font family from the
   document, it doesn't inherit the colour. This is because the CSS I've applied
@@ -184,7 +184,7 @@ position the text in the centre of the rectangle:
     />
     <text
       x="100" y="50"
-      alignment-baseline="middle"
+      dominant-baseline="middle"
       text-anchor="middle">
       Some text
     </text>
@@ -197,7 +197,7 @@ Here's the output:
 <svg width="400" height="250" xmlns="http://www.w3.org/2000/svg" style="border: 1px rgba(41, 61, 163, 0.2) solid;">
 <g transform="translate(50, 50)">
   <rect width="200" height="100" fill="hsl(10, 80%, 70%)" />
-  <text x="100" y="50" alignment-baseline="middle" text-anchor="middle">
+  <text x="100" y="50" dominant-baseline="middle" text-anchor="middle">
     Some text
   </text>
 </g>
@@ -218,19 +218,17 @@ the upper right of the rectangle, like this:
   </g>
 </svg>
 
-The two attributes added in the last example help us here. `alignment-baseline`
+The two attributes added in the last example help us here. `dominant-baseline`
 says where the text should be positioned vertically by specifying which baseline
 of the element should be used. `text-anchor` does a similar thing, but
 horizontally instead of vertically.
 
 Here's a quick demo:
 
-@todo WHY ISN'T ALIGNMENT BASELINE WORKING!
-
 <div id="text-position-demo">
   <p>
     <small>
-      alignment-baseline:
+      dominant-baseline:
       <select v-model="baselineSelect.value">
         <option v-for="option in baselineSelect.options">{{ option }}</option>
       </select>
@@ -250,7 +248,7 @@ Here's a quick demo:
       />
       <text
         x="100" y="50"
-        :alignment-baseline="baselineSelect.value"
+        :dominant-baseline="baselineSelect.value"
         :text-anchor="textAnchorSelect.value">
         Some text
       </text>
@@ -260,9 +258,9 @@ Here's a quick demo:
   </svg>
 </div>
 
-Don't ask me what all the possible values for alignment-baseline do - I have no
+Don't ask me what all the possible values for dominant-baseline do - I have no
 idea! You can find an explanation on the MDN article:
-[alignment-baseline](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/alignment-baseline).
+[dominant-baseline](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/dominant-baseline).
 
 ### CSS and SVG
 
@@ -280,15 +278,15 @@ It's easier understood with an example:
 svg text {
   x: 100;
   y: 50;
-  alignment-baseline: middle;
+  dominant-baseline: middle;
   text-anchor: middle;
 }
 ```
 
 That's the equivalent of writing
-`x="100" y="50" alignment-baseline="middle" text-anchor="middle"` on every text
+`x="100" y="50" dominant-baseline="middle" text-anchor="middle"` on every text
 element inside the SVG element. I tend to use this for styling
-stuff—`alignment-baseline` and `text-anchor`—but keep the positioning attributes
+stuff—`dominant-baseline` and `text-anchor`—but keep the positioning attributes
 directly on the SVG elements.
 
 So that's a super quick tour of SVG. For a longer read that goes more into depth
@@ -498,7 +496,7 @@ add the new `<text>` element:
     <rect :width="barWidth(value)" height="50" />
     <text
       x="10" y="25"
-      alignment-baseline="middle">
+      dominant-baseline="middle">
       {{ country }}
     </text>
   </g>
@@ -514,7 +512,7 @@ add the new `<text>` element:
     v-for="({ country, value }, i) in chartData"
     :transform="`translate(0, ${i * 60})`">
     <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
-    <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+    <text x="10" y="25" dominant-baseline="middle">{{ country }}</text>
   </g>
 </svg>
 
@@ -540,7 +538,7 @@ Now, after changing `day` to 63, the chart looks like this:
     v-for="{ country, value, position } in chartData"
     :transform="`translate(0, ${position * 60})`">
     <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
-    <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+    <text x="10" y="25" dominant-baseline="middle">{{ country }}</text>
   </g>
 </svg>
 
@@ -573,7 +571,7 @@ day of data after a short interval.
       v-for="{ country, value, position } in chartData"
       :transform="`translate(0, ${position * 60})`">
       <rect :width="barWidth(value)" height="50" fill="hsl(10, 80%, 70%)" />
-      <text x="10" y="25" alignment-baseline="middle">{{ country }}</text>
+      <text x="10" y="25" dominant-baseline="middle">{{ country }}</text>
     </g>
   </svg>
   <day-input
@@ -610,10 +608,10 @@ widths will be slightly narrower.
       v-for="({ country, value, position }) in chartData"
       :transform="`translate(0, ${position * 60})`">
       <rect :x="barStart" :width="barWidthSpaced(value)" height="50" fill="hsl(10, 80%, 70%)" />
-      <text :x="barStart - 10" y="25" alignment-baseline="middle" text-anchor="end">{{ country }}</text>
+      <text :x="barStart - 10" y="25" dominant-baseline="middle" text-anchor="end">{{ country }}</text>
       <text
         y="25"
-        alignment-baseline="middle"
+        dominant-baseline="middle"
         :x="barStart + barWidthSpaced(value)"
         :fill="value < maxValue * 0.8 ? 'black' : 'white'"
         :text-anchor="value < maxValue * 0.8 ? 'start' : 'end'"
@@ -917,7 +915,7 @@ There's a few different ways we can approach this, but the one we'll go for is
 as follows:
 
 - Add a new property of the data object of the ChartBar component called
-  `tweenedValue`.
+  `tweenedValue` (I'll explain what tweening is in a couple paragraphs).
 - Add a watcher watching for when the `value` prop is changed.
 - When the `value` prop is changed, transition `tweenedValue` from the old value
   to the new value.

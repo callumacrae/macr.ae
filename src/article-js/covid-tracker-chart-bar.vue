@@ -79,7 +79,7 @@ rect {
 
 text {
   font: 16px sans-serif;
-  alignment-baseline: middle;
+  dominant-baseline: middle;
 }
 
 .country {

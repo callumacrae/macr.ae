@@ -17,22 +17,16 @@ export default function init() {
     data: {
       baselineSelect: {
         options: [
-          'baseline',
-          'before-edge',
-          'text-before-edge',
+          'auto',
+          'text-bottom',
+          'alphabetic',
           'middle',
           'central',
-          'after-edge',
-          'text-after-edge',
-          'ideographic',
-          'alphabetic',
-          'hanging',
           'mathematical',
-          'top',
-          'centre',
-          'bottom'
+          'hanging',
+          'text-top'
         ],
-        value: 'baseline'
+        value: 'alphabetic'
       },
       textAnchorSelect: {
         options: ['start', 'middle', 'end'],
