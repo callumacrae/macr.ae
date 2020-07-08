@@ -14,7 +14,7 @@ specific example.
 
 - Part one contains a brief primer to SVG and builds a static chart using SVG and
   Vue.
-- Part two, which will be published quite soon, will show how to animate it the
+- [Part two](/article/codid-tracker-vue-part-two), which will be published quite soon, will show how to animate it the
   chart built in part one.
 
 The code for the entire article can be found on GitHub:
