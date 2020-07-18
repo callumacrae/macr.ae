@@ -35,11 +35,11 @@ export default {
       // DISABLED because of high CPU and GPU usage
       return;
 
-      requestAnimationFrame(this.frame);
+      // requestAnimationFrame(this.frame);
 
-      if (this.isIntersecting) {
-        this.i++;
-      }
+      // if (this.isIntersecting) {
+      //   this.i++;
+      // }
     }
   }
 };

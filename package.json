@@ -26,21 +26,23 @@
     "prismjs": "^1.17.1",
     "sass-loader": "^8.0.0",
     "transform-when": "^1.2.0",
-    "vue": "^2.6.10",
-    "vue-global-events": "^1.1.2",
+    "vue": "^3.0.0-rc.1",
+    "vue-global-events": "callumacrae/vue-global-events#vue-3",
     "vue-meta": "^2.3.1",
-    "vue-router": "^3.1.3",
-    "vue-slider-component": "^3.1.2",
+    "vue-router": "^4.0.0-beta.2",
+    "vue-slider-component": "^3.2.2",
     "vue-template-compiler": "^2.6.10",
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
-    "@vue/cli-plugin-eslint": "^4.0.5",
+    "@vue/cli-plugin-eslint": "^4.4.6",
+    "@vue/compiler-sfc": "^3.0.0-rc.1",
     "babel-eslint": "^10.0.3",
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-vue": "^6.0.0"
+    "eslint-plugin-vue": "^7.0.0-alpha.10",
+    "vue-cli-plugin-vue-next": "~0.1.3"
   },
   "eslintConfig": {
     "root": true,
@@ -48,7 +50,7 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/vue3-essential",
       "plugin:prettier/recommended",
       "eslint:recommended"
     ],
@@ -62,11 +64,6 @@
       ]
     }
   },
-  "vuePlugins": {
-    "service": [
-      "webpack/yaml-markdown.js"
-    ]
-  },
   "postcss": {
     "plugins": {
       "autoprefixer": {}
@@ -76,5 +73,10 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "vuePlugins": {
+    "service": [
+      "webpack/yaml-markdown.js"
+    ]
+  }
 }

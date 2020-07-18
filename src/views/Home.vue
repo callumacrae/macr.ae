@@ -13,13 +13,12 @@
         organizes and simplifies web development. With this practical guide,
         you’ll quickly move from basics to custom components and advanced
         features—including JSX, the JavaScript syntax extension.
-        <a href="http://shop.oreilly.com/product/0636920103455.do">
-          O'Reilly Shop</a
+        <a href="http://shop.oreilly.com/product/0636920103455.do"
+          >O'Reilly Shop</a
         >,
         <a
           href="https://www.amazon.co.uk/Vue-js-Up-Running-Callum-Macrae/dp/1491997249"
-        >
-          amazon.co.uk</a
+          >amazon.co.uk</a
         >,
         <a href="https://www.amazon.com/_/dp/1491997249">amazon.com</a>
       </BookInfo>
@@ -35,19 +34,17 @@
         devotees write as little code as possible, but with some JavaScript
         under your belt, you can prevent errors, reduce overhead, and make your
         application code more efficient.
-        <a href="http://shop.oreilly.com/product/0636920026280.do">
-          O'Reilly Shop</a
+        <a href="http://shop.oreilly.com/product/0636920026280.do"
+          >O'Reilly Shop</a
         >,
         <a
           href="http://www.amazon.co.uk/Learning-jQuery-Callum-Macrae/dp/1449335195"
-        >
-          amazon.co.uk</a
+          >amazon.co.uk</a
         >,
         <a
           href="http://www.amazon.com/Learning-jQuery-Callum-Macrae/dp/1449335195"
+          >amazon.com</a
         >
-          amazon.com
-        </a>
       </BookInfo>
     </TitledSection>
 
@@ -55,9 +52,9 @@
       <ul class="articles">
         <li v-for="talk in talks" :key="talk.title">
           <h3>{{ talk.title }}</h3>
-          <time :datetime="talk.date.toISOString()">
-            {{ talk.date | niceDate }}
-          </time>
+          <time :datetime="talk.date.toISOString()">{{
+            niceDate(talk.date)
+          }}</time>
           <blockquote>
             <p v-if="talk.event">
               Event{{ talk.event.includes(',') ? 's' : '' }}: {{ talk.event }}
@@ -65,9 +62,9 @@
             <TruncatedText :text="talk.description" />
             <p v-if="talk.video">
               Video:
-              <a :href="talk.video" target="_blank" rel="noopener">
-                {{ talk.video }}
-              </a>
+              <a :href="talk.video" target="_blank" rel="noopener">{{
+                talk.video
+              }}</a>
             </p>
           </blockquote>
         </li>
@@ -81,9 +78,9 @@
           <router-link :to="`article/${article.attributes.path}`">
             <h3>{{ article.attributes.title }}</h3>
           </router-link>
-          <time :datetime="article.attributes.date.toISOString()">
-            {{ article.attributes.date | niceDate }}
-          </time>
+          <time :datetime="article.attributes.date.toISOString()">{{
+            niceDate(article.attributes.date)
+          }}</time>
           <blockquote>{{ article.attributes.description }}</blockquote>
         </li>
 

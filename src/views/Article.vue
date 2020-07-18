@@ -6,9 +6,8 @@
       <time
         class="article-date"
         :datetime="article.attributes.date.toISOString()"
+        >{{ niceDate(article.attributes.date) }}</time
       >
-        {{ article.attributes.date | niceDate }}
-      </time>
 
       <div v-html="article.body" class="article"></div>
     </TitledSection>

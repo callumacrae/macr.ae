@@ -1,9 +1,7 @@
 <template>
   <g>
     <rect :x="barStart" :width="barWidth" height="50" />
-    <text y="25" :x="barStart - 10" class="country">
-      {{ country }}
-    </text>
+    <text y="25" :x="barStart - 10" class="country">{{ country }}</text>
     <text
       y="25"
       :x="barStart + barWidth"
@@ -11,9 +9,8 @@
         'value',
         tweenedValue < tweenedMaxValue * 0.8 ? 'value--right' : 'value--left'
       ]"
+      >{{ formatNumber(valueAnimated ? tweenedValue : value) }}</text
     >
-      {{ valueAnimated ? tweenedValue : value | formatNumber }}
-    </text>
   </g>
 </template>
 
@@ -64,7 +61,7 @@ export default {
       });
     }
   },
-  filters: {
+  methods: {
     formatNumber(value) {
       return Math.round(value).toLocaleString();
     }

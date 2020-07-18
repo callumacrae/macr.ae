@@ -4,17 +4,14 @@
       {{ truncatedText }}
       <a href title="See more" @click.prevent="expanded = true">[&hellip;]</a>
     </p>
-    <p v-else-if="!Array.isArray(text)">
-      {{ text }}
-    </p>
-    <p v-else v-for="line of text" :key="line">
-      {{ line }}
-    </p>
+    <p v-else-if="!Array.isArray(text)">{{ text }}</p>
+    <p v-else v-for="line of text" :key="line">{{ line }}</p>
   </div>
 </template>
 
 <script>
-import Vue from 'vue';
+import { nextTick } from 'vue';
+
 export default {
   props: {
     text: {
@@ -81,7 +78,7 @@ export default {
           return;
         }
 
-        Vue.nextTick(() => {
+        nextTick(() => {
           if (getHeight() > MAX_HEIGHT) {
             subtractWords();
           }
@@ -97,7 +94,7 @@ export default {
           return;
         }
 
-        Vue.nextTick(() => {
+        nextTick(() => {
           if (getHeight() < MAX_HEIGHT) {
             addWords();
           } else {
@@ -108,7 +105,7 @@ export default {
         });
       };
 
-      Vue.nextTick(() => {
+      nextTick(() => {
         const height = getHeight();
 
         if (height > MAX_HEIGHT) {

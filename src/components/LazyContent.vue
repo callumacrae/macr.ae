@@ -29,7 +29,7 @@ export default {
       this.observer.observe(this.$el);
     });
   },
-  destroyed() {
+  unmounted() {
     if (this.observer) {
       this.observer.disconnect();
     }

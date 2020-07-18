@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 import { gsap } from 'gsap';
 import covidData from './covid-data.json';
 import DayInput from './covid-tracker-day-input.vue';
@@ -12,28 +12,31 @@ export default function init() {
     document.body.appendChild(script);
   }
 
-  new Vue({
-    el: '#text-position-demo',
-    data: {
-      baselineSelect: {
-        options: [
-          'auto',
-          'text-bottom',
-          'alphabetic',
-          'middle',
-          'central',
-          'mathematical',
-          'hanging',
-          'text-top'
-        ],
-        value: 'alphabetic'
-      },
-      textAnchorSelect: {
-        options: ['start', 'middle', 'end'],
-        value: 'start'
-      }
+  const app = createApp({
+    data: function() {
+      return {
+        baselineSelect: {
+          options: [
+            'auto',
+            'text-bottom',
+            'alphabetic',
+            'middle',
+            'central',
+            'mathematical',
+            'hanging',
+            'text-top'
+          ],
+          value: 'alphabetic'
+        },
+        textAnchorSelect: {
+          options: ['start', 'middle', 'end'],
+          value: 'start'
+        }
+      };
     }
   });
+
+  app.mount('#text-position-demo');
 
   const simpleData = {
     dates: ['1/22/20', '2/11/20', '3/27/20'],
@@ -46,11 +49,12 @@ export default function init() {
 
   const simpleDatas = document.querySelectorAll('.covid-simple-data');
   simpleDatas.forEach(el => {
-    new Vue({
-      el,
-      data: {
-        day: 2,
-        chartWidth: 760
+    createApp({
+      data: function() {
+        return {
+          day: 2,
+          chartWidth: 760
+        };
       },
       computed: {
         chartData() {
@@ -76,19 +80,20 @@ export default function init() {
           return (this.chartWidth / this.maxValue) * value;
         }
       }
-    });
+    }).mount(el);
   });
 
   const fullDatas = document.querySelectorAll('.covid-full-data');
   fullDatas.forEach(el => {
-    new Vue({
-      el,
+    createApp({
       components: { ChartBar, DayInput },
-      data: {
-        day: 63,
-        dates: covidData.dates,
-        barStart: 150,
-        chartWidth: 760
+      data: function() {
+        return {
+          day: 63,
+          dates: covidData.dates,
+          barStart: 150,
+          chartWidth: 760
+        };
       },
       computed: {
         chartData() {
@@ -125,14 +130,15 @@ export default function init() {
           return ((this.chartWidth - this.barStart) / this.maxValue) * value;
         }
       }
-    });
+    }).mount(el);
   });
 
-  new Vue({
-    el: '#gsap-tweening-example',
-    data: {
-      number: 1000,
-      tweenedNumber: 1000
+  createApp({
+    data: function() {
+      return {
+        number: 1000,
+        tweenedNumber: 1000
+      };
     },
     methods: {
       newNumber() {
@@ -142,5 +148,5 @@ export default function init() {
         });
       }
     }
-  });
+  }).mount('#gsap-tweening-example');
 }

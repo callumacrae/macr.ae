@@ -7,6 +7,8 @@ export default function init() {
     transform.reset();
   }
 
+  console.log('test');
+
   new Transformer([
     {
       el: document.querySelector('.arrow'),

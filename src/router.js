@@ -1,14 +1,10 @@
-import Vue from 'vue';
-import Router from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import Home from './views/Home.vue';
 import Article from './views/Article.vue';
 import NotFoundPage from './views/NotFoundPage.vue';
 
-Vue.use(Router);
-
-const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -25,7 +21,7 @@ const router = new Router({
       component: Article
     },
     {
-      path: '*',
+      path: '/:catchAll(.*)',
       name: '404',
       component: NotFoundPage
     }
@@ -39,7 +35,7 @@ const router = new Router({
       return { selector: to.hash };
     }
 
-    return { x: 0, y: 0 };
+    return { left: 0, top: 0 };
   }
 });
 

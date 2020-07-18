@@ -1,11 +1,11 @@
-import Vue from 'vue';
-import VueMeta from 'vue-meta';
+import { createApp } from 'vue';
+// import VueMeta from 'vue-meta';
 
 import WebFontLoader from 'webfontloader';
 
 import App from './App.vue';
 import router from './router';
-import './filters';
+import globalMixin from './global-mixin';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -18,9 +18,6 @@ import { faArrowDown, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faCodepen, faGithub, faTwitter, faEnvelope, faArrowDown, faCircle);
-Vue.component('FontAwesomeIcon', FontAwesomeIcon);
-
-Vue.use(VueMeta);
 
 // Don't prerender this or it'll be included in the <head>
 if (!navigator.userAgent.includes('HeadlessChrome')) {
@@ -31,9 +28,8 @@ if (!navigator.userAgent.includes('HeadlessChrome')) {
   });
 }
 
-Vue.config.productionTip = false;
-
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app');
+createApp(App)
+  .use(router)
+  .component('FontAwesomeIcon', FontAwesomeIcon)
+  .mixin(globalMixin)
+  .mount('#app');
