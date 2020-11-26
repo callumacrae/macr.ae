@@ -2,8 +2,9 @@
 title: 'Turning a <canvas> into a perfect quality gif'
 date: 2020-11-27
 description:
-  todo: add description
-image: covid-tracker.png
+  Recently I had to turn a canvas animation into a gif to post on social media.
+  This article explains how I did it!
+image: canvas-to-gif/still.png
 ---
 
 Recently I made an animation using canvas that I wanted to turn into a gif. The
