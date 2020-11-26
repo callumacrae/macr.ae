@@ -17,7 +17,7 @@ animation looks like this:
 I wanted to turn it into a gif to post it on Twitter, so I opened my screen
 recording software: this was the output:
 
-<video autoplay muted loop style="width: 100%">
+<video autoplay muted loop playsinline style="width: 100%">
   <source src="/article-images/canvas-to-gif/screen-recorder.mov" type="video/mp4" />
 </video>
 
@@ -42,7 +42,7 @@ which suggested using the MediaRecorder API.
 
 Here's the output:
 
-<video autoplay muted loop style="width: 100%">
+<video autoplay muted loop playsinline style="width: 100%">
   <source src="/article-images/canvas-to-gif/media-recorder.mp4" type="video/mp4" />
 </video>
 
@@ -203,7 +203,7 @@ together and outputs the newly created gif as `out.gif`.
 one digit long—for example, 09.png. You'll need to adjust it for one or three
 digit numbers.</small>
 
-<video autoplay muted loop style="width: 100%">
+<video autoplay muted loop playsinline style="width: 100%">
   <source src="/article-images/canvas-to-gif/lines.mp4" type="video/mp4" />
 </video>
 
