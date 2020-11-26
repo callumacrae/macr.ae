@@ -8,7 +8,7 @@ description:
 image: covid-tracker.png
 ---
 
-This is part of of a two-part mini-series about how you can use Vue and SVG to
+This is part of two a two-part mini-series about how you can use Vue and SVG to
 build an animated COVID-19 tracker.
 
 - [Part one](/article/covid-tracker-vue-part-one) contained a brief primer to
