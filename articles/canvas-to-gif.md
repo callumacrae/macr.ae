@@ -1,5 +1,5 @@
 ---
-title: 'Turning a <canvas> into a perfect quality gif'
+title: 'Turning a canvas into a perfect quality gif'
 date: 2020-11-27
 description:
   Recently I had to turn a canvas animation into a gif to post on social media.
