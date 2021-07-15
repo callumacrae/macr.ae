@@ -222,7 +222,7 @@ above and just use a looping video instead. The ffmpeg command to get an mp4
 video instead of a gif is as follows:
 
 ```
-$ ffmpeg -f image2 -framerate 50 -i %002d.png -vcodec mjpeg -vcodec libx264 out.mp4
+$ ffmpeg -f image2 -framerate 50 -i %002d.png -c:v libx264 -pix_fmt yuv420p out.mp4
 ```
 
 This produces a video which is only 124KB for my animation—before compression!
