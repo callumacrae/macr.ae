@@ -125,6 +125,14 @@ export default {
     showAll: false,
     talks: [
       {
+        title: 'Animation and Vue.js',
+        date: new Date(2021, 9, 20),
+        event: 'Vue.js Live (Vue.js London)',
+        description:
+          'There's a lot to gain from adding animations to your site or app. Beyond their visual appeal, you can guide the user's attention, cover up slow to load components and elements, and reveal sections of a page without the user wondering where it came from. This talk will cover the built-in ways Vue.js helps you animate your site, and how for more complicated animations you can hook into third party libraries. It'll also cover the basics of animation itself – what to animate, what not to animate – and how you can use animations to enhance your website without harming the experience of people with disabilities.',
+        video: 'https://portal.gitnation.org/contents/animation-and-vuejs'
+      },
+      {
         title: 'Vue.js and SVG',
         date: new Date(2020, 3, 9),
         event: 'Vue.js Amsterdam Virtual Meetup',
