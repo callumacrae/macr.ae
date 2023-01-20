@@ -11,12 +11,13 @@ works, to tweak variables until things look just how I want them.
 
 Open "Controls" on the top right to see an example here:
 
-<p class="codepen" data-height="300" data-default-tab="result" data-slug-hash="poZpbPY" data-user="callumacrae" style="height: 300px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
-  <span>See the Pen <a href="https://codepen.io/callumacrae/pen/poZpbPY">
+<iframe height="400" style="width: 100%;" scrolling="no" title="Pickup sticks"
+  src="https://codepen.io/callumacrae/embed/poZpbPY?default-tab=result"
+  frameborder="no" loading="lazy" allowtransparency="true" allowfullscreen="true">
+  See the Pen <a href="https://codepen.io/callumacrae/pen/poZpbPY">
   Pickup sticks</a> by Callum Macrae (<a href="https://codepen.io/callumacrae">@callumacrae</a>)
-  on <a href="https://codepen.io">CodePen</a>.</span>
-</p>
-<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+  on <a href="https://codepen.io">CodePen</a>.
+</iframe>
 
 I kept finding myself setting the same settings again and again because they
 weren't persisting across page reloads, so I wrote some code to persist various
