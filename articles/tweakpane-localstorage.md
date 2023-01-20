@@ -1,7 +1,9 @@
 ---
 title: 'Persisting tweakpane settings using localStorage'
 date: 2023-01-19
-description: helo write description pls
+description:
+  I wanted my tweakpane settings to persist across page loads, so I wrote some
+  code to do just that. Here I share it with you :)
 ---
 
 I love [Tweakpane]! I use it when working on [my Codepens] and other visual
@@ -27,7 +29,7 @@ Let's take a basic Tweakpane setup:
 const config = {
   number: 5,
   string: 'hello world',
-  color: 0xff0000
+  color: 0xff0000,
 };
 
 const pane = new Pane({
@@ -53,8 +55,8 @@ pane.on('change', () => {
 });
 ```
 
-Then, on page load, we can check local storage for an existing preset and
-import it into tweakpane if it exists:
+Then, on page load, we can check local storage for an existing preset and import
+it into tweakpane if it exists:
 
 ```js
 const preset = localStorage.getItem('tweakpane-preset');
@@ -67,7 +69,7 @@ if (preset) {
 }
 ```
 
-Note that this has to be done *after* you've added your inputs as tweakpane
+Note that this has to be done _after_ you've added your inputs as tweakpane
 ignores properties that it doesn't know about.
 
 The final code looks like this:
@@ -76,7 +78,7 @@ The final code looks like this:
 const config = {
   number: 5,
   string: 'hello world',
-  color: 0xff0000
+  color: 0xff0000,
 };
 
 const pane = new Pane({
@@ -125,16 +127,16 @@ config specified in the code, for when I _don't_ want the settings to persist
 anymore.
 
 It can be done in two steps: first, copy the initial config object so that we
-can know what it used to be after `config` is changed by tweakpane. I chose
-to use JSON.stringify to do this for simplicity - using a function to do an
-actual deep copy of the object would also work, but be aware that you need to
-do it every time the button is clicked, not just on initialisation.
+can know what it used to be after `config` is changed by tweakpane. I chose to
+use JSON.stringify to do this for simplicity - using a function to do an actual
+deep copy of the object would also work, but be aware that you need to do it
+every time the button is clicked, not just on initialisation.
 
 ```js
 const config = {
   number: 5,
   string: 'hello world',
-  color: 0xff0000
+  color: 0xff0000,
 };
 const initialConfig = JSON.stringify(config);
 ```
@@ -159,7 +161,7 @@ button looks like this:
 const config = {
   number: 5,
   string: 'hello world',
-  color: 0xff0000
+  color: 0xff0000,
 };
 const initialConfig = JSON.stringify(config);
 
@@ -198,7 +200,7 @@ All code in this article is freely released under the [MIT] license.
 
 Happy tinkering!
 
-[Tweakpane]: https://cocopon.github.io/tweakpane/
-[My codepens]: https://codepen.io/callumacrae
+[tweakpane]: https://cocopon.github.io/tweakpane/
+[my codepens]: https://codepen.io/callumacrae
 [tweakpane misc]: https://cocopon.github.io/tweakpane/misc/
-[MIT]: https://opensource.org/licenses/MIT
+[mit]: https://opensource.org/licenses/MIT
