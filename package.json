@@ -19,7 +19,7 @@
     "front-matter": "^3.0.2",
     "gsap": "^3.2.6",
     "json-loader": "^0.5.7",
-    "marked": "^0.7.0",
+    "marked": "^4.0.10",
     "normalize.css": "^8.0.0",
     "prerender-spa-plugin": "^3.4.0",
     "prismjs": "^1.21.0",
