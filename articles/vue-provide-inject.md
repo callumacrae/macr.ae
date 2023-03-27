@@ -302,21 +302,19 @@ wants to block another user, so all we have left to do is update the object
 representing that user. It might look like this:
 
 ```typescript
-import { provide, ref, type InjectionKey } from 'vue';
+import { provide, ref, type InjectionKey, type Ref } from 'vue';
 import { User } from './models/user';
 
 const users = ref<User[]>([]);
 
 interface UsersProvider {
-	getUser(id: User['id']): User | undefined;
+  users: Ref<User[]>;
 	storeUser(user: User): void;
 	updateUser(id: User['id'], updatedData: Partial<User>): User;
 }
 
 const usersProvider: UsersProvider = {
-	getUser(id: User['id']) {
-		return users.value.find((user) => user.id === id);
-	},
+  users,
 	storeUser(user: User) {
 		users.value.push(user);
 	},
@@ -416,9 +414,7 @@ export function useUsers() {
   }
 
   return {
-    getUser(id: User['id']) {
-      return users.value.find((user) => user.id === id);
-    },
+    users,
     storeUser(user: User) {
       users.value.push(user);
     },
@@ -523,3 +519,57 @@ at the top of the sidebar to change to the options API.
 - global state - apollo store / tanstack query
 - slots
 - prop drilling
+
+## Best practices
+
+- Don’t make components too far down too aware of the overlying data - talk
+  about testability. apply it to current global state best practices
+  - Aka, avoid deeply nested provide / inject
+  - Prop drilling isn’t just a problem in itself, but can be a symptom of a
+    wider problem with how you’re using components
+- Don’t use when slots can be used instead - e.g. layout components shouldn’t
+  have any knowledge of how they’re used, so prop drilling isn’t a problem that
+  should be solved
+  - talk about floating user preview
+    - used outside context of server, e.g. in private messages
+    - sections are slightly different but largely the same
+    - good architecture would be base component with slot support, then a
+      component that extends that to pass in the server-specific stuff
+- Use symbol keys
+- Be mindful of component lifecycle - data can be destroyed
+- Wrap in composables (but this is my advice, not common practice)
+  - Make composables name good
+
+## Examples
+
+- Reduce prop drilling
+- Reduce dependence on global state
+  - Example: messaging app with sidebar of conversations
+    - Make it clear that messaging app is a small part of a larger app
+    - Or maybe not sidebar? Maybe popup app like Facebook messenger
+    - Cover case where data is used in multiple places, e.g. pop-up
+      conversations or full screen conversations
+    - Case where maybe not appropriate: popup conversation has “go full screen”
+      mode
+  - Some sort of product listing where product item has many children
+    - Maybe product item is reused in both product page and listing?
+    - Maybe pattern is reused in search bar at top of page?
+  - Something kind of out there? Like data for levels in a game maybe?
+- As a simple global store
+- To provide an event bus
+- Theme ui
+- Find other examples from react community
+-
+
+## Close
+
+---
+
+things to review:
+
+- “deeply nested child” - nope, it’s not a child any more, it’s a descendant /
+  component
+- typescript by default, but talk about javascript too
+- options API still exists
+- components can’t do non-default exports, so symbol keys have to be in another
+  file—make it clear what’s a component and what isn’t
