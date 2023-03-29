@@ -86,8 +86,8 @@ to ask, and another valid approach—we'll look into this later._
 
 I'll be digging further in to how to actually use it later on in the article,
 but hopefully this is enough to help you understand the concept. If not, the Vue
-documentation has another example with a diagram here:
-<https://vuejs.org/guide/components/provide-inject.html>
+documentation has another example with a diagram here: [vuejs.org: Provide /
+Inject].
 
 ## Why is it so great?
 
@@ -206,11 +206,10 @@ much all cases, the other of which I've seen used a few times in the past which
 I'll explain in case you see it yourself.
 
 The first thing you need to know is that in addition to supporting strings as
-keys, it also supports Symbols[1].
+keys, it also supports Symbols\*.
 
-[1]: Symbols are a way of creating an identifier or key that is completely
-unique. You can read more about it on MDN:
-<https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol>
+<small>\* Symbols are a way of creating an identifier or key that is completely
+unique. You can read more about it on [MDN's Symbol guide].</small>
 
 We can use a symbol as follows:
 
@@ -253,8 +252,9 @@ provide(serverInfoKey, serverInfo);
 ```
 
 Then, any instance of `inject` using `serverInfoKey` will have a return type of
-`ServerInfo | undefined`—`undefined` as a component can't be certain that any of
-its ancestors has actually provided the requested data.
+`ServerInfo | undefined`—the return type we specified as a union type with
+`undefined` as a component can't be certain that any of its ancestors have
+actually provided the requested data.
 
 You can of course use primitive types like `string` as the argument for
 `InjectionKey`, or you can specify the object type directly, or you can even do
@@ -289,10 +289,10 @@ actions lie far outside the responsibility of the profile preview popup, so we
 need some way of letting the component at whatever level we decided should be
 responsible for that data know that the current user has performed that action.
 
-Your instinct might to have been to reach for Vue's component events[link], but
-component events don't bubble, and for the same reason we don't want prop
-drilling downwards, we don't want a chain of components passing an event back
-upwards either.
+Your instinct might to have been to reach for Vue's [component events], but
+they're not suitable here: component events don't bubble, and for the same
+reason we don't want prop drilling downwards, we don't want a chain of
+components passing an event back upwards either.
 
 The approach I generally recommend is to pass a function along with the data
 into the `provide` function, which can then be called to mutate the data or
@@ -473,8 +473,8 @@ This ensures as little knowledge of what's happening in the users provider as
 possible in that file—another good example of the principle of least knowledge!
 
 As a side note, if you're starting to think this is looking a lot like how a
-global state management tool might work... you're not wrong!
-<https://github.com/vuejs/pinia/blob/0d29ed3f4f8da157e11d9391687739d562f014ee/packages/pinia/src/createPinia.ts#L22-L38>
+global state management tool might work... [you're not
+wrong!][createpinia provider]
 
 ### Usage with the options API
 
@@ -507,18 +507,141 @@ export default {
 ```
 
 Note that the injected `users` value isn't reactive. If you want to know how to
-do that, or anything else with the options API, I'd recommend checking out the
-official Vue docs: <https://vuejs.org/guide/components/provide-inject.html>
+do that, or anything else with the options API, I'd recommend checking out [the
+official Vue docs][vuejs.org: provide / inject].
 
 If you're seeing documentation for the composition API, you can use the toggle
 at the top of the sidebar to change to the options API.
 
 ## Alternative approaches
 
-- global state - vuex / pinia
-- global state - apollo store / tanstack query
-- slots
-- prop drilling
+Let's talk about some other forms of managing state across multiple components
+in Vue apps, and which are more appropriate at which occasions. Just like the
+answer isn't always a global store, the answer isn't always provide / inject,
+either!
+
+It's important to think about what problems you're trying to solve _before_ you
+jump to a solution. Instead of thinking about how you can make a solution work
+for you, think first about what you need a solution to offer you, and choose
+based on that. Also keep in mind that your design decisions will likely go out
+date—products and systems grow and change, often in ways that weren't thought
+about or intended initially. Thinking ahead about what could happen in the
+future and making your architecture as resilient to change as possible can save
+you a lot of time and pain when those changes need to be made.
+
+### Store-based global state management tools (Vuex, Pinia)
+
+I'm seperating state management tooling into two sections, and you'll see why
+shortly.
+
+Global state management is when you manage state… well, globally. When I talk
+about "store-based" global state management specifically, I mean a state
+management solution that has a store of data at its core, with everything built
+around that.
+
+Two such libraries are [Vuex] and [Pinia], both well used libraries provided by
+the Vue core team. In both libraries, you've got a central "store" of data, and
+then different methods of changing and accessing that data - actions, mutations
+and getters in Vuex, and actions and getters in Pinia.
+
+pros:
+
+- easy to see where data is
+- good development tools
+
+cons:
+
+- can become complicated, especially if using vuex
+- easy to violate the principle of least knowledge when too much stuff is stored
+  in stores
+
+good for:
+
+- when that data is a core part of your app and used throughout it - e.g., your
+  current user's profile information
+- when that data is a modular, but always visible part of your app - e.g., a
+  notifications menu item
+
+not great for:
+
+- when modules are too small, especially when you have many modules that rely on
+  each other. a global state management tool might still be the answer, but you
+  might have to think about your definition of "module" and whether they should
+  either be larger, or whether it would be worth lifting your state up out of
+  the modules
+- in really simple apps (better with vuex than pinia)
+
+### Query-based state management tools (Vue Apollo, TanStack Query)
+
+An alternative approach to global state management tools is the query-based
+approach taken by libraries like [Vue Apollo] and [TanStack Query]. Both
+libraries give you an API something like this:
+
+```typescript
+const { isLoading, data, error } = useQuery(/* some arguments here */);
+```
+
+For Apollo Client, you pass `useQuery` a GraphQL query, and for TanStack Query,
+you pass `useQuery` a function which fetches data, commonly using `fetch`.
+Instead of being built around a store of data, this lets you think about your
+data in terms of where you're getting it from. You can then build composables
+around this API, such as a `useUserQuery` function to fetch a user with a given
+ID.
+
+There's other libraries that do similar things, such as [urql] and [swrv], but
+Apollo and TanStack Query are the two I'm most familiar with!
+
+So what's the difference between a library like this, and a relatively simple
+composable like VueUse's [useFetch]?
+
+There's a few significant differences, but in the context of this article, the
+main difference is the caching functionality. With `useFetch`, if you unmount
+the component containing the `useFetch` and remount it, it fetches the data
+again. With a query-based state management tool, you get to choose whether it
+refetches the data, or whether it reuses the data it already fetched and stored
+in its own internal cache—or some other, smarter refetching method.
+
+Additionally, it doesn't matter where you call the function from, it'll reuse
+the same cached data. Your `useUserQuery` call will return the same data in one
+component that it fetched from another, if that's what you desire.
+
+Finally, most of these libraries contain data updating strategies that are more
+powerful than anything you could hope to implement everywhere you fetch data in
+your app without effectively having to write your own library. For example,
+optimistically updating data when a mutation is sent to the API (and changing it
+back if the request fails), retrying failed requests, and built-in pagination
+support.
+
+Apollo in particular also has what is known as a "normalised cache", which means
+that it is aware of the types of your data and caches objects in a flat storage.
+The effect of this is that if you have two queries, `useConversation()` and
+`useUser()`, and your user performs an action that changes a user object (say,
+by changing their username), it updates both in the data returned by `useUser()`
+_and_ the data returned by `useConversation()` pertaining to that user, without
+having to send another request or invalidate any of the data in the cache.
+
+pros
+
+- they give you a tonne of functionality related to data fetching which would be
+  difficult to implement otherwise
+- being so domain-specific means that it's easy to know when to use it and when
+  to use something else instead
+- you can use in combination with pinia, but less easy with vuex
+- also good developer tools
+
+cons:
+
+- while the advanced features are all optional, if you use them, your setup can
+  become pretty complicated—especially when using a normalised cache.
+- they're only good for data coming from an API
+- if you're storing data across sessions, cache invalidation, knowing when data
+  is stale and when to fetch it, can become a hard problem
+
+### Slots
+
+### Prop drilling
+
+### You might not need global state
 
 ## Best practices
 
@@ -573,3 +696,18 @@ things to review:
 - options API still exists
 - components can’t do non-default exports, so symbol keys have to be in another
   file—make it clear what’s a component and what isn’t
+
+[vuejs.org: provide / inject]:
+  https://vuejs.org/guide/components/provide-inject.html
+[mdn's symbol guide]:
+  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol
+[component events]: https://vuejs.org/guide/components/events.html
+[createpinia provider]:
+  https://github.com/vuejs/pinia/blob/0d29ed3f4f8da157e11d9391687739d562f014ee/packages/pinia/src/createPinia.ts#L22-L38
+[vuex]: https://vuex.vuejs.org/
+[pinia]: https://pinia.vuejs.org/
+[vue apollo]: https://apollo.vuejs.org/
+[tanstack query]: https://tanstack.com/query/latest
+[urql]: https://formidable.com/open-source/urql/
+[swrv]: https://docs-swrv.netlify.app/
+[usefetch]: https://vueuse.org/core/useFetch/
